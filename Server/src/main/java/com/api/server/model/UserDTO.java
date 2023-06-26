@@ -2,8 +2,6 @@ package com.api.server.model;
 
 import lombok.*;
 
-import java.util.UUID;
-
 @Setter
 @Getter
 @AllArgsConstructor
