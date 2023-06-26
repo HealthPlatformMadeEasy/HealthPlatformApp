@@ -388,3 +388,5 @@ sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,webstorm,visualstudiocode,java,react,node
 .idea
+/client.iml
+/client/package-lock.json
