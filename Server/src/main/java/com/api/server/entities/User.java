@@ -1,17 +1,18 @@
-package com.api.server.model;
+package com.api.server.entities;
 
+//import jakarta.persistence.Entity;
 import lombok.*;
-
-import java.util.UUID;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDTO {
+//@Entity
+public class User {
     private int id;
     private String name;
     private String email;
     private String password;
+
 }
