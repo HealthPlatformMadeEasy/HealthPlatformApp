@@ -24,4 +24,9 @@ public class HelpController {
     public List<User> GetHelp() {
         return userService.getAllUsers();
     }
+
+//    @GetMapping("/help")
+//    public List<User> GetHelp() {
+//        return userService.getAllUsers();
+//    }
 }
