@@ -1,11 +1,9 @@
 package com.api.server.model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
 public class UserDTO {
     private int id;
