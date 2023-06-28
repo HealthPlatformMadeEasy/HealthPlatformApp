@@ -1,6 +1,6 @@
 package com.api.server.mappers;
 
-import com.api.server.entities.User;
+import com.api.server.entities.AppUser;
 import com.api.server.model.UserDTO;
 import org.mapstruct.Mapper;
 
@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 
 public interface UserMapper {
 
-    User userDtoToUser(UserDTO userDTO) ;
-    UserDTO userToUserDto(User user) ;
+    AppUser userDtoToUser(UserDTO userDTO);
+
+    UserDTO userToUserDto(AppUser user);
 }
