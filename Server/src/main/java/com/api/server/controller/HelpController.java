@@ -1,7 +1,6 @@
 package com.api.server.controller;
 
-import com.api.server.entities.User;
-import com.api.server.model.UserDTO;
+import com.api.server.entities.AppUser;
 import com.api.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,7 @@ public class HelpController {
     }
 
     @GetMapping("/help")
-    public List<User> GetHelp() {
+    public List<AppUser> GetHelp() {
         return userService.getAllUsers();
     }
 }
