@@ -8,8 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface FoodProductMapper {
-    FoodProductResponse foodProductToFoodProductDto(FoodProduct foodProduct);
-
     List<FoodProductResponse> listFoodProductToFoodProductsDto(List<FoodProduct> foodProduct);
-
 }
