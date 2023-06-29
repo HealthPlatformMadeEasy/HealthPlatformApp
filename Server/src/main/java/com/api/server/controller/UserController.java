@@ -27,8 +27,7 @@ public class UserController {
     @GetMapping()
     public List<UserDTO> GetHelp() {
         var result = userService.getAllUsers();
-        var response = result.stream().map(userMapper::userToUserDto).toList();
 
-        return response;
+        return result.stream().map(userMapper::userToUserDto).toList();
     }
 }

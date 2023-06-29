@@ -30,8 +30,6 @@ public class FoodProductController {
     @PostMapping("search-by-food")
     public CaloricResponse getFood(@RequestBody CaloricCalculationRequest request) {
 
-        var x = service.GetFood(request);
-
-        return x;
+        return service.GetFood(request);
     }
 }

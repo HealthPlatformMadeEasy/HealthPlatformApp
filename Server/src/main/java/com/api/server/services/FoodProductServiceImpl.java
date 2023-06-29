@@ -31,9 +31,9 @@ public class FoodProductServiceImpl implements FoodProductService {
     public CaloricResponse GetFood(CaloricCalculationRequest request) {
         log.debug(request.food());
         FoodProduct food = foodProductRepository.findFoodProductByProductNameEquals(request.food());
-        Long cal = Long.valueOf(food.getProductCalories());
+        long cal = Long.parseLong(food.getProductCalories());
 
-        return new CaloricResponse(cal * Long.valueOf(request.quantity()));
+        return new CaloricResponse(cal * request.quantity());
     }
 
 }
