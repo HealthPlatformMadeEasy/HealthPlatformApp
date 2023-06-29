@@ -1,4 +1,4 @@
-# HealthPlatformApp
+# HealthPlatformApp.
 
 An easy platform that patients and doctors can use for interaction. Our main focus in the beginning will be weight-loss treatment,variouus calculators such as calories ,BMI etc. Later focus will be implementing features in that direction, for example implementing tools to keep track of your weight, getting in contact with doctors, and access to healthy recipes.
 
