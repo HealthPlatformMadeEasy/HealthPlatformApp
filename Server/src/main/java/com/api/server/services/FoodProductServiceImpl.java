@@ -6,12 +6,11 @@ import com.api.server.model.CaloricCalculationRequest;
 import com.api.server.model.CaloricResponse;
 import com.api.server.model.FoodProductResponse;
 import com.api.server.repositories.FoodProductRepository;
-import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service
 public class FoodProductServiceImpl implements FoodProductService {
     private final FoodProductRepository foodProductRepository;
@@ -28,8 +27,7 @@ public class FoodProductServiceImpl implements FoodProductService {
     }
 
     @Override
-    public CaloricResponse GetFood(CaloricCalculationRequest request) {
-        log.debug(request.food());
+    public CaloricResponse GetFood(@NotNull CaloricCalculationRequest request) {
         FoodProduct food = foodProductRepository.findFoodProductByProductNameEquals(request.food());
         long cal = Long.parseLong(food.getProductCalories());
 
