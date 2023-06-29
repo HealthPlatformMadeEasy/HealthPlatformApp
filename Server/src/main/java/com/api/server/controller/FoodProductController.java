@@ -1,27 +1,37 @@
 package com.api.server.controller;
 
-import com.api.server.entities.FoodProduct;
-import com.api.server.repositories.FoodProductRepository;
+import com.api.server.model.CaloricCalculationRequest;
+import com.api.server.model.CaloricResponse;
+import com.api.server.model.FoodProductResponse;
+import com.api.server.services.FoodProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/foodProduct/")
+@RequestMapping("/v1/api/food-product/")
 public class FoodProductController {
 
-    private final FoodProductRepository foodProductRepository;
+    private final FoodProductService service;
+
     @Autowired
-    public FoodProductController(FoodProductRepository foodProductRepository) {
-        this.foodProductRepository = foodProductRepository;
+    public FoodProductController(FoodProductService service) {
+
+        this.service = service;
     }
 
     @GetMapping
-    public List<FoodProduct> getAllProducts() {
-        return foodProductRepository.findAll();
+    public List<FoodProductResponse> getAllProducts() {
+        return service.GetAllFood();
+    }
+
+    @PostMapping("search-by-food")
+    public CaloricResponse getFood(@RequestBody CaloricCalculationRequest request) {
+
+        var x = service.GetFood(request);
+
+        return x;
     }
 }
