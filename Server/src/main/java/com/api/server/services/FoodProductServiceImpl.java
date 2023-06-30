@@ -35,7 +35,7 @@ public class FoodProductServiceImpl implements FoodProductService {
             throw new RuntimeException("no food item find");
         }
 
-        return new CaloricResponse(food.get().getCalsPer100grams() * request.quantity());
+        return new CaloricResponse(food.get().getCalsPer100grams() * request.quantityInGrams() / 100);
     }
 
 }

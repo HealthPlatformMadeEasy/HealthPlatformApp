@@ -1,4 +1,8 @@
 package com.api.server.model.response;
 
-public record CaloricResponse(long totalCalories) {
+import jakarta.validation.constraints.PositiveOrZero;
+
+public record CaloricResponse(
+        @PositiveOrZero
+        long totalCalories) {
 }

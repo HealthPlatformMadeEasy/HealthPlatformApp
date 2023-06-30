@@ -4,6 +4,7 @@ import com.api.server.model.request.CaloricCalculationRequest;
 import com.api.server.model.response.CaloricResponse;
 import com.api.server.model.response.FoodProductResponse;
 import com.api.server.services.FoodProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class FoodProductController {
     }
 
     @PostMapping("search-by-food")
-    public CaloricResponse getFood(@RequestBody CaloricCalculationRequest request) {
+    public CaloricResponse getFood (@Valid @RequestBody CaloricCalculationRequest request) {
 
         return service.GetFood(request);
     }
