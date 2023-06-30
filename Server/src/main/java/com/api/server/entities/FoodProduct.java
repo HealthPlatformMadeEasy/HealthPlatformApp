@@ -1,8 +1,8 @@
 package com.api.server.entities;
 
+import com.api.server.utils.StringToLongDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
@@ -14,12 +14,9 @@ import lombok.*;
 @Entity
 public class FoodProduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String  productCategory;
-    private String productName;
-    private  String  per100g;
-    private String productCalories;
-
+    private String foodItem;
+    private String  foodCategory;
+    @JsonDeserialize(using = StringToLongDeserializer.class)
+    private Long calsPer100grams;
 
 }

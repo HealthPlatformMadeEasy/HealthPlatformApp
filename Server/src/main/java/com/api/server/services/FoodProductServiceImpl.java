@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FoodProductServiceImpl implements FoodProductService {
@@ -28,10 +29,13 @@ public class FoodProductServiceImpl implements FoodProductService {
 
     @Override
     public CaloricResponse GetFood(@NotNull CaloricCalculationRequest request) {
-        FoodProduct food = foodProductRepository.findFoodProductByProductNameEquals(request.food());
-        long cal = Long.parseLong(food.getProductCalories());
+        Optional<FoodProduct> food = foodProductRepository.findById(request.food());
 
-        return new CaloricResponse(cal * request.quantity());
+        if(food.isEmpty()) {
+            throw new RuntimeException("no food item find");
+        }
+
+        return new CaloricResponse(food.get().getCalsPer100grams() * request.quantity());
     }
 
 }
