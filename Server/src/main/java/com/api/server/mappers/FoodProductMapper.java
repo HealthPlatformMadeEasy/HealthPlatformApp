@@ -1,7 +1,7 @@
 package com.api.server.mappers;
 
 import com.api.server.entities.FoodProduct;
-import com.api.server.model.FoodProductResponse;
+import com.api.server.model.response.FoodProductResponse;
 import org.mapstruct.Mapper;
 
 import java.util.List;

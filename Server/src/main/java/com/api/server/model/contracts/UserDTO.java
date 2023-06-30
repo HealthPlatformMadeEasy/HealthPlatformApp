@@ -1,4 +1,4 @@
-package com.api.server.model;
+package com.api.server.model.contracts;
 
 import lombok.Builder;
 import lombok.Data;

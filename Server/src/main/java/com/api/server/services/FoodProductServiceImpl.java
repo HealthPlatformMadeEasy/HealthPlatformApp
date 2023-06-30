@@ -2,9 +2,9 @@ package com.api.server.services;
 
 import com.api.server.entities.FoodProduct;
 import com.api.server.mappers.FoodProductMapper;
-import com.api.server.model.CaloricCalculationRequest;
-import com.api.server.model.CaloricResponse;
-import com.api.server.model.FoodProductResponse;
+import com.api.server.model.request.CaloricCalculationRequest;
+import com.api.server.model.response.CaloricResponse;
+import com.api.server.model.response.FoodProductResponse;
 import com.api.server.repositories.FoodProductRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.api.server.controller;
 
 import com.api.server.mappers.UserMapper;
-import com.api.server.model.UserDTO;
+import com.api.server.model.contracts.UserDTO;
 import com.api.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

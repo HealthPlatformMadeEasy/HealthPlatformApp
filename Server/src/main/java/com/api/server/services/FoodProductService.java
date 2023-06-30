@@ -1,8 +1,8 @@
 package com.api.server.services;
 
-import com.api.server.model.CaloricCalculationRequest;
-import com.api.server.model.CaloricResponse;
-import com.api.server.model.FoodProductResponse;
+import com.api.server.model.request.CaloricCalculationRequest;
+import com.api.server.model.response.CaloricResponse;
+import com.api.server.model.response.FoodProductResponse;
 
 import java.util.List;
 
