@@ -1,17 +1,12 @@
 import {useState} from "react";
 
-interface totalCalories {
-    totalCalories: number
-}
-
 function CalorieCalculator() {
-    const [data, setData] = useState<totalCalories>();
+    const [data, setData] = useState<undefined>();
     const [food, setFood] = useState("");
     const [quantity, setQuantity] = useState<number>();
 
-
     const callData = () => {
-        fetch('http://localhost:8081/v1/api/food-product/search-by-food', {
+        fetch('https://localhost:7247/v1/api/food/', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -22,9 +17,6 @@ function CalorieCalculator() {
             .then(response => response.json())
             .then(data => setData(data))
     }
-
-    console.log(food)
-    console.log(quantity)
 
     return (
         <>
@@ -42,7 +34,7 @@ function CalorieCalculator() {
             >Submit
             </button>
 
-            <h1>{data?.totalCalories}</h1>
+            <h1>{JSON.stringify(data)}</h1>
         </>
     )
 }

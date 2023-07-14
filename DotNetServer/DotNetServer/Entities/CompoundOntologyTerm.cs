@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+namespace DotNetServer.Entities;
+
+[Table("compound_ontology_terms")]
+public partial class CompoundOntologyTerm
+{
+    [Key]
+    [Column("id")]
+    public int Id { get; set; }
+
+    [Column("compound_id")]
+    public int? CompoundId { get; set; }
+
+    [Column("export")]
+    public bool? Export { get; set; }
+
+    [Column("ontology_term_id")]
+    public int? OntologyTermId { get; set; }
+
+    [Column("created_at", TypeName = "datetime")]
+    public DateTime CreatedAt { get; set; }
+
+    [Column("updated_at", TypeName = "datetime")]
+    public DateTime UpdatedAt { get; set; }
+}
