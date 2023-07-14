@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,18 +8,13 @@ namespace DotNetServer.Entities;
 [Index("SourceId", "SourceType", "FoodId", Name = "content_source_and_food_index")]
 public partial class Content
 {
-    [Key]
-    [Column("id")]
-    public int Id { get; set; }
+    [Key] [Column("id")] public int Id { get; set; }
 
-    [Column("source_id")]
-    public int? SourceId { get; set; }
+    [Column("source_id")] public int SourceId { get; set; }
 
-    [Column("source_type")]
-    public string? SourceType { get; set; }
+    [Column("source_type")] public string? SourceType { get; set; }
 
-    [Column("food_id")]
-    public int FoodId { get; set; }
+    [Column("food_id")] public int FoodId { get; set; }
 
     [Column("orig_food_id")]
     [StringLength(255)]
@@ -73,11 +66,9 @@ public partial class Content
     [StringLength(255)]
     public string CitationType { get; set; } = null!;
 
-    [Column("creator_id")]
-    public int? CreatorId { get; set; }
+    [Column("creator_id")] public int? CreatorId { get; set; }
 
-    [Column("updater_id")]
-    public int? UpdaterId { get; set; }
+    [Column("updater_id")] public int? UpdaterId { get; set; }
 
     [Column("created_at", TypeName = "datetime")]
     public DateTime? CreatedAt { get; set; }
@@ -95,12 +86,11 @@ public partial class Content
 
     [Column("standard_content")]
     [Precision(15, 9)]
-    public decimal? StandardContent { get; set; }
+    public decimal StandardContent { get; set; }
 
     [Column("preparation_type")]
     [StringLength(255)]
     public string? PreparationType { get; set; }
 
-    [Column("export")]
-    public sbyte? Export { get; set; }
+    [Column("export")] public sbyte? Export { get; set; }
 }

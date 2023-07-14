@@ -1,5 +1,6 @@
 using DotNetServer.Context;
 using DotNetServer.Repositories;
+using DotNetServer.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<FoodbContext>(opt =>
     opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:FoodbMySQL")!));
 
 builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+builder.Services.AddScoped<IFoodService, FoodService>();
 
 builder.Services.AddCors(options =>
 {
