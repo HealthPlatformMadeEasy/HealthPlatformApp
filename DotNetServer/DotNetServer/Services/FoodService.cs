@@ -1,4 +1,5 @@
-﻿using DotNetServer.Model.Requests;
+﻿using DotNetServer.Mapping;
+using DotNetServer.Model.Requests;
 using DotNetServer.Model.Responses;
 using DotNetServer.Repositories;
 
@@ -15,26 +16,15 @@ public class FoodService : IFoodService
 
     public FoodResponse GetFood(FoodRequest request)
     {
-        var dbResponse = _foodRepository.GetFood(request.Food);
+        var dbResponse = _foodRepository.GetFood(request.Food).Select(row => FoodMapper.FoodToFoodResponse(row))
+            .Single();
 
-        var contentList = dbResponse.Contents.Select(row =>
+        dbResponse.Contents.ForEach(row =>
         {
-            var foodCalculation = row.OrigContent * request.Quantity / 100;
-            return new ContentResponse(
-                row.SourceId,
-                row.SourceType,
-                foodCalculation,
-                row.OrigUnit,
-                row.StandardContent);
-        }).ToList();
+            row.OrigContent = row.OrigContent * request.Quantity / 100;
+            row.StandardContent = row.StandardContent * request.Quantity / 100;
+        });
 
-
-        var foodResponse = new FoodResponse(
-            dbResponse.Name,
-            dbResponse.Description,
-            dbResponse.FoodGroup,
-            contentList);
-
-        return foodResponse;
+        return dbResponse;
     }
 }

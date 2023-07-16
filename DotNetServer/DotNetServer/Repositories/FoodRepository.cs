@@ -12,9 +12,10 @@ public class FoodRepository : IFoodRepository
     {
         _context = context;
     }
-    public Food GetFood(string foodName)
+
+    public List<Food> GetFood(string foodName)
     {
         return _context.Foods.Where(food => food.Name == foodName)
-            .Include(prop => prop.Contents).Single();
+            .Include(prop => prop.Contents).ToList();
     }
 }
