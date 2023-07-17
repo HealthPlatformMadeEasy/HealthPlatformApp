@@ -9,7 +9,7 @@ type foodRequest = {
 function CalorieCalculator() {
     const [data, setData] = useState<undefined>();
     const [food1, setFood] = useState("");
-    const [quantity1, setQuantity] = useState<number>(0);
+    const [quantity1, setQuantity] = useState("");
     const [formData, setFormData] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showData, setShowData] = useState(false);
@@ -20,7 +20,7 @@ function CalorieCalculator() {
 
         const food: foodRequest = {
             food: food1,
-            quantity: quantity1
+            quantity: parseFloat(quantity1)
         }
 
         fetch('https://localhost:7247/v1/api/food/', {
@@ -47,7 +47,7 @@ function CalorieCalculator() {
                            placeholder="food"/>
 
                     <input type="text" name="price" id="price" value={quantity1}
-                           onChange={e => setQuantity(parseFloat(e.target.value))}
+                           onChange={e => setQuantity(e.target.value)}
                            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-grey-900 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                            placeholder="quantity"/>
 

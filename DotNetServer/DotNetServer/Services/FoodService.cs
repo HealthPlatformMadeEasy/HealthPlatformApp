@@ -16,7 +16,7 @@ public class FoodService : IFoodService
 
     public FoodResponse GetFood(FoodRequest request)
     {
-        var dbResponse = _foodRepository.GetFood(request.Food).Select(row => FoodMapper.FoodToFoodResponse(row))
+        var dbResponse = _foodRepository.GetFood(request.Food).Select(FoodMapper.FoodToFoodResponse)
             .Single();
 
         dbResponse.Contents.ForEach(row =>
