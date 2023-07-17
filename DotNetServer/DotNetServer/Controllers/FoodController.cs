@@ -1,6 +1,6 @@
-﻿using DotNetServer.Entities;
-using DotNetServer.Model;
-using DotNetServer.Repositories;
+﻿using DotNetServer.Model.Requests;
+using DotNetServer.Model.Responses;
+using DotNetServer.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetServer.Controllers;
@@ -9,16 +9,16 @@ namespace DotNetServer.Controllers;
 [Route("/v1/api/[controller]")]
 public class FoodController : ControllerBase
 {
-    private readonly IFoodRepository _foodRepository;
+    private readonly IFoodService _foodService;
 
-    public FoodController(IFoodRepository foodRepository)
+    public FoodController(IFoodService foodService)
     {
-        _foodRepository = foodRepository;
+        _foodService = foodService;
     }
 
     [HttpPost]
-    public ActionResult<Food> GetFood([FromBody] FoodRequest request)
+    public ActionResult<FoodResponse> GetFood([FromBody] FoodRequest request)
     {
-        return _foodRepository.GetFood(request.Food);
+        return _foodService.GetFood(request);
     }
 }

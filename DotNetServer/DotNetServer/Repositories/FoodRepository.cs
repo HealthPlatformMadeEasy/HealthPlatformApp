@@ -12,9 +12,43 @@ public class FoodRepository : IFoodRepository
     {
         _context = context;
     }
-    public Food GetFood(string foodName)
+
+    public List<Food> GetFood(string foodName)
     {
         return _context.Foods.Where(food => food.Name == foodName)
-            .Include(prop => prop.Contents).Single();
+            .Include(prop => prop.Contents)
+            .Select(food => new Food
+            {
+                Name = food.Name,
+                Description = food.Description,
+                FoodGroup = food.FoodGroup,
+                Contents = food.Contents.Select(cont => new Content
+                {
+                    OrigContent = cont.OrigContent,
+                    SourceType = cont.SourceType,
+                    StandardContent = cont.StandardContent,
+                    OrigSourceName = cont.OrigSourceName,
+                    OrigUnit = cont.OrigUnit
+                }).ToList()
+            }).ToList();
+    }
+
+    public List<Food> GetFoodsFromRequestList(List<string> foodList)
+    {
+        return _context.Foods.Where(food => foodList.Any(item => food.Name == item)).Include(prop => prop.Contents)
+            .Select(food => new Food
+            {
+                Name = food.Name,
+                Description = food.Description,
+                FoodGroup = food.FoodGroup,
+                Contents = food.Contents.Select(cont => new Content
+                {
+                    OrigContent = cont.OrigContent,
+                    SourceType = cont.SourceType,
+                    StandardContent = cont.StandardContent,
+                    OrigSourceName = cont.OrigSourceName,
+                    OrigUnit = cont.OrigUnit
+                }).ToList()
+            }).ToList();
     }
 }
