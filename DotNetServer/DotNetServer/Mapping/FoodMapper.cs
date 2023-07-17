@@ -8,4 +8,6 @@ namespace DotNetServer.Mapping;
 public static partial class FoodMapper
 {
     public static partial FoodResponse FoodToFoodResponse(Food food);
+
+    public static partial List<FoodResponse> FoodListToFoodResponseList(List<Food> food);
 }
