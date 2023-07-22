@@ -23,7 +23,7 @@ function CalorieCalculator() {
             quantity: parseFloat(quantity1)
         }
 
-        fetch('https://localhost:7247/v1/api/food/', {
+        fetch('https://localhost:7247/v1/api/food/single', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(food)

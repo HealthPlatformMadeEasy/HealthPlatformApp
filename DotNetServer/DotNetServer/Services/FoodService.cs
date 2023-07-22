@@ -28,7 +28,8 @@ public class FoodService : IFoodService
         return dbResponse;
     }
 
-    public List<FoodResponse> GetResultOfListFood(List<FoodRequest> requests)
+    // TODO refactor this logic
+    public List<ContentResponse> GetResultOfListFood(List<FoodRequest> requests)
     {
         var dbResponse = _foodRepository.GetFoodsFromRequestList(requests
                 .Select(item => item.Food)
@@ -44,11 +45,16 @@ public class FoodService : IFoodService
                 cont.StandardContent = cont.StandardContent * requests[row.index].Quantity / 100;
             });
 
-        /* TODO
-         add all list of content then
-         var result = items.GroupBy(x => x.name).Select(g => new { name = g.Key, money = g.Sum(x => x.money) }).ToList();
-        that will return a list with no repeated element and add the value column */
+        var items = new List<ContentResponse>();
+        dbResponse.ForEach(food => items.AddRange(food.Contents));
 
-        return dbResponse;
+        var result = items.GroupBy(row => (row.OrigSourceName, row.OrigUnit, row.SourceType))
+            .Select(row => new ContentResponse(row.Key.SourceType, row.Key.OrigUnit, row.Key.OrigSourceName)
+            {
+                OrigContent = row.Sum(cont => cont.OrigContent),
+                StandardContent = row.Sum(cont => cont.StandardContent)
+            }).OrderBy(row => row.OrigSourceName).ToList();
+
+        return result;
     }
 }
