@@ -7,5 +7,5 @@ public interface IFoodService
 {
     FoodResponse GetFood(FoodRequest request);
 
-    List<FoodResponse> GetResultOfListFood(List<FoodRequest> requests);
+    List<ContentResponse> GetResultOfListFood(List<FoodRequest> requests);
 }

@@ -16,9 +16,17 @@ public class FoodController : ControllerBase
         _foodService = foodService;
     }
 
+    [Route("single")]
     [HttpPost]
     public ActionResult<FoodResponse> GetFood([FromBody] FoodRequest request)
     {
         return _foodService.GetFood(request);
+    }
+
+    [Route("multiple")]
+    [HttpPost]
+    public ActionResult<List<ContentResponse>> GetListOfContents([FromBody] List<FoodRequest> request)
+    {
+        return _foodService.GetResultOfListFood(request);
     }
 }
