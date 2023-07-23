@@ -1,10 +1,11 @@
 using DotNetServer.Core.Context;
-using DotNetServer.FoodModule.Repositories;
-using DotNetServer.FoodModule.Services;
-using DotNetServer.UserContentModule.Repositories;
-using DotNetServer.UserModule.Model.Requests;
-using DotNetServer.UserModule.Repositories;
-using DotNetServer.UserModule.Validations;
+using DotNetServer.Modules.FoodModule.Repositories;
+using DotNetServer.Modules.FoodModule.Services;
+using DotNetServer.Modules.UserContentModule.Repositories;
+using DotNetServer.Modules.UserModule.Model.Requests;
+using DotNetServer.Modules.UserModule.Repositories;
+using DotNetServer.Modules.UserModule.Services;
+using DotNetServer.Modules.UserModule.Validations;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,11 +19,12 @@ if (builder.Environment.IsProduction())
     builder.Services.AddDbContext<FoodbContext>(opt =>
         opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:ProFoodbMySQL")!));
 
-builder.Services.AddSingleton<IFoodRepository, FoodRepository>();
-builder.Services.AddSingleton<IUserRepository, UserRepository>();
-builder.Services.AddSingleton<IUserContentRepository, UserContentRepository>();
+builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserContentRepository, UserContentRepository>();
 
-builder.Services.AddSingleton<IFoodService, FoodService>();
+builder.Services.AddScoped<IFoodService, FoodService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IValidator<UserRequest>, UserRequestValidator>();
 
@@ -37,6 +39,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

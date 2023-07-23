@@ -23,18 +23,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="TestModule\Controllers\"/>
-        <Folder Include="TestModule\Entities\"/>
-        <Folder Include="TestModule\Mapping\"/>
-        <Folder Include="TestModule\Model\Requests\"/>
-        <Folder Include="TestModule\Model\Responses\"/>
-        <Folder Include="TestModule\Repositories\"/>
-        <Folder Include="TestModule\Services\"/>
-        <Folder Include="TestModule\Validations\"/>
-        <Folder Include="UserContentModule\Controllers\"/>
-        <Folder Include="UserContentModule\Entities\"/>
-        <Folder Include="UserContentModule\Model\Responses\"/>
-        <Folder Include="UserContentModule\Validations\"/>
+        <Folder Include="ProtoModule\Controllers\"/>
+        <Folder Include="ProtoModule\Entities\"/>
+        <Folder Include="ProtoModule\Mapping\"/>
+        <Folder Include="ProtoModule\Model\Requests\"/>
+        <Folder Include="ProtoModule\Model\Responses\"/>
+        <Folder Include="ProtoModule\Repositories\"/>
+        <Folder Include="ProtoModule\Services\"/>
+        <Folder Include="ProtoModule\Validations\"/>
     </ItemGroup>
 
 </Project>

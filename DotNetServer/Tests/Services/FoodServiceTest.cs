@@ -1,7 +1,7 @@
 ﻿using DotNetServer.Core.Context;
-using DotNetServer.FoodModule.Model.Requests;
-using DotNetServer.FoodModule.Repositories;
-using DotNetServer.FoodModule.Services;
+using DotNetServer.Modules.FoodModule.Model.Requests;
+using DotNetServer.Modules.FoodModule.Repositories;
+using DotNetServer.Modules.FoodModule.Services;
 using Microsoft.EntityFrameworkCore;
 using Xunit.Abstractions;
 

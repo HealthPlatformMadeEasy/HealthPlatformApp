@@ -1,8 +1,8 @@
 using DotNetServer.Core.Context;
-using DotNetServer.FoodModule.Mapping;
-using DotNetServer.FoodModule.Model.Requests;
-using DotNetServer.FoodModule.Model.Responses;
-using DotNetServer.FoodModule.Repositories;
+using DotNetServer.Modules.FoodModule.Mapping;
+using DotNetServer.Modules.FoodModule.Model.Requests;
+using DotNetServer.Modules.FoodModule.Model.Responses;
+using DotNetServer.Modules.FoodModule.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Xunit.Abstractions;
 

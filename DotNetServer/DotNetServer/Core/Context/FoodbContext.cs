@@ -1,7 +1,7 @@
 ﻿using DotNetServer.Core.Entities.Foodb;
 using DotNetServer.Core.Entities.User;
-using DotNetServer.FoodModule.Entities;
-using DotNetServer.UserModule.Entities;
+using DotNetServer.Modules.FoodModule.Entities;
+using DotNetServer.Modules.UserModule.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Core.Context;

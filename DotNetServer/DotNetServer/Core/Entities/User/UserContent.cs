@@ -21,5 +21,5 @@ public class UserContent
 
     [Column("user_id")] public Guid UserId { get; set; }
 
-    public required UserModule.Entities.User User { get; set; }
+    public required Modules.UserModule.Entities.User User { get; set; }
 }
