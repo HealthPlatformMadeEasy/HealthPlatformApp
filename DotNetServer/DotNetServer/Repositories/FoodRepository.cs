@@ -1,5 +1,5 @@
 ﻿using DotNetServer.Context;
-using DotNetServer.Entities;
+using DotNetServer.Entities.Foodb;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Repositories;

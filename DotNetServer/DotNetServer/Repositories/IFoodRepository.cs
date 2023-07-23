@@ -1,4 +1,4 @@
-﻿using DotNetServer.Entities;
+﻿using DotNetServer.Entities.Foodb;
 
 namespace DotNetServer.Repositories;
 

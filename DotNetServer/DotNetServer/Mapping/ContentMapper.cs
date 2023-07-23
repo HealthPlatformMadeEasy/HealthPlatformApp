@@ -1,4 +1,4 @@
-﻿using DotNetServer.Entities;
+﻿using DotNetServer.Entities.Foodb;
 using DotNetServer.Model.Responses;
 using Riok.Mapperly.Abstractions;
 

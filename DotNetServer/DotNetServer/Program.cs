@@ -1,16 +1,28 @@
 using DotNetServer.Context;
+using DotNetServer.Model.Requests;
 using DotNetServer.Repositories;
 using DotNetServer.Services;
+using DotNetServer.Validations;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<FoodbContext>(opt =>
-    opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:FoodbMySQL")!));
+    opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:DevFoodbMySQL")!));
 
-builder.Services.AddScoped<IFoodRepository, FoodRepository>();
-builder.Services.AddScoped<IFoodService, FoodService>();
+if (builder.Environment.IsProduction())
+    builder.Services.AddDbContext<FoodbContext>(opt =>
+        opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:ProFoodbMySQL")!));
+
+builder.Services.AddSingleton<IFoodRepository, FoodRepository>();
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<IUserContentRepository, UserContentRepository>();
+
+builder.Services.AddSingleton<IFoodService, FoodService>();
+
+builder.Services.AddScoped<IValidator<UserRequest>, UserRequestValidator>();
 
 builder.Services.AddCors(options =>
 {

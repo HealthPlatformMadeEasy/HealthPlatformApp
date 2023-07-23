@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using DotNetServer.Entities;
+﻿using DotNetServer.Entities.Foodb;
+using DotNetServer.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Context;
@@ -106,47 +105,42 @@ public partial class FoodbContext : DbContext
 
     public virtual DbSet<WishartNotice> WishartNotices { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserContent> UserContents { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AccessionNumber>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<AccessionNumber>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<CiteThisArticle>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CiteThisArticle>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<CiteThisArticleReferencing>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Article).WithMany(p => p.CiteThisArticleReferencings).HasConstraintName("fk_rails_e74ef0242f");
+            entity.HasOne(d => d.Article).WithMany(p => p.CiteThisArticleReferencings)
+                .HasConstraintName("fk_rails_e74ef0242f");
         });
 
-        modelBuilder.Entity<CiteThisExternalLink>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CiteThisExternalLink>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<CiteThisExternalLinkReferencing>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.ExternalLink).WithMany(p => p.CiteThisExternalLinkReferencings).HasConstraintName("fk_rails_a798195c86");
+            entity.HasOne(d => d.ExternalLink).WithMany(p => p.CiteThisExternalLinkReferencings)
+                .HasConstraintName("fk_rails_a798195c86");
         });
 
-        modelBuilder.Entity<CiteThisTextbook>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CiteThisTextbook>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<CiteThisTextbookReferencing>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Textbook).WithMany(p => p.CiteThisTextbookReferencings).HasConstraintName("fk_rails_c859c1f8e3");
+            entity.HasOne(d => d.Textbook).WithMany(p => p.CiteThisTextbookReferencings)
+                .HasConstraintName("fk_rails_c859c1f8e3");
         });
 
         modelBuilder.Entity<Compound>(entity =>
@@ -160,47 +154,35 @@ public partial class FoodbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Compound).WithMany(p => p.CompoundAlternateParents).HasConstraintName("fk_rails_0aefaa1014");
+            entity.HasOne(d => d.Compound).WithMany(p => p.CompoundAlternateParents)
+                .HasConstraintName("fk_rails_0aefaa1014");
         });
 
         modelBuilder.Entity<CompoundExternalDescriptor>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Compound).WithMany(p => p.CompoundExternalDescriptors).HasConstraintName("fk_rails_2395524b9a");
+            entity.HasOne(d => d.Compound).WithMany(p => p.CompoundExternalDescriptors)
+                .HasConstraintName("fk_rails_2395524b9a");
         });
 
-        modelBuilder.Entity<CompoundOntologyTerm>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CompoundOntologyTerm>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<CompoundSubstituent>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.Compound).WithMany(p => p.CompoundSubstituents).HasConstraintName("fk_rails_1e68999a98");
+            entity.HasOne(d => d.Compound).WithMany(p => p.CompoundSubstituents)
+                .HasConstraintName("fk_rails_1e68999a98");
         });
 
-        modelBuilder.Entity<CompoundSynonym>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CompoundSynonym>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<CompoundsEnzyme>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CompoundsEnzyme>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<CompoundsFlavor>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CompoundsFlavor>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<CompoundsHealthEffect>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<CompoundsHealthEffect>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<CompoundsPathway>(entity =>
         {
@@ -219,20 +201,11 @@ public partial class FoodbContext : DbContext
             entity.Property(e => e.OrigUnit).HasDefaultValueSql("''");
         });
 
-        modelBuilder.Entity<Enzyme>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Enzyme>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<EnzymeSynonym>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<EnzymeSynonym>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<Flavor>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Flavor>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<Food>(entity =>
         {
@@ -245,10 +218,7 @@ public partial class FoodbContext : DbContext
                 .IsRequired();
         });
 
-        modelBuilder.Entity<FoodTaxonomy>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<FoodTaxonomy>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<FoodcomexCompound>(entity =>
         {
@@ -266,15 +236,9 @@ public partial class FoodbContext : DbContext
             entity.Property(e => e.TaxonomyFamily).HasDefaultValueSql("''");
         });
 
-        modelBuilder.Entity<FoodcomexCompoundProvider>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<FoodcomexCompoundProvider>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<FoodcomexCompoundRequest>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<FoodcomexCompoundRequest>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<FoodcomexUserDatum>(entity =>
         {
@@ -283,25 +247,13 @@ public partial class FoodbContext : DbContext
             entity.Property(e => e.Role).HasDefaultValueSql("'recipient'");
         });
 
-        modelBuilder.Entity<FoodcomexVendor>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<FoodcomexVendor>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<FoodcomexVendorCompound>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<FoodcomexVendorCompound>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<HealthEffect>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<HealthEffect>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<MapItemsPathway>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<MapItemsPathway>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<Metabolite>(entity =>
         {
@@ -313,10 +265,7 @@ public partial class FoodbContext : DbContext
             entity.Property(e => e.PredictedInHmdb).HasDefaultValueSql("'0'");
         });
 
-        modelBuilder.Entity<NcbiTaxonomyMap>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<NcbiTaxonomyMap>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<Nutrient>(entity =>
         {
@@ -329,48 +278,25 @@ public partial class FoodbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasOne(d => d.OntologyTerm).WithMany(p => p.OntologySynonyms).HasConstraintName("fk_rails_ad89f73357");
+            entity.HasOne(d => d.OntologyTerm).WithMany(p => p.OntologySynonyms)
+                .HasConstraintName("fk_rails_ad89f73357");
         });
 
-        modelBuilder.Entity<OntologyTerm>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<OntologyTerm>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<Pathway>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Pathway>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<PdbIdentifier>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<PdbIdentifier>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<Pfam>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Pfam>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<PfamMembership>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<PfamMembership>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<Reference>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Reference>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<Sequence>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Sequence>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<SimulateContent>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<SimulateContent>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<WishartNotice>(entity =>
         {
@@ -378,6 +304,19 @@ public partial class FoodbContext : DbContext
 
             entity.Property(e => e.Display).HasDefaultValueSql("'0'");
         });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+
+            entity.HasMany<UserContent>(e => e.UserContents)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId);
+        });
+
+        modelBuilder.Entity<UserContent>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         OnModelCreatingPartial(modelBuilder);
     }
