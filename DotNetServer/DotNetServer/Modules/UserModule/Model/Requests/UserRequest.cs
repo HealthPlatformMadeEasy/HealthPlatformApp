@@ -6,5 +6,6 @@ public record UserRequest(
     string Email
 )
 {
+    public Guid Id { get; init; } = Guid.NewGuid();
     public DateTime CreatedAt { get; init; } = DateTime.Now;
 }

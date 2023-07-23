@@ -311,6 +311,8 @@ public partial class FoodbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
+            entity.HasAlternateKey(e => e.Email).HasName("email_pk");
+
             entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
 
             entity.HasMany<UserContent>(e => e.UserContents)

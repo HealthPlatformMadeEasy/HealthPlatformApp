@@ -5,7 +5,9 @@
     password   VARCHAR(255) NOT NULL,
     email      VARCHAR(255) NOT NULL,
     created_at DATETIME     NOT NULL,
-    PRIMARY KEY (Id)
+    PRIMARY KEY (Id),
+    constraint email_pk
+        unique (password)
 );
 
 CREATE TABLE UserContents
