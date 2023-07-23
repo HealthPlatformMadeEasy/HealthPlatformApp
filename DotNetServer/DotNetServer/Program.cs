@@ -1,8 +1,10 @@
-using DotNetServer.Context;
-using DotNetServer.Model.Requests;
-using DotNetServer.Repositories;
-using DotNetServer.Services;
-using DotNetServer.Validations;
+using DotNetServer.Core.Context;
+using DotNetServer.FoodModule.Repositories;
+using DotNetServer.FoodModule.Services;
+using DotNetServer.UserContentModule.Repositories;
+using DotNetServer.UserModule.Model.Requests;
+using DotNetServer.UserModule.Repositories;
+using DotNetServer.UserModule.Validations;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 

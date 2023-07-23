@@ -1,5 +1,5 @@
-﻿using DotNetServer.Context;
-using DotNetServer.Repositories;
+﻿using DotNetServer.Core.Context;
+using DotNetServer.FoodModule.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Xunit.Abstractions;
 
