@@ -1,0 +1,54 @@
+﻿using DotNetServer.Core.Context;
+using DotNetServer.Modules.FoodModule.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace DotNetServer.Modules.FoodModule.Repositories;
+
+public class FoodRepository : IFoodRepository
+{
+    private readonly FoodbContext _context;
+
+    public FoodRepository(FoodbContext context)
+    {
+        _context = context;
+    }
+
+    public List<Food> GetFood(string foodName)
+    {
+        return _context.Foods.Where(food => food.Name == foodName)
+            .Include(prop => prop.Contents)
+            .Select(food => new Food
+            {
+                Name = food.Name,
+                Description = food.Description,
+                FoodGroup = food.FoodGroup,
+                Contents = food.Contents.Select(cont => new Content
+                {
+                    OrigContent = cont.OrigContent,
+                    SourceType = cont.SourceType,
+                    StandardContent = cont.StandardContent,
+                    OrigSourceName = cont.OrigSourceName,
+                    OrigUnit = cont.OrigUnit
+                }).ToList()
+            }).ToList();
+    }
+
+    public List<Food> GetFoodsFromRequestList(List<string> foodList)
+    {
+        return _context.Foods.Where(food => foodList.Any(item => food.Name == item)).Include(prop => prop.Contents)
+            .Select(food => new Food
+            {
+                Name = food.Name,
+                Description = food.Description,
+                FoodGroup = food.FoodGroup,
+                Contents = food.Contents.Select(cont => new Content
+                {
+                    OrigContent = cont.OrigContent,
+                    SourceType = cont.SourceType,
+                    StandardContent = cont.StandardContent,
+                    OrigSourceName = cont.OrigSourceName,
+                    OrigUnit = cont.OrigUnit
+                }).ToList()
+            }).ToList();
+    }
+}

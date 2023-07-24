@@ -25,7 +25,7 @@ interface IError {
 
 const pushFoodData = async (list: FoodItem[]) => {
     const response = await axios.post(
-        'https://localhost:7247/v1/api/food/multiple',
+        'https://localhost:7247/v1/api/foods/multiple',
         list,
         {headers: {'Content-Type': 'application/json'}}
     );
@@ -124,7 +124,7 @@ function ListOfFoods() {
                             type="number"
                             required
                             value={form.quantity}
-                            placeholder="Quantity"
+                            placeholder="Quantity in grams"
                             onChange={(e) =>
                                 setForm({...form, quantity: parseFloat(e.target.value)})
                             }
