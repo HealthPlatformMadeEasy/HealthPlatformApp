@@ -1,5 +1,5 @@
 ﻿using DotNetServer.Core.Context;
-using DotNetServer.Core.Entities.User;
+using DotNetServer.Modules.UserContentModule.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.UserContentModule.Repositories;
@@ -40,5 +40,15 @@ public class UserContentRepository : IUserContentRepository
 
         _context.UserContents.Remove(userContent);
         _context.SaveChanges();
+    }
+
+    public List<UserContent> GetUserContentByUserId(Guid id)
+    {
+        return _context.UserContents.Where(u => u.UserId == id).ToList();
+    }
+
+    public void CreateMultipleUserContent(List<UserContent> userContents)
+    {
+        _context.UserContents.AddRange(userContents);
     }
 }

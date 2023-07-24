@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DotNetServer.Modules.UserModule.Entities;
 
-namespace DotNetServer.Core.Entities.User;
+namespace DotNetServer.Modules.UserContentModule.Entities;
 
 public class UserContent
 {
-    [Key] [Column("id")] public int Id { get; set; }
+    [Key] [Column("id")] public Guid Id { get; set; }
 
     [Column("source_type")] public string? SourceType { get; set; }
 
@@ -21,5 +22,5 @@ public class UserContent
 
     [Column("user_id")] public Guid UserId { get; set; }
 
-    public required Modules.UserModule.Entities.User User { get; set; }
+    public User User { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetServer.Core.Entities.User;
+using DotNetServer.Modules.UserContentModule.Entities;
 
 namespace DotNetServer.Modules.UserModule.Entities;
 

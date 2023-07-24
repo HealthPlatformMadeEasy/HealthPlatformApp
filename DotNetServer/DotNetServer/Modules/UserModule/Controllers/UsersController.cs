@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetServer.Modules.UserModule.Controllers;
 
+//TODO Refactor this controller, more error checking.
 [ApiController]
 [Route("v1/api/[controller]")]
 public class UsersController : ControllerBase
@@ -31,9 +32,31 @@ public class UsersController : ControllerBase
     {
         var validator = _userValidator.Validate(userRequest);
 
-        if (!validator.IsValid) return Conflict(validator.Errors);
-        _userService.CreateUser(userRequest);
+        if (!validator.IsValid) return BadRequest(validator.Errors);
 
-        return CreatedAtAction("GetUser", new { id = userRequest.Id }, userRequest);
+        if (_userService.CreateUser(userRequest))
+            return CreatedAtAction("GetUser", new { id = userRequest.Id }, userRequest);
+
+        return BadRequest();
+    }
+
+    [HttpDelete]
+    public ActionResult DeleteUser(Guid id)
+    {
+        _userService.DeleteUser(id);
+
+        return NoContent();
+    }
+
+    [HttpPut("{id:guid}")]
+    public ActionResult<UserResponse> UpdateUser(Guid id, [FromBody] UserRequest userRequest)
+    {
+        var validator = _userValidator.Validate(userRequest);
+
+        if (!validator.IsValid) return BadRequest(validator.Errors);
+
+        if (_userService.UpdateUser(id, userRequest)) return Ok(userRequest);
+
+        return BadRequest();
     }
 }

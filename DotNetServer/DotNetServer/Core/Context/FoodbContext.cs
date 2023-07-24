@@ -1,6 +1,6 @@
 ﻿using DotNetServer.Core.Entities.Foodb;
-using DotNetServer.Core.Entities.User;
 using DotNetServer.Modules.FoodModule.Entities;
+using DotNetServer.Modules.UserContentModule.Entities;
 using DotNetServer.Modules.UserModule.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -320,7 +320,12 @@ public partial class FoodbContext : DbContext
                 .HasForeignKey(e => e.UserId);
         });
 
-        modelBuilder.Entity<UserContent>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
+        modelBuilder.Entity<UserContent>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+        });
 
         OnModelCreatingPartial(modelBuilder);
     }

@@ -1,7 +1,10 @@
 using DotNetServer.Core.Context;
 using DotNetServer.Modules.FoodModule.Repositories;
 using DotNetServer.Modules.FoodModule.Services;
+using DotNetServer.Modules.UserContentModule.Model.Requests;
 using DotNetServer.Modules.UserContentModule.Repositories;
+using DotNetServer.Modules.UserContentModule.Services;
+using DotNetServer.Modules.UserContentModule.Validations;
 using DotNetServer.Modules.UserModule.Model.Requests;
 using DotNetServer.Modules.UserModule.Repositories;
 using DotNetServer.Modules.UserModule.Services;
@@ -25,8 +28,10 @@ builder.Services.AddScoped<IUserContentRepository, UserContentRepository>();
 
 builder.Services.AddScoped<IFoodService, FoodService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserContentService, UserContentService>();
 
 builder.Services.AddScoped<IValidator<UserRequest>, UserRequestValidator>();
+builder.Services.AddScoped<IValidator<UserContentRequest>, UserContentRequestValidator>();
 
 builder.Services.AddCors(options =>
 {

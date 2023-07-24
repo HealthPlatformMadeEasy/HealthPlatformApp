@@ -12,7 +12,7 @@
 
 CREATE TABLE UserContents
 (
-    id               INT      NOT NULL AUTO_INCREMENT,
+    id CHAR(36) NOT NULL,
     source_type      VARCHAR(255),
     orig_unit        VARCHAR(255),
     orig_source_name VARCHAR(255),

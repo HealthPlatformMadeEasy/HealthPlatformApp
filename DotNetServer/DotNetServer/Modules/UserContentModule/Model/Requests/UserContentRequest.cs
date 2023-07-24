@@ -5,8 +5,10 @@ public record UserContentRequest(
     string OrigUnit,
     string? OrigSourceName,
     decimal? OrigContent,
-    decimal? StandardContent
+    decimal? StandardContent,
+    Guid UserId
 )
 {
+    public Guid Id { get; init; } = Guid.NewGuid();
     public DateTime CreatedAt { get; init; } = DateTime.Now;
 }
