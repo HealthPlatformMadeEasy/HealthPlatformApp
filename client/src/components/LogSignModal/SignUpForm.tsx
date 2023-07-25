@@ -24,6 +24,7 @@ const SignUpForm = ({setModalOpen}: Props) => {
             return;
         }
 
+        handleLogInClick();
     };
 
     const handleLogInClick = () => {
@@ -35,7 +36,8 @@ const SignUpForm = ({setModalOpen}: Props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form onSubmit={handleSubmit}
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-auto">
                 <p className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800 mb-4">
                     Created Account
@@ -44,15 +46,16 @@ const SignUpForm = ({setModalOpen}: Props) => {
                     <label id="UserName" className="text-sm font-medium leading-none text-gray-800">
                         User Name
                     </label>
-                    <input value={username} aria-labelledby="userName" type="userName"
-                           onChange={(e) => setUsername(e.target.value)}
+                    <input onChange={(e) => setUsername(e.target.value)}
+                           value={username} aria-labelledby="userName" type="userName"
                            className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"/>
                 </div>
                 <div>
                     <label id="email" className="text-sm font-medium leading-none text-gray-800">
                         Email
                     </label>
-                    <input value={email} aria-labelledby="email" type="email" onChange={(e) => setEmail(e.target.value)}
+                    <input onChange={(e) => setEmail(e.target.value)}
+                           value={email} aria-labelledby="email" type="email"
                            className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"/>
                 </div>
                 <div className="mt-6  w-full">
@@ -60,7 +63,8 @@ const SignUpForm = ({setModalOpen}: Props) => {
                         Password
                     </label>
                     <div className="relative flex items-center justify-center">
-                        <input value={password} id="pass" type="password" onChange={(e) => setPassword(e.target.value)}
+                        <input onChange={(e) => setPassword(e.target.value)}
+                               value={password} id="pass" type="password"
                                className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"/>
                         <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -78,8 +82,8 @@ const SignUpForm = ({setModalOpen}: Props) => {
                         Repeat Password
                     </label>
                     <div className="relative flex items-center justify-center">
-                        <input value={repeatPassword} id="pass" type="password"
-                               onChange={(e) => setRepeatPassword(e.target.value)}
+                        <input onChange={(e) => setRepeatPassword(e.target.value)}
+                               value={repeatPassword} id="pass" type="password"
                                className="bg-gray-200 border rounded  text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"/>
                         <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -92,10 +96,8 @@ const SignUpForm = ({setModalOpen}: Props) => {
                     </div>
                 </div>
                 <div className="mt-8">
-                    <button role="button" onClick={handleLogInClick}
-                            className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
-                        Create Account
-                    </button>
+                    <input type='submit' value='Sign Up'
+                           className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"/>
                 </div>
             </div>
         </form>
