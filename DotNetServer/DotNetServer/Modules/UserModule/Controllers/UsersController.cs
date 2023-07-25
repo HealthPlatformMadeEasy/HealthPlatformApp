@@ -28,14 +28,14 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<UserResponse> PostUser([FromBody] UserRequest userRequest)
+    public ActionResult<UserIdResponse> PostUser([FromBody] UserRequest userRequest)
     {
         var validator = _userValidator.Validate(userRequest);
 
         if (!validator.IsValid) return BadRequest(validator.Errors);
 
         if (_userService.CreateUser(userRequest))
-            return CreatedAtAction("GetUser", new { id = userRequest.Id }, userRequest);
+            return CreatedAtAction("GetUser", new { id = userRequest.Id }, new UserIdResponse(userRequest.Id));
 
         return BadRequest();
     }
