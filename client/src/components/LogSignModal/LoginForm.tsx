@@ -1,5 +1,7 @@
 ﻿import React, {useState} from 'react';
 import SignUpForm from "./SignUpForm.tsx";
+import {useUserId} from "../../hooks/userUserId.tsx";
+
 
 type Props = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -10,10 +12,12 @@ const LoginForm = ({setModalOpen}: Props) => {
     const [password, setPassword] = useState("");
     const [isSignUp, setIsSignUp] = useState(false);
     const [passwordType, setPasswordType] = useState('password');
+    const {setUserId} = useUserId();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Handle login request here
+        setUserId("Test")
     };
 
     const handleSignUpClick = () => {
