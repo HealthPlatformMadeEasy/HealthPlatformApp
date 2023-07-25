@@ -1,15 +1,14 @@
 import './App.css'
-import CalorieCalculator from "./components/CalorieCalculator/CalorieCalculator.tsx";
-import ListOfFoods from "./components/ListOfFoodsRequest/ListOfFoodsResquest.tsx";
 import {Navbar} from "./components/NavBar/NavBar.tsx";
+import Router from "./routes/Router.tsx";
+
 
 function App() {
 
     return (
         <>
             <Navbar/>
-            <CalorieCalculator/>
-            <ListOfFoods/>
+            <Router/>
         </>
     )
 }
