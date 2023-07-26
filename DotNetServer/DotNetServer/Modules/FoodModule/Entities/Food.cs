@@ -8,7 +8,7 @@ namespace DotNetServer.Modules.FoodModule.Entities;
 [Index("ExportToAfcdb", Name = "index_foods_on_export_to_afcdb")]
 [Index("Name", Name = "index_foods_on_name", IsUnique = true)]
 [Index("NameScientific", Name = "index_foods_on_name_scientific")]
-public partial class Food
+public class Food
 {
     [Key] [Column("id")] public int Id { get; set; }
 

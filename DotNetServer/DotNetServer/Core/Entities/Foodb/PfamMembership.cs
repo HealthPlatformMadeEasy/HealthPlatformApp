@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("pfam_memberships")]
 [Index("EnzymeId", "PfamId", Name = "index_pfam_memberships_on_enzyme_id_and_pfam_id", IsUnique = true)]
-public partial class PfamMembership
+public class PfamMembership
 {
     [Key] [Column("id")] public int Id { get; set; }
 

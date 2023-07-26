@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("compound_external_descriptors")]
 [Index("CompoundId", Name = "index_compound_external_descriptors_on_compound_id")]
-public partial class CompoundExternalDescriptor
+public class CompoundExternalDescriptor
 {
     [Key] [Column("id")] public int Id { get; set; }
 

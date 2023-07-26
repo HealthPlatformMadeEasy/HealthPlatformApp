@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("foodcomex_user_data")]
-public partial class FoodcomexUserDatum
+public class FoodcomexUserDatum
 {
     [Key] [Column("id")] public int Id { get; set; }
 

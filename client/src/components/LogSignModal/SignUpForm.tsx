@@ -1,11 +1,11 @@
 ﻿import React, {useState} from 'react';
-import LoginForm from "./LoginForm.tsx";
+import {LoginForm} from "./LoginForm";
 
 type Props = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SignUpForm = ({setModalOpen}: Props) => {
+export function SignUpForm({setModalOpen}: Props) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -102,6 +102,4 @@ const SignUpForm = ({setModalOpen}: Props) => {
             </div>
         </form>
     )
-};
-
-export default SignUpForm;
+}

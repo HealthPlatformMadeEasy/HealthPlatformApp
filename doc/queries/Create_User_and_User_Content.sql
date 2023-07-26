@@ -12,7 +12,7 @@
 
 CREATE TABLE UserContents
 (
-    id CHAR(36) NOT NULL,
+    id               CHAR(36) NOT NULL,
     source_type      VARCHAR(255),
     orig_unit        VARCHAR(255),
     orig_source_name VARCHAR(255),

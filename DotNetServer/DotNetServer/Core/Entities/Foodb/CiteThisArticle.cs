@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("cite_this_articles")]
 [Index("PubmedId", Name = "index_cite_this_articles_on_pubmed_id", IsUnique = true)]
-public partial class CiteThisArticle
+public class CiteThisArticle
 {
     [Key] [Column("id")] public int Id { get; set; }
 

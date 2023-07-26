@@ -1,13 +1,11 @@
-﻿import {useUserId} from "../hooks/userUserId.tsx";
+﻿import {useUserId} from "../hooks";
 
-function Home() {
+export function LandingPage() {
     const {userId} = useUserId();
     return (
         <>
             <h1>Presentation Page {userId}</h1>
-            
+
         </>
     )
 }
-
-export default Home;

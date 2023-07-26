@@ -1,7 +1,7 @@
 ﻿import React, {useEffect, useState} from 'react';
 import {PencilIcon, PlusIcon, TrashIcon} from "@heroicons/react/24/outline";
 import Modal from 'react-modal';
-import Loading from "../Loading/Loading.tsx";
+import {Loading} from "../Loading";
 import axios from "axios";
 import {useMutation} from "react-query";
 
@@ -45,7 +45,7 @@ const useSaveFoodData = () => {
 }
 
 
-function ListOfFoods() {
+export function ListOfFoods() {
     useEffect(() => {
         Modal.setAppElement('#root');
     }, []);
@@ -280,5 +280,3 @@ function ListOfFoods() {
         </>
     );
 }
-
-export default ListOfFoods;

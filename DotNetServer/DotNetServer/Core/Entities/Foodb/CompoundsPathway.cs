@@ -7,7 +7,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Table("compounds_pathways")]
 [Index("CompoundId", Name = "index_compounds_pathways_on_compound_id")]
 [Index("PathwayId", Name = "index_compounds_pathways_on_pathway_id")]
-public partial class CompoundsPathway
+public class CompoundsPathway
 {
     [Key] [Column("id")] public int Id { get; set; }
 

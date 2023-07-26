@@ -7,7 +7,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Table("accession_numbers")]
 [Index("CompoundId", Name = "index_accession_numbers_on_compound_id")]
 [Index("SourceId", "SourceType", Name = "index_accession_numbers_on_source_id_and_source_type")]
-public partial class AccessionNumber
+public class AccessionNumber
 {
     [Key] [Column("id")] public int Id { get; set; }
 

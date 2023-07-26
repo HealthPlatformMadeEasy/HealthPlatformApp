@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("map_items_pathways")]
 [Index("MapItemId", "MapItemType", Name = "index_map_items_pathways_on_map_item_id_and_map_item_type")]
-public partial class MapItemsPathway
+public class MapItemsPathway
 {
     [Key] [Column("id")] public int Id { get; set; }
 

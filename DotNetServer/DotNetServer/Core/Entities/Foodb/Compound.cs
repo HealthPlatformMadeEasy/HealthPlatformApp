@@ -8,7 +8,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Index("Name", Name = "index_compounds_on_name", IsUnique = true)]
 [Index("Name", "PublicId", Name = "index_compounds_on_name_and_public_id", IsUnique = true)]
 [Index("PublicId", Name = "index_compounds_on_public_id", IsUnique = true)]
-public partial class Compound
+public class Compound
 {
     [Key] [Column("id")] public int Id { get; set; }
 

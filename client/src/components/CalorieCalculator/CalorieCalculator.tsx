@@ -1,12 +1,12 @@
 import {useState} from "react";
-import Loading from "../Loading/Loading.tsx";
+import {Loading} from "../Loading";
 
 type foodRequest = {
     food: string,
     quantity: number
 }
 
-function CalorieCalculator() {
+export function CalorieCalculator() {
     const [data, setData] = useState<undefined>();
     const [food1, setFood] = useState("");
     const [quantity1, setQuantity] = useState("");
@@ -77,5 +77,3 @@ function CalorieCalculator() {
         </>
     )
 }
-
-export default CalorieCalculator;

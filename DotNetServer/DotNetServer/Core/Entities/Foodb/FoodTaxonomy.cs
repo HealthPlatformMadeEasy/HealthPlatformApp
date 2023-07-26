@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("food_taxonomies")]
-public partial class FoodTaxonomy
+public class FoodTaxonomy
 {
     [Key] [Column("id")] public int Id { get; set; }
 

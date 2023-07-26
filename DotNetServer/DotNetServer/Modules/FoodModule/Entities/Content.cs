@@ -6,7 +6,7 @@ namespace DotNetServer.Modules.FoodModule.Entities;
 
 [Table("contents")]
 [Index("SourceId", "SourceType", "FoodId", Name = "content_source_and_food_index")]
-public partial class Content
+public class Content
 {
     [Key] [Column("id")] public int Id { get; set; }
 

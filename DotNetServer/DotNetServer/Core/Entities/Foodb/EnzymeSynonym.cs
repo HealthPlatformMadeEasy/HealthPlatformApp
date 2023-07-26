@@ -7,7 +7,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Table("enzyme_synonyms")]
 [Index("EnzymeId", Name = "index_enzyme_synonyms_on_enzyme_id")]
 [Index("Synonym", Name = "index_enzyme_synonyms_on_synonym", IsUnique = true)]
-public partial class EnzymeSynonym
+public class EnzymeSynonym
 {
     [Key] [Column("id")] public int Id { get; set; }
 
