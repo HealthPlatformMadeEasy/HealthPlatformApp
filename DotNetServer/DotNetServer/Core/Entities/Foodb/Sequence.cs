@@ -8,7 +8,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Index("SequenceableId", Name = "index_sequences_on_sequenceable_id")]
 [Index("SequenceableId", "SequenceableType", Name = "index_sequences_on_sequenceable_id_and_sequenceable_type")]
 [Index("SequenceableType", Name = "index_sequences_on_sequenceable_type")]
-public partial class Sequence
+public class Sequence
 {
     [Key] [Column("id")] public int Id { get; set; }
 

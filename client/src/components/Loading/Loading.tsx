@@ -1,4 +1,4 @@
-﻿function Loading() {
+﻿export function Loading() {
     return (
         <div className="grid grid-cols-7 items-stretch justify-items-center">
             <div
@@ -60,5 +60,3 @@
         </div>
     )
 }
-
-export default Loading;

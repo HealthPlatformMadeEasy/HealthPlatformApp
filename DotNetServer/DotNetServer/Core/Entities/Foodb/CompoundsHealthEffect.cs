@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("compounds_health_effects")]
 [Index("SourceId", "SourceType", Name = "index_compounds_health_effects_on_source_id_and_source_type")]
-public partial class CompoundsHealthEffect
+public class CompoundsHealthEffect
 {
     [Key] [Column("id")] public int Id { get; set; }
 

@@ -1,10 +1,9 @@
-import './App.css'
-import {Navbar} from "./components/NavBar/NavBar.tsx";
-import Router from "./routes/Router.tsx";
-import {UserIdProvider} from "./hooks/userUserId.tsx";
+import {Navbar} from "./components";
+import {UserIdProvider} from "./hooks";
+import {Router} from "./routes";
 
 function App() {
-    
+
     return (
         <>
             <UserIdProvider>

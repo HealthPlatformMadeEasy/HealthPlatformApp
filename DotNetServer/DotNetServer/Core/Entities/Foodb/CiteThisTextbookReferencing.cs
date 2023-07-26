@@ -8,7 +8,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Index("ReferencerId", "ReferencerType", Name = "cite_this_article_referencings_all_ids")]
 [Index("ReferencerId", Name = "index_cite_this_textbook_referencings_on_referencer_id")]
 [Index("TextbookId", Name = "index_cite_this_textbook_referencings_on_textbook_id")]
-public partial class CiteThisTextbookReferencing
+public class CiteThisTextbookReferencing
 {
     [Key] [Column("id")] public int Id { get; set; }
 

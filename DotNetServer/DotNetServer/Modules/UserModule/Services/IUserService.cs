@@ -7,9 +7,11 @@ public interface IUserService
 {
     UserResponse GetUser(Guid id);
 
-    bool CreateUser(UserRequest userRequest);
+    UserIdResponse CreateUser(MinimalUserRequest userRequest);
 
     bool UpdateUser(Guid id, UserRequest userRequest);
 
     void DeleteUser(Guid id);
+
+    UserIdResponse GetUserId(MinimalUserRequest minimalUserRequest);
 }

@@ -1,16 +1,19 @@
 ﻿import React, {useState} from 'react';
-import LoginForm from "./LoginForm.tsx";
+import {useUserId} from "../../hooks";
+import {CreateUser} from "../Fetch";
+import {LoginForm} from "./LoginForm";
 
 type Props = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SignUpForm = ({setModalOpen}: Props) => {
+export function SignUpForm({setModalOpen}: Props) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [isLogIn, setIsLogIn] = useState(false);
+    const {setUserId} = useUserId();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,7 +27,13 @@ const SignUpForm = ({setModalOpen}: Props) => {
             return;
         }
 
+        CreateUser({name: username, email: email, password: password}).then(data => {
+            setUserId(data);
+            console.log(JSON.stringify(data))
+        })
+
         handleLogInClick();
+        setModalOpen(false);
     };
 
     const handleLogInClick = () => {
@@ -102,6 +111,4 @@ const SignUpForm = ({setModalOpen}: Props) => {
             </div>
         </form>
     )
-};
-
-export default SignUpForm;
+}

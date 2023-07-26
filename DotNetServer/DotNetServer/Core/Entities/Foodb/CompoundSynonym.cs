@@ -7,7 +7,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Table("compound_synonyms")]
 [Index("SourceId", "SourceType", Name = "index_compound_synonyms_on_source_id_and_source_type")]
 [Index("Synonym", Name = "index_compound_synonyms_on_synonym", IsUnique = true)]
-public partial class CompoundSynonym
+public class CompoundSynonym
 {
     [Key] [Column("id")] public int Id { get; set; }
 

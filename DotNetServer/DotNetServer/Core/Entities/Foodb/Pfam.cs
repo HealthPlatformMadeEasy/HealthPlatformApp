@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("pfams")]
-public partial class Pfam
+public class Pfam
 {
     [Key] [Column("id")] public int Id { get; set; }
 

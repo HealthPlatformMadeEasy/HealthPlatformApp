@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("ontology_terms")]
-public partial class OntologyTerm
+public class OntologyTerm
 {
     [Key] [Column("id")] public int Id { get; set; }
 

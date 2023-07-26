@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DotNetServer.Core.Entities.Foodb;
 
 /// <summary>
-/// Chemical Properties
+///     Chemical Properties
 /// </summary>
 [Table("metabolites")]
 [Index("ExportToHmdb", Name = "index_metabolites_on_export_to_hmdb")]
@@ -17,7 +17,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Index("Status", Name = "index_metabolites_on_status")]
 [Index("UpdatedAt", Name = "index_metabolites_on_updated_at")]
 [Index("HmdbId", Name = "index_tbl_chemical_on_hmdb_id", IsUnique = true)]
-public partial class Metabolite
+public class Metabolite
 {
     [Key] [Column("id")] public int Id { get; set; }
 

@@ -16,7 +16,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Index("PdbId", Name = "index_enzymes_on_pdb_id", IsUnique = true)]
 [Index("UniprotId", Name = "index_enzymes_on_uniprot_id", IsUnique = true)]
 [Index("UniprotName", Name = "index_enzymes_on_uniprot_name", IsUnique = true)]
-public partial class Enzyme
+public class Enzyme
 {
     [Key] [Column("id")] public int Id { get; set; }
 

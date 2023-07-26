@@ -1,18 +1,15 @@
-﻿import CalorieCalculator from "../components/CalorieCalculator/CalorieCalculator.tsx";
-import ListOfFoods from "../components/ListOfFoodsRequest/ListOfFoodsResquest.tsx";
-import {useUserId} from "../hooks/userUserId.tsx";
+﻿import {CalorieCalculator, ListOfFoods} from "../components";
+import {useUserId} from "../hooks";
 
 
-function UserHomePage() {
+export function UserHomePage() {
     const {userId} = useUserId();
 
     return (
         <>
-            <h1>{userId}</h1>
+            <h1>{userId?.userId}</h1>
             <CalorieCalculator/>
             <ListOfFoods/>
         </>
     )
 }
-
-export default UserHomePage;

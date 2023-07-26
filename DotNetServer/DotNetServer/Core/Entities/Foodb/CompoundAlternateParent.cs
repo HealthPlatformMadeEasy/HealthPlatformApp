@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("compound_alternate_parents")]
 [Index("CompoundId", Name = "index_compound_alternate_parents_on_compound_id")]
-public partial class CompoundAlternateParent
+public class CompoundAlternateParent
 {
     [Key] [Column("id")] public int Id { get; set; }
 

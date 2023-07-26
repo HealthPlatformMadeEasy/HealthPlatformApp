@@ -1,5 +1,6 @@
 ﻿using DotNetServer.Core.Context;
 using DotNetServer.Modules.UserModule.Entities;
+using DotNetServer.Modules.UserModule.Model.Requests;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.UserModule.Repositories;
@@ -38,5 +39,15 @@ public class UserRepository : IUserRepository
         if (user is null) return;
         _context.Users.Remove(user);
         _context.SaveChanges();
+    }
+
+    public User GetUserId(MinimalUserRequest minimalUserRequest)
+    {
+        var user = _context.Users.FirstOrDefault(user =>
+            user.Email == minimalUserRequest.Email && user.Name == minimalUserRequest.Name &&
+            user.Password == minimalUserRequest.Password);
+        if (user is null) throw new Exception("user not found");
+
+        return user;
     }
 }

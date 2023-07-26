@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("cite_this_external_links")]
-public partial class CiteThisExternalLink
+public class CiteThisExternalLink
 {
     [Key] [Column("id")] public int Id { get; set; }
 

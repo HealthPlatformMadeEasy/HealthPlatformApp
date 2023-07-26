@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("pdb_identifiers")]
 [Index("CompoundId", Name = "index_pdb_identifiers_on_compound_id")]
-public partial class PdbIdentifier
+public class PdbIdentifier
 {
     [Key] [Column("id")] public int Id { get; set; }
 

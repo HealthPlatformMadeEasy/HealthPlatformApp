@@ -1,10 +1,9 @@
 ﻿import {useState} from 'react'
-import LoginForm from "../LogSignModal/LoginForm.tsx";
+import {LoginForm} from "../LogSignModal";
 import Modal from "react-modal";
 import {NavLink} from "react-router-dom";
 
-
-export const Navbar = () => {
+export function Navbar() {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const handleOpenModal = () => {

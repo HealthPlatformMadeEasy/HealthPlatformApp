@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("simulate_contents")]
 [Index("SourceId", "SourceType", "FoodId", Name = "index_simulate_contents_on_source_id_and_source_type_and_food_id")]
-public partial class SimulateContent
+public class SimulateContent
 {
     [Key] [Column("id")] public int Id { get; set; }
 

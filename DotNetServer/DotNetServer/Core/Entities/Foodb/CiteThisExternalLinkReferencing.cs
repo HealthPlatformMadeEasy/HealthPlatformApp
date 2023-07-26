@@ -8,7 +8,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Index("ReferencerId", "ReferencerType", Name = "external_link_referencings_all_ids")]
 [Index("ExternalLinkId", Name = "index_cite_this_external_link_referencings_on_external_link_id")]
 [Index("ReferencerId", Name = "index_cite_this_external_link_referencings_on_referencer_id")]
-public partial class CiteThisExternalLinkReferencing
+public class CiteThisExternalLinkReferencing
 {
     [Key] [Column("id")] public int Id { get; set; }
 

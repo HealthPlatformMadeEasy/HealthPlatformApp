@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("ncbi_taxonomy_maps")]
-public partial class NcbiTaxonomyMap
+public class NcbiTaxonomyMap
 {
     [Key] [Column("id")] public int Id { get; set; }
 

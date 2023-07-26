@@ -6,7 +6,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 
 [Table("ontology_synonyms")]
 [Index("OntologyTermId", Name = "index_ontology_synonyms_on_ontology_term_id")]
-public partial class OntologySynonym
+public class OntologySynonym
 {
     [Key] [Column("id")] public int Id { get; set; }
 

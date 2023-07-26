@@ -7,12 +7,16 @@
     created_at DATETIME     NOT NULL,
     PRIMARY KEY (Id),
     constraint email_pk
-        unique (password)
+        unique (password),
+    constraint name_pk
+        unique (name),
+    constraint email_pk
+        unique (email)
 );
 
 CREATE TABLE UserContents
 (
-    id CHAR(36) NOT NULL,
+    id               CHAR(36) NOT NULL,
     source_type      VARCHAR(255),
     orig_unit        VARCHAR(255),
     orig_source_name VARCHAR(255),

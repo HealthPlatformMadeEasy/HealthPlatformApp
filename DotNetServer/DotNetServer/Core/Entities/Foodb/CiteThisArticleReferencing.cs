@@ -10,7 +10,7 @@ namespace DotNetServer.Core.Entities.Foodb;
 [Index("ReferencerId", Name = "index_cite_this_article_referencings_on_referencer_id")]
 [Index("ReferencerId", "ArticleId", Name = "new_index")]
 [Index("ArticleId", "ReferencerId", "ReferencerType", Name = "unique_article_referencer", IsUnique = true)]
-public partial class CiteThisArticleReferencing
+public class CiteThisArticleReferencing
 {
     [Key] [Column("id")] public int Id { get; set; }
 

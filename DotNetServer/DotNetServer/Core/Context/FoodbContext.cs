@@ -17,99 +17,99 @@ public partial class FoodbContext : DbContext
     {
     }
 
-    public virtual DbSet<AccessionNumber> AccessionNumbers { get; set; }
+    public virtual DbSet<AccessionNumber> AccessionNumbers { get; set; } = null!;
 
-    public virtual DbSet<CiteThisArticle> CiteThisArticles { get; set; }
+    public virtual DbSet<CiteThisArticle> CiteThisArticles { get; set; } = null!;
 
-    public virtual DbSet<CiteThisArticleReferencing> CiteThisArticleReferencings { get; set; }
+    public virtual DbSet<CiteThisArticleReferencing> CiteThisArticleReferencings { get; set; } = null!;
 
-    public virtual DbSet<CiteThisExternalLink> CiteThisExternalLinks { get; set; }
+    public virtual DbSet<CiteThisExternalLink> CiteThisExternalLinks { get; set; } = null!;
 
-    public virtual DbSet<CiteThisExternalLinkReferencing> CiteThisExternalLinkReferencings { get; set; }
+    public virtual DbSet<CiteThisExternalLinkReferencing> CiteThisExternalLinkReferencings { get; set; } = null!;
 
-    public virtual DbSet<CiteThisTextbook> CiteThisTextbooks { get; set; }
+    public virtual DbSet<CiteThisTextbook> CiteThisTextbooks { get; set; } = null!;
 
-    public virtual DbSet<CiteThisTextbookReferencing> CiteThisTextbookReferencings { get; set; }
+    public virtual DbSet<CiteThisTextbookReferencing> CiteThisTextbookReferencings { get; set; } = null!;
 
-    public virtual DbSet<Compound> Compounds { get; set; }
+    public virtual DbSet<Compound> Compounds { get; set; } = null!;
 
-    public virtual DbSet<CompoundAlternateParent> CompoundAlternateParents { get; set; }
+    public virtual DbSet<CompoundAlternateParent> CompoundAlternateParents { get; set; } = null!;
 
-    public virtual DbSet<CompoundExternalDescriptor> CompoundExternalDescriptors { get; set; }
+    public virtual DbSet<CompoundExternalDescriptor> CompoundExternalDescriptors { get; set; } = null!;
 
-    public virtual DbSet<CompoundOntologyTerm> CompoundOntologyTerms { get; set; }
+    public virtual DbSet<CompoundOntologyTerm> CompoundOntologyTerms { get; set; } = null!;
 
-    public virtual DbSet<CompoundSubstituent> CompoundSubstituents { get; set; }
+    public virtual DbSet<CompoundSubstituent> CompoundSubstituents { get; set; } = null!;
 
-    public virtual DbSet<CompoundSynonym> CompoundSynonyms { get; set; }
+    public virtual DbSet<CompoundSynonym> CompoundSynonyms { get; set; } = null!;
 
-    public virtual DbSet<CompoundsEnzyme> CompoundsEnzymes { get; set; }
+    public virtual DbSet<CompoundsEnzyme> CompoundsEnzymes { get; set; } = null!;
 
-    public virtual DbSet<CompoundsFlavor> CompoundsFlavors { get; set; }
+    public virtual DbSet<CompoundsFlavor> CompoundsFlavors { get; set; } = null!;
 
-    public virtual DbSet<CompoundsHealthEffect> CompoundsHealthEffects { get; set; }
+    public virtual DbSet<CompoundsHealthEffect> CompoundsHealthEffects { get; set; } = null!;
 
-    public virtual DbSet<CompoundsPathway> CompoundsPathways { get; set; }
+    public virtual DbSet<CompoundsPathway> CompoundsPathways { get; set; } = null!;
 
-    public virtual DbSet<Content> Contents { get; set; }
+    public virtual DbSet<Content> Contents { get; set; } = null!;
 
-    public virtual DbSet<Enzyme> Enzymes { get; set; }
+    public virtual DbSet<Enzyme> Enzymes { get; set; } = null!;
 
-    public virtual DbSet<EnzymeSynonym> EnzymeSynonyms { get; set; }
+    public virtual DbSet<EnzymeSynonym> EnzymeSynonyms { get; set; } = null!;
 
-    public virtual DbSet<Flavor> Flavors { get; set; }
+    public virtual DbSet<Flavor> Flavors { get; set; } = null!;
 
-    public virtual DbSet<Food> Foods { get; set; }
+    public virtual DbSet<Food> Foods { get; set; } = null!;
 
-    public virtual DbSet<FoodTaxonomy> FoodTaxonomies { get; set; }
+    public virtual DbSet<FoodTaxonomy> FoodTaxonomies { get; set; } = null!;
 
-    public virtual DbSet<FoodcomexCompound> FoodcomexCompounds { get; set; }
+    public virtual DbSet<FoodcomexCompound> FoodcomexCompounds { get; set; } = null!;
 
-    public virtual DbSet<FoodcomexCompoundProvider> FoodcomexCompoundProviders { get; set; }
+    public virtual DbSet<FoodcomexCompoundProvider> FoodcomexCompoundProviders { get; set; } = null!;
 
-    public virtual DbSet<FoodcomexCompoundRequest> FoodcomexCompoundRequests { get; set; }
+    public virtual DbSet<FoodcomexCompoundRequest> FoodcomexCompoundRequests { get; set; } = null!;
 
-    public virtual DbSet<FoodcomexUserDatum> FoodcomexUserData { get; set; }
+    public virtual DbSet<FoodcomexUserDatum> FoodcomexUserData { get; set; } = null!;
 
-    public virtual DbSet<FoodcomexVendor> FoodcomexVendors { get; set; }
+    public virtual DbSet<FoodcomexVendor> FoodcomexVendors { get; set; } = null!;
 
-    public virtual DbSet<FoodcomexVendorCompound> FoodcomexVendorCompounds { get; set; }
+    public virtual DbSet<FoodcomexVendorCompound> FoodcomexVendorCompounds { get; set; } = null!;
 
-    public virtual DbSet<HealthEffect> HealthEffects { get; set; }
+    public virtual DbSet<HealthEffect> HealthEffects { get; set; } = null!;
 
-    public virtual DbSet<MapItemsPathway> MapItemsPathways { get; set; }
+    public virtual DbSet<MapItemsPathway> MapItemsPathways { get; set; } = null!;
 
-    public virtual DbSet<Metabolite> Metabolites { get; set; }
+    public virtual DbSet<Metabolite> Metabolites { get; set; } = null!;
 
-    public virtual DbSet<NcbiTaxonomyMap> NcbiTaxonomyMaps { get; set; }
+    public virtual DbSet<NcbiTaxonomyMap> NcbiTaxonomyMaps { get; set; } = null!;
 
-    public virtual DbSet<Nutrient> Nutrients { get; set; }
+    public virtual DbSet<Nutrient> Nutrients { get; set; } = null!;
 
-    public virtual DbSet<OntologySynonym> OntologySynonyms { get; set; }
+    public virtual DbSet<OntologySynonym> OntologySynonyms { get; set; } = null!;
 
-    public virtual DbSet<OntologyTerm> OntologyTerms { get; set; }
+    public virtual DbSet<OntologyTerm> OntologyTerms { get; set; } = null!;
 
-    public virtual DbSet<Pathway> Pathways { get; set; }
+    public virtual DbSet<Pathway> Pathways { get; set; } = null!;
 
-    public virtual DbSet<PdbIdentifier> PdbIdentifiers { get; set; }
+    public virtual DbSet<PdbIdentifier> PdbIdentifiers { get; set; } = null!;
 
-    public virtual DbSet<Pfam> Pfams { get; set; }
+    public virtual DbSet<Pfam> Pfams { get; set; } = null!;
 
-    public virtual DbSet<PfamMembership> PfamMemberships { get; set; }
+    public virtual DbSet<PfamMembership> PfamMemberships { get; set; } = null!;
 
-    public virtual DbSet<Reference> References { get; set; }
+    public virtual DbSet<Reference> References { get; set; } = null!;
 
-    public virtual DbSet<SchemaMigration> SchemaMigrations { get; set; }
+    public virtual DbSet<SchemaMigration> SchemaMigrations { get; set; } = null!;
 
-    public virtual DbSet<Sequence> Sequences { get; set; }
+    public virtual DbSet<Sequence> Sequences { get; set; } = null!;
 
-    public virtual DbSet<SimulateContent> SimulateContents { get; set; }
+    public virtual DbSet<SimulateContent> SimulateContents { get; set; } = null!;
 
-    public virtual DbSet<WishartNotice> WishartNotices { get; set; }
+    public virtual DbSet<WishartNotice> WishartNotices { get; set; } = null!;
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<User> Users { get; set; } = null!;
 
-    public virtual DbSet<UserContent> UserContents { get; set; }
+    public virtual DbSet<UserContent> UserContents { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -312,6 +312,10 @@ public partial class FoodbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.HasAlternateKey(e => e.Email).HasName("email_pk");
+
+            entity.HasAlternateKey(e => e.Password).HasName("password_pk");
+
+            entity.HasAlternateKey(e => e.Name).HasName("name_pk");
 
             entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
 
