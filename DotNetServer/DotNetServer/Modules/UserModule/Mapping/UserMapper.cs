@@ -13,4 +13,6 @@ public static partial class UserMapper
     public static partial UserRequest UserToUserRequest(User user);
 
     public static partial UserResponse UserToUserResponse(User user);
+
+    public static partial UserRequest MinimalUserRequestToUserRequest(MinimalUserRequest userRequest);
 }

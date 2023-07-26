@@ -21,13 +21,15 @@ public class UserService : IUserService
         return UserMapper.UserToUserResponse(userDb);
     }
 
-    public bool CreateUser(UserRequest userRequest)
+    public UserIdResponse CreateUser(MinimalUserRequest minimalUserRequest)
     {
-        var userDb = UserMapper.UserRequestToUser(userRequest);
+        var userRequestDb = UserMapper.MinimalUserRequestToUserRequest(minimalUserRequest);
+
+        var userDb = UserMapper.UserRequestToUser(userRequestDb);
 
         var response = _userRepository.CreateUser(userDb);
 
-        return response > 0;
+        return new UserIdResponse(userDb.Id);
     }
 
     public bool UpdateUser(Guid id, UserRequest userRequest)
@@ -42,5 +44,10 @@ public class UserService : IUserService
     public void DeleteUser(Guid id)
     {
         _userRepository.DeleteUser(id);
+    }
+
+    public UserIdResponse GetUserId(MinimalUserRequest minimalUserRequest)
+    {
+        return new UserIdResponse(_userRepository.GetUserId(minimalUserRequest).Id);
     }
 }

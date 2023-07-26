@@ -7,7 +7,11 @@
     created_at DATETIME     NOT NULL,
     PRIMARY KEY (Id),
     constraint email_pk
-        unique (password)
+        unique (password),
+    constraint name_pk
+        unique (name),
+    constraint email_pk
+        unique (email)
 );
 
 CREATE TABLE UserContents

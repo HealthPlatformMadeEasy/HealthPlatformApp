@@ -1,8 +1,8 @@
 ﻿namespace DotNetServer.Modules.UserContentModule.Model.Requests;
 
 public record UserContentRequest(
-    string SourceType,
-    string OrigUnit,
+    string? SourceType,
+    string? OrigUnit,
     string? OrigSourceName,
     decimal? OrigContent,
     decimal? StandardContent,

@@ -14,9 +14,9 @@ public class Response<T>
         Data = data;
     }
 
-    public T Data { get; set; }
+    public T Data { get; set; } = default!;
     public bool Succeeded { get; set; }
 
     public string[]? Errors { get; set; }
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
 }

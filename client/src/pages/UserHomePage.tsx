@@ -7,7 +7,7 @@ export function UserHomePage() {
 
     return (
         <>
-            <h1>{userId}</h1>
+            <h1>{userId?.userId}</h1>
             <CalorieCalculator/>
             <ListOfFoods/>
         </>

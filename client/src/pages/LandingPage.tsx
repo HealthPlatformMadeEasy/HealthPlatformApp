@@ -4,7 +4,7 @@ export function LandingPage() {
     const {userId} = useUserId();
     return (
         <>
-            <h1>Presentation Page {userId}</h1>
+            <h1>Presentation Page {userId?.userId}</h1>
 
         </>
     )

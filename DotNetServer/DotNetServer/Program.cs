@@ -32,6 +32,7 @@ builder.Services.AddScoped<IUserContentService, UserContentService>();
 
 builder.Services.AddScoped<IValidator<UserRequest>, UserRequestValidator>();
 builder.Services.AddScoped<IValidator<UserContentRequest>, UserContentRequestValidator>();
+builder.Services.AddScoped<IValidator<MinimalUserRequest>, MinimalUserRequestValidation>();
 
 builder.Services.AddCors(options =>
 {

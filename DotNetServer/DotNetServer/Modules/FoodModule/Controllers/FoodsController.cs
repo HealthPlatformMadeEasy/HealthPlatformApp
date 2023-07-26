@@ -1,6 +1,8 @@
 ﻿using DotNetServer.Modules.FoodModule.Model.Requests;
 using DotNetServer.Modules.FoodModule.Model.Responses;
 using DotNetServer.Modules.FoodModule.Services;
+using DotNetServer.Modules.UserContentModule.Model.Requests;
+using DotNetServer.Modules.UserContentModule.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetServer.Modules.FoodModule.Controllers;
@@ -10,10 +12,12 @@ namespace DotNetServer.Modules.FoodModule.Controllers;
 public class FoodsController : ControllerBase
 {
     private readonly IFoodService _foodService;
+    private readonly IUserContentService _userContentService;
 
-    public FoodsController(IFoodService foodService)
+    public FoodsController(IFoodService foodService, IUserContentService userContentService)
     {
         _foodService = foodService;
+        _userContentService = userContentService;
     }
 
     [Route("single")]
@@ -25,8 +29,20 @@ public class FoodsController : ControllerBase
 
     [Route("multiple")]
     [HttpPost]
-    public ActionResult<List<ContentResponse>> GetListOfContents([FromBody] List<FoodRequest> request)
+    public ActionResult<List<ContentResponse>> GetListOfContents([FromBody] FullFoodRequest request)
     {
-        return _foodService.GetResultOfListFood(request);
+        var response = _foodService.GetResultOfListFood(request.FoodRequests);
+
+        var userContentDb = new List<UserContentRequest>();
+        response.ForEach(row =>
+        {
+            var item = new UserContentRequest(row.SourceType, row.OrigUnit, row.OrigSourceName, row.OrigContent,
+                row.StandardContent, new Guid(request.UserId));
+            userContentDb.Add(item);
+        });
+
+        _userContentService.CreateMultipleUserContent(userContentDb);
+
+        return response;
     }
 }

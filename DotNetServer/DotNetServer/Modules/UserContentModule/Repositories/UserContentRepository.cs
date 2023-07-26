@@ -50,5 +50,6 @@ public class UserContentRepository : IUserContentRepository
     public void CreateMultipleUserContent(List<UserContent> userContents)
     {
         _context.UserContents.AddRange(userContents);
+        _context.SaveChanges();
     }
 }

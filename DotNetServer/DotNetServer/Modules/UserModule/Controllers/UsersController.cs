@@ -12,13 +12,16 @@ namespace DotNetServer.Modules.UserModule.Controllers;
 [Route("v1/api/[controller]")]
 public class UsersController : ControllerBase
 {
+    private readonly IValidator<MinimalUserRequest> _minimalValidator;
     private readonly IUserService _userService;
     private readonly IValidator<UserRequest> _userValidator;
 
-    public UsersController(IUserService userService, IValidator<UserRequest> userValidator)
+    public UsersController(IUserService userService, IValidator<UserRequest> userValidator,
+        IValidator<MinimalUserRequest> minimalValidator)
     {
         _userService = userService;
         _userValidator = userValidator;
+        _minimalValidator = minimalValidator;
     }
 
     [HttpGet("{id:guid}")]
@@ -27,17 +30,30 @@ public class UsersController : ControllerBase
         return Ok(_userService.GetUser(id));
     }
 
-    [HttpPost]
-    public ActionResult<UserIdResponse> PostUser([FromBody] UserRequest userRequest)
+    [Route("get-user-id")]
+    [HttpGet]
+    public ActionResult<UserIdResponse> GetUserId([FromQuery] MinimalUserRequest minimalUserRequest)
     {
-        var validator = _userValidator.Validate(userRequest);
+        try
+        {
+            return _userService.GetUserId(minimalUserRequest);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e);
+        }
+    }
+
+    [HttpPost]
+    public ActionResult<UserIdResponse> PostUser([FromBody] MinimalUserRequest minimalUserRequest)
+    {
+        var validator = _minimalValidator.Validate(minimalUserRequest);
 
         if (!validator.IsValid) return BadRequest(validator.Errors);
 
-        if (_userService.CreateUser(userRequest))
-            return CreatedAtAction("GetUser", new { id = userRequest.Id }, new UserIdResponse(userRequest.Id));
+        var response = _userService.CreateUser(minimalUserRequest);
 
-        return BadRequest();
+        return CreatedAtAction("GetUser", new { id = response.UserId }, response);
     }
 
     [HttpDelete]

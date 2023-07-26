@@ -1,4 +1,6 @@
 ﻿import React, {useState} from 'react';
+import {useUserId} from "../../hooks";
+import {CreateUser} from "../Fetch";
 import {LoginForm} from "./LoginForm";
 
 type Props = {
@@ -11,6 +13,7 @@ export function SignUpForm({setModalOpen}: Props) {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [isLogIn, setIsLogIn] = useState(false);
+    const {setUserId} = useUserId();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,7 +27,13 @@ export function SignUpForm({setModalOpen}: Props) {
             return;
         }
 
+        CreateUser({name: username, email: email, password: password}).then(data => {
+            setUserId(data);
+            console.log(JSON.stringify(data))
+        })
+
         handleLogInClick();
+        setModalOpen(false);
     };
 
     const handleLogInClick = () => {
