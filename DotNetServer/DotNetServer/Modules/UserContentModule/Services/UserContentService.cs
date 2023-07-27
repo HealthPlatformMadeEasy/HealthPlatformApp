@@ -56,4 +56,11 @@ public class UserContentService : IUserContentService
         var userContents = UserContentMapper.ListUserContentRequestToUserContents(userContentRequests);
         _userContentRepository.CreateMultipleUserContent(userContents);
     }
+
+    public MacrosAndEnergyResponse GetMacrosAndEnergy(Guid id)
+    {
+        var response = _userContentRepository.GetMacrosAndEnergy(id);
+
+        return UserContentMapper.MacrosAndEnergyToMacrosAndEnergyResponse(response);
+    }
 }

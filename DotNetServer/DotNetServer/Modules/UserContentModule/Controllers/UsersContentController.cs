@@ -26,6 +26,13 @@ public class UsersContentController : ControllerBase
         return _userContentService.GetUserContent(id);
     }
 
+    [Route("get-macros-and-energy/{id:guid}")]
+    [HttpGet]
+    public ActionResult<MacrosAndEnergyResponse> GetMacrosAndEnergy(Guid id)
+    {
+        return _userContentService.GetMacrosAndEnergy(id);
+    }
+
     [HttpPost]
     public ActionResult<UserResponse> PostUserContent([FromBody] UserContentRequest userContentRequest)
     {

@@ -1,5 +1,6 @@
 ﻿using DotNetServer.Core.Context;
 using DotNetServer.Modules.UserContentModule.Entities;
+using DotNetServer.Modules.UserContentModule.Model.DTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.UserContentModule.Repositories;
@@ -45,6 +46,41 @@ public class UserContentRepository : IUserContentRepository
     public List<UserContent> GetUserContentByUserId(Guid id)
     {
         return _context.UserContents.Where(u => u.UserId == id).ToList();
+    }
+
+    public MacrosAndEnergy GetMacrosAndEnergy(Guid id)
+    {
+        var dbResponse = _context.UserContents
+            .Where(u => u.UserId == id)
+            .Where(u =>
+                u.OrigSourceName == "PROTEIN" ||
+                u.OrigSourceName == "CARBOHYDRATES" ||
+                u.OrigSourceName == "FAT" ||
+                u.OrigSourceName == "Energy"
+            )
+            .GroupBy(u => u.OrigSourceName).ToList();
+
+        var result = new MacrosAndEnergy();
+        dbResponse.ForEach(row =>
+        {
+            switch (row.Key)
+            {
+                case "CARBOHYDRATES":
+                    result.Carbs = row.ToList();
+                    break;
+                case "FAT":
+                    result.Fats = row.ToList();
+                    break;
+                case "Energy":
+                    result.Energy = row.ToList();
+                    break;
+                case "PROTEIN":
+                    result.Proteins = row.ToList();
+                    break;
+            }
+        });
+
+        return result;
     }
 
     public void CreateMultipleUserContent(List<UserContent> userContents)

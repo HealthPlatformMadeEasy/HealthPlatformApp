@@ -1,4 +1,5 @@
 ﻿using DotNetServer.Modules.UserContentModule.Entities;
+using DotNetServer.Modules.UserContentModule.Model.DTO;
 
 namespace DotNetServer.Modules.UserContentModule.Repositories;
 
@@ -13,6 +14,8 @@ public interface IUserContentRepository
     void DeleteUserContent(Guid id);
 
     List<UserContent> GetUserContentByUserId(Guid id);
+
+    MacrosAndEnergy GetMacrosAndEnergy(Guid id);
 
     void CreateMultipleUserContent(List<UserContent> userContents);
 }

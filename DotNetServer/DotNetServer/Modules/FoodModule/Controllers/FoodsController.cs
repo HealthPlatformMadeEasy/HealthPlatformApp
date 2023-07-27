@@ -36,8 +36,13 @@ public class FoodsController : ControllerBase
         var userContentDb = new List<UserContentRequest>();
         response.ForEach(row =>
         {
-            var item = new UserContentRequest(row.SourceType, row.OrigUnit, row.OrigSourceName, row.OrigContent,
-                row.StandardContent, new Guid(request.UserId));
+            var item = new UserContentRequest(
+                row.SourceType,
+                row.OrigUnit,
+                row.OrigSourceName,
+                row.OrigContent,
+                row.StandardContent,
+                request.UserId);
             userContentDb.Add(item);
         });
 

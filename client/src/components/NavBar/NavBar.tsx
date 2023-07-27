@@ -1,7 +1,7 @@
 ﻿import {useState} from 'react'
-import {LoginForm} from "../LogSignModal";
 import Modal from "react-modal";
 import {NavLink} from "react-router-dom";
+import {LoginForm} from "../LogSignModal";
 
 export function Navbar() {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -38,8 +38,11 @@ export function Navbar() {
                         </NavLink>
                     </button>
                     <button
-                        className="transform transition duration-300 ease-in-out hover:scale-125 hover:text-red-600 mr-4 p-2 text-lg">
-                        Macros Graph
+                        className="transform transition duration-300 ease-in-out hover:scale-125 mr-4 text-lg">
+                        <NavLink to='/charts'
+                                 className={({isActive}) => isActive ? 'text-green-700 hover:font-bold p-2 hover:text-green-700' : 'text-gray-500 hover:font-bold p-2 hover:text-green-700'}>
+                            Charts
+                        </NavLink>
                     </button>
                 </div>
                 <button onClick={() => handleOpenModal()}

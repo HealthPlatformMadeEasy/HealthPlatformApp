@@ -19,7 +19,8 @@
     "react-modal": "^3.16.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.14.2",
-    "tw-elements": "^1.0.0-beta2"
+    "tw-elements": "^1.0.0-beta2",
+    "victory": "^36.6.11"
   },
   "devDependencies": {
     "@types/node": "^20.3.3",

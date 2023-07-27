@@ -16,4 +16,6 @@ public interface IUserContentService
     List<UserContentResponse> GetUserContentByUserId(Guid id);
 
     void CreateMultipleUserContent(List<UserContentRequest> userContentRequests);
+
+    MacrosAndEnergyResponse GetMacrosAndEnergy(Guid id);
 }
