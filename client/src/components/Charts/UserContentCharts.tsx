@@ -31,7 +31,7 @@ export function UserContentCharts() {
     const {userId} = useUserId();
 
     useEffect(() => {
-        if (userId === undefined) {
+        if (typeof userId === undefined) {
             return
         }
         const test = () => {

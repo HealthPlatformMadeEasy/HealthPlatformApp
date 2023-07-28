@@ -11,8 +11,16 @@ using DotNetServer.Modules.UserModule.Services;
 using DotNetServer.Modules.UserModule.Validations;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration)
+        .WriteTo.Console()
+        .WriteTo.File("Logs/AppLogs.txt", rollingInterval: RollingInterval.Month);
+});
 
 // Add services to the container.
 builder.Services.AddDbContext<FoodbContext>(opt =>
