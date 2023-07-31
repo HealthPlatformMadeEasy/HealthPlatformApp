@@ -3,9 +3,9 @@ using DotNetServer.Modules.FoodModule.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Xunit.Abstractions;
 
-namespace Tests.Repositories;
+namespace Tests.ModulesTest.FoodModuleTest.IntegrationTests.IntegrationRepositoryTest;
 
-public class FoodRepositoryTest
+public class FoodIntegrationRepositoryTest
 {
     private static readonly DbContextOptions<FoodbContext> Options = new DbContextOptionsBuilder<FoodbContext>()
         .UseMySQL("Server=localhost;Port=3306;Database=foodb;Uid=foodb;Pwd=password;")
@@ -16,7 +16,7 @@ public class FoodRepositoryTest
     private readonly FoodRepository _foodRepository = new(Context);
     private readonly ITestOutputHelper _testOutputHelper;
 
-    public FoodRepositoryTest(ITestOutputHelper testOutputHelper)
+    public FoodIntegrationRepositoryTest(ITestOutputHelper testOutputHelper)
     {
         _testOutputHelper = testOutputHelper;
     }
@@ -37,5 +37,15 @@ public class FoodRepositoryTest
 
         result.ForEach(item => _testOutputHelper
             .WriteLine(item.Name + " " + item.Id + " " + item.Contents.Count));
+    }
+
+    [Fact]
+    public async void NotOnDatabaseRequestTest()
+    {
+        var token = new CancellationTokenSource();
+        token.CancelAfter(10000);
+
+        var result = await _foodRepository.GetFoodsFromRequestList(new List<string> { "Tomato" }, token.Token);
+        Assert.Equal(2, result.Count);
     }
 }

@@ -1,17 +1,18 @@
-﻿using DotNetServer.Modules.UserModule.Model.Requests;
+﻿using DotNetServer.Core.Wrappers;
+using DotNetServer.Modules.UserModule.Model.Requests;
 using DotNetServer.Modules.UserModule.Model.Responses;
 
 namespace DotNetServer.Modules.UserModule.Services;
 
 public interface IUserService
 {
-    UserResponse GetUser(Guid id);
+    Task<Response<UserResponse>> GetUserAsync(Guid id);
 
-    UserIdResponse CreateUser(MinimalUserRequest userRequest);
+    Task<Response<UserIdResponse>> AddUserAsync(MinimalUserRequest userRequest);
 
-    bool UpdateUser(Guid id, UserRequest userRequest);
+    Task UpdateUserAsync(Guid id, UserRequest userRequest);
 
-    void DeleteUser(Guid id);
+    Task DeleteUserAsync(Guid id);
 
-    UserIdResponse GetUserId(MinimalUserRequest minimalUserRequest);
+    Task<Response<UserIdResponse>> GetUserIdAsync(MinimalUserRequest minimalUserRequest);
 }

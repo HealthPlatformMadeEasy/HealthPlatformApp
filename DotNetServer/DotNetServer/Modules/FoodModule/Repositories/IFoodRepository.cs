@@ -4,7 +4,7 @@ namespace DotNetServer.Modules.FoodModule.Repositories;
 
 public interface IFoodRepository
 {
-    List<Food> GetFood(string food);
+    Task<List<Food>> GetFood(string food, CancellationToken cancellationToken);
 
-    List<Food> GetFoodsFromRequestList(List<string> foodList);
+    Task<List<Food>> GetFoodsFromRequestList(List<string> foodList, CancellationToken cancellationToken);
 }

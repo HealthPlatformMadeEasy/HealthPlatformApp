@@ -35,10 +35,10 @@ public class UnitTest1
     }
 
     [Fact]
-    public void TestMapper()
+    public async void TestMapper()
     {
         var request = new FoodRequest("Angelica", 200);
-        var db = _foodRepository.GetFood(request.Food);
+        var db = await _foodRepository.GetFood(request.Food);
         var response = db.Select(food => FoodMapper.FoodToFoodResponse(food)).Single();
 
         _testOutputHelper.WriteLine(response.Contents.ToString());

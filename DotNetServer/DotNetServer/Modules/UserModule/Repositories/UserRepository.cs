@@ -14,39 +14,50 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public User GetUserById(Guid id)
+    public async Task<User?> GetUserByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return _context.Users.Find(id) ?? throw new InvalidOperationException();
+        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
+
+        return await _context.Users.FindAsync(new object?[] { id }, cancellationToken);
     }
 
-    public int CreateUser(User user)
+    public async Task AddUserAsync(User user, CancellationToken cancellationToken)
     {
+        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
+
         _context.Users.Add(user);
 
-        return _context.SaveChanges();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public int UpdateUser(Guid id, User user)
+    public async Task UpdateUserAsync(Guid id, User user, CancellationToken cancellationToken)
     {
+        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
+
         _context.Entry(user).State = EntityState.Modified;
-        return _context.SaveChanges();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public void DeleteUser(Guid id)
+    public async Task DeleteUserAsync(Guid id, CancellationToken cancellationToken)
     {
-        var user = _context.Users.Find(id);
+        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
+
+        var user = await _context.Users.FindAsync(new object?[] { id }, cancellationToken);
 
         if (user is null) return;
+
         _context.Users.Remove(user);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public User GetUserId(MinimalUserRequest minimalUserRequest)
+    public async Task<User?> GetUserIdAsync(MinimalUserRequest minimalUserRequest, CancellationToken cancellationToken)
     {
-        var user = _context.Users.FirstOrDefault(user =>
-            user.Email == minimalUserRequest.Email && user.Name == minimalUserRequest.Name &&
-            user.Password == minimalUserRequest.Password);
-        if (user is null) throw new Exception("user not found");
+        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
+
+        var user = await _context.Users.FirstOrDefaultAsync(user =>
+            user.Email == minimalUserRequest.Email &&
+            user.Name == minimalUserRequest.Name &&
+            user.Password == minimalUserRequest.Password, cancellationToken);
 
         return user;
     }

@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace DotNetServer.Modules.UserModule.Validations;
 
-public class MinimalUserRequestValidation : AbstractValidator<MinimalUserRequest>
+public class MinimalUserRequestValidator : AbstractValidator<MinimalUserRequest>
 {
-    public MinimalUserRequestValidation()
+    public MinimalUserRequestValidator()
     {
         RuleFor(u => u.Email).EmailAddress();
 

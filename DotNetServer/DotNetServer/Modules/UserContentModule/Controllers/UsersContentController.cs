@@ -21,43 +21,75 @@ public class UsersContentController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public ActionResult<UserContentResponse> GetUserContentById(Guid id)
+    public async Task<ActionResult<UserContentResponse>> GetUserContentByIdAsync(Guid id)
     {
-        return _userContentService.GetUserContent(id);
+        var response = await _userContentService.GetUserContentAsync(id);
+
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
     }
 
     [Route("get-macros-and-energy/{id:guid}")]
     [HttpGet]
-    public ActionResult<MacrosAndEnergyResponse> GetMacrosAndEnergy(Guid id)
+    public async Task<ActionResult<MacrosAndEnergyResponse>> GetMacrosAndEnergyAsync(Guid id)
     {
-        return _userContentService.GetMacrosAndEnergy(id);
+        var response = await _userContentService.GetMacrosAndEnergyAsync(id);
+
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
     }
 
     [HttpPost]
-    public ActionResult<UserResponse> PostUserContent([FromBody] UserContentRequest userContentRequest)
+    public async Task<ActionResult<UserResponse>> PostUserContentAsync([FromBody] UserContentRequest userContentRequest)
     {
-        var validator = _validator.Validate(userContentRequest);
+        var validator = await _validator.ValidateAsync(userContentRequest);
 
         if (!validator.IsValid) return BadRequest(validator.Errors);
 
-        if (_userContentService.CreateUserContent(userContentRequest))
-            return CreatedAtAction("GetUserContentById", new { id = userContentRequest.Id }, userContentRequest);
+        try
+        {
+            await _userContentService.AddUserContentAsync(userContentRequest);
 
-        return BadRequest();
+            return CreatedAtAction("GetUserContentById", new { id = userContentRequest.Id }, userContentRequest);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [Route("multiple")]
     [HttpPost]
-    public ActionResult PostMultipleUserContent([FromBody] List<UserContentRequest> userContentRequests)
+    public async Task<ActionResult> PostMultipleUserContentAsync(
+        [FromBody] List<UserContentRequest> userContentRequests)
     {
-        _userContentService.CreateMultipleUserContent(userContentRequests);
-        return Ok();
+        try
+        {
+            await _userContentService.AddMultipleUserContentAsync(userContentRequests);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [Route("user-id/{id:guid}")]
     [HttpGet]
-    public ActionResult<List<UserContentResponse>> GetUsersContentByUserId(Guid id)
+    public async Task<ActionResult<List<UserContentResponse>>> GetUsersContentByUserIdAsync(Guid id)
     {
-        return Ok(_userContentService.GetUserContentByUserId(id));
+        var response = await _userContentService.GetUserContentByUserIdAsync(id);
+
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
     }
 }

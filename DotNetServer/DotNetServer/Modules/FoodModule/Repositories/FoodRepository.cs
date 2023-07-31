@@ -13,9 +13,11 @@ public class FoodRepository : IFoodRepository
         _context = context;
     }
 
-    public List<Food> GetFood(string foodName)
+    public async Task<List<Food>> GetFood(string foodName, CancellationToken cancellationToken)
     {
-        return _context.Foods.Where(food => food.Name == foodName)
+        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
+
+        var response = await _context.Foods.Where(food => food.Name == foodName)
             .Include(prop => prop.Contents)
             .Select(food => new Food
             {
@@ -30,12 +32,17 @@ public class FoodRepository : IFoodRepository
                     OrigSourceName = cont.OrigSourceName,
                     OrigUnit = cont.OrigUnit
                 }).ToList()
-            }).ToList();
+            }).ToListAsync(cancellationToken);
+
+        return response;
     }
 
-    public List<Food> GetFoodsFromRequestList(List<string> foodList)
+    public async Task<List<Food>> GetFoodsFromRequestList(List<string> foodList, CancellationToken cancellationToken)
     {
-        return _context.Foods.Where(food => foodList.Any(item => food.Name == item)).Include(prop => prop.Contents)
+        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
+
+        return await _context.Foods.Where(food => foodList.Any(item => food.Name == item))
+            .Include(prop => prop.Contents)
             .Select(food => new Food
             {
                 Name = food.Name,
@@ -49,6 +56,6 @@ public class FoodRepository : IFoodRepository
                     OrigSourceName = cont.OrigSourceName,
                     OrigUnit = cont.OrigUnit
                 }).ToList()
-            }).ToList();
+            }).ToListAsync(cancellationToken);
     }
 }

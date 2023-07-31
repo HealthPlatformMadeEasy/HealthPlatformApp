@@ -22,9 +22,10 @@ public class UserContentRepositoryTest
     }
 
     [Fact]
-    public void GetListMacrosAndEnergyTest()
+    public async void GetListMacrosAndEnergyTest()
     {
-        var result = _userContentRepository.GetMacrosAndEnergy(new Guid("1202295b-3ce4-405f-9319-b1598c0df3a2"));
+        var result =
+            await _userContentRepository.GetMacrosAndEnergyAsync(new Guid("1202295b-3ce4-405f-9319-b1598c0df3a2"));
 
         Assert.Equal(2, result.Proteins.Count);
     }
