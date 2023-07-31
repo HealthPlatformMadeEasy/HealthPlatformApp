@@ -1,4 +1,5 @@
 ﻿using DotNetServer.Modules.UserContentModule.Entities;
+using DotNetServer.Modules.UserContentModule.Model.DTO;
 using DotNetServer.Modules.UserContentModule.Model.Requests;
 using DotNetServer.Modules.UserContentModule.Model.Responses;
 using Riok.Mapperly.Abstractions;
@@ -19,4 +20,7 @@ public static partial class UserContentMapper
 
     public static partial List<UserContent> ListUserContentRequestToUserContents(
         List<UserContentRequest> userContentRequests);
+
+    public static partial MacrosAndEnergyResponse MacrosAndEnergyToMacrosAndEnergyResponse(
+        MacrosAndEnergy macrosAndEnergy);
 }

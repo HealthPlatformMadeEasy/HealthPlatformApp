@@ -1,38 +1,23 @@
-using DotNetServer.Core.Context;
-using DotNetServer.Modules.FoodModule.Repositories;
-using DotNetServer.Modules.FoodModule.Services;
-using DotNetServer.Modules.UserContentModule.Model.Requests;
-using DotNetServer.Modules.UserContentModule.Repositories;
-using DotNetServer.Modules.UserContentModule.Services;
-using DotNetServer.Modules.UserContentModule.Validations;
-using DotNetServer.Modules.UserModule.Model.Requests;
-using DotNetServer.Modules.UserModule.Repositories;
-using DotNetServer.Modules.UserModule.Services;
-using DotNetServer.Modules.UserModule.Validations;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
+using DotNetServer.Core;
+using DotNetServer.Modules.FoodModule;
+using DotNetServer.Modules.UserContentModule;
+using DotNetServer.Modules.UserModule;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<FoodbContext>(opt =>
-    opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:DevFoodbMySQL")!));
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration)
+        .WriteTo.Console()
+        .WriteTo.File("Logs/AppLogs.txt", rollingInterval: RollingInterval.Month);
+});
 
-if (builder.Environment.IsProduction())
-    builder.Services.AddDbContext<FoodbContext>(opt =>
-        opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:ProFoodbMySQL")!));
-
-builder.Services.AddScoped<IFoodRepository, FoodRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserContentRepository, UserContentRepository>();
-
-builder.Services.AddScoped<IFoodService, FoodService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserContentService, UserContentService>();
-
-builder.Services.AddScoped<IValidator<UserRequest>, UserRequestValidator>();
-builder.Services.AddScoped<IValidator<UserContentRequest>, UserContentRequestValidator>();
-builder.Services.AddScoped<IValidator<MinimalUserRequest>, MinimalUserRequestValidation>();
+//Modules
+builder.Services.AddFoodModuleLayer();
+builder.Services.AddUserModuleLayer();
+builder.Services.AddUserContentModuleLayer();
+builder.Services.AddCoreModuleLayer(builder);
 
 builder.Services.AddCors(options =>
 {
@@ -47,6 +32,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

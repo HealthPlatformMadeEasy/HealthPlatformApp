@@ -5,13 +5,13 @@ namespace DotNetServer.Modules.UserModule.Repositories;
 
 public interface IUserRepository
 {
-    User GetUserById(Guid id);
+    Task<User?> GetUserByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    int CreateUser(User user);
+    Task AddUserAsync(User user, CancellationToken cancellationToken);
 
-    int UpdateUser(Guid id, User user);
+    Task UpdateUserAsync(Guid id, User user, CancellationToken cancellationToken);
 
-    void DeleteUser(Guid id);
+    Task DeleteUserAsync(Guid id, CancellationToken cancellationToken);
 
-    User GetUserId(MinimalUserRequest minimalUserRequest);
+    Task<User?> GetUserIdAsync(MinimalUserRequest minimalUserRequest, CancellationToken cancellationToken);
 }

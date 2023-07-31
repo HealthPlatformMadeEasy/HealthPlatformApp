@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DotNetServer.Modules.UserModule.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.UserContentModule.Entities;
 
+[Table("usercontents")]
+[Index("OrigSourceName", Name = "usercontents_orig_source_name_index")]
 public class UserContent
 {
     [Key] [Column("id")] public Guid Id { get; set; }

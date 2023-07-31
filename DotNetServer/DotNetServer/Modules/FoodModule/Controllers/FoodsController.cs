@@ -1,8 +1,7 @@
 ﻿using DotNetServer.Modules.FoodModule.Model.Requests;
 using DotNetServer.Modules.FoodModule.Model.Responses;
 using DotNetServer.Modules.FoodModule.Services;
-using DotNetServer.Modules.UserContentModule.Model.Requests;
-using DotNetServer.Modules.UserContentModule.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetServer.Modules.FoodModule.Controllers;
@@ -12,37 +11,48 @@ namespace DotNetServer.Modules.FoodModule.Controllers;
 public class FoodsController : ControllerBase
 {
     private readonly IFoodService _foodService;
-    private readonly IUserContentService _userContentService;
+    private readonly IValidator<FoodRequest> _validatorFood;
+    private readonly IValidator<FullFoodRequest> _validatorFull;
 
-    public FoodsController(IFoodService foodService, IUserContentService userContentService)
+    public FoodsController(IFoodService foodService,
+        IValidator<FullFoodRequest> validatorFull, IValidator<FoodRequest> validatorFood)
     {
         _foodService = foodService;
-        _userContentService = userContentService;
+        _validatorFull = validatorFull;
+        _validatorFood = validatorFood;
     }
 
     [Route("single")]
     [HttpPost]
-    public ActionResult<FoodResponse> GetFood([FromBody] FoodRequest request)
+    public async Task<ActionResult<FoodResponse>> GetFood([FromBody] FoodRequest request)
     {
-        return _foodService.GetFood(request);
+        var validator = await _validatorFood.ValidateAsync(request);
+
+        if (!validator.IsValid) return BadRequest(validator.Errors);
+
+        var response = await _foodService.GetFood(request);
+
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
     }
 
     [Route("multiple")]
     [HttpPost]
-    public ActionResult<List<ContentResponse>> GetListOfContents([FromBody] FullFoodRequest request)
+    public async Task<ActionResult<List<ContentResponse>>> GetListOfContents([FromBody] FullFoodRequest request)
     {
-        var response = _foodService.GetResultOfListFood(request.FoodRequests);
+        var validator = await _validatorFull.ValidateAsync(request);
 
-        var userContentDb = new List<UserContentRequest>();
-        response.ForEach(row =>
-        {
-            var item = new UserContentRequest(row.SourceType, row.OrigUnit, row.OrigSourceName, row.OrigContent,
-                row.StandardContent, new Guid(request.UserId));
-            userContentDb.Add(item);
-        });
+        if (!validator.IsValid) return BadRequest(validator.Errors);
 
-        _userContentService.CreateMultipleUserContent(userContentDb);
+        var response = await _foodService.GetContentAndAddToUserContent(request);
 
-        return response;
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
     }
 }

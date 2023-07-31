@@ -1,19 +1,22 @@
-﻿using DotNetServer.Modules.UserContentModule.Model.Requests;
+﻿using DotNetServer.Core.Wrappers;
+using DotNetServer.Modules.UserContentModule.Model.Requests;
 using DotNetServer.Modules.UserContentModule.Model.Responses;
 
 namespace DotNetServer.Modules.UserContentModule.Services;
 
 public interface IUserContentService
 {
-    UserContentResponse GetUserContent(Guid id);
+    Task<Response<UserContentResponse>> GetUserContentAsync(Guid id);
 
-    bool CreateUserContent(UserContentRequest userContentRequest);
+    Task AddUserContentAsync(UserContentRequest userContentRequest);
 
-    bool UpdateUserContent(Guid id, UserContentRequest userContentRequest);
+    Task UpdateUserContentAsync(Guid id, UserContentRequest userContentRequest);
 
-    void DeleteUserContent(Guid id);
+    Task DeleteUserContentAsync(Guid id);
 
-    List<UserContentResponse> GetUserContentByUserId(Guid id);
+    Task<Response<List<UserContentResponse>>> GetUserContentByUserIdAsync(Guid id);
 
-    void CreateMultipleUserContent(List<UserContentRequest> userContentRequests);
+    Task AddMultipleUserContentAsync(List<UserContentRequest> userContentRequests);
+
+    Task<Response<MacrosAndEnergyResponse>> GetMacrosAndEnergyAsync(Guid id);
 }

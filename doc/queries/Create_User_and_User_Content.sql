@@ -20,10 +20,12 @@ CREATE TABLE UserContents
     source_type      VARCHAR(255),
     orig_unit        VARCHAR(255),
     orig_source_name VARCHAR(255),
-    orig_content     DECIMAL(15, 9),
-    standard_content DECIMAL(15, 9),
+    orig_content     DECIMAL(20, 9),
+    standard_content DECIMAL(20, 9),
     created_at       DATETIME NOT NULL,
     user_id          CHAR(36) NOT NULL,
     PRIMARY KEY (Id),
-    FOREIGN KEY (user_id) REFERENCES Users (id)
+    FOREIGN KEY (user_id) REFERENCES Users (id),
+    create           index usercontents_orig_source_name_index
+        on usercontents (orig_source_name desc)
 );

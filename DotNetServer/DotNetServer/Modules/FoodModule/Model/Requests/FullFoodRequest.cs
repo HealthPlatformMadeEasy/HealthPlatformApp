@@ -1,3 +1,3 @@
 ﻿namespace DotNetServer.Modules.FoodModule.Model.Requests;
 
-public record FullFoodRequest(string UserId, List<FoodRequest> FoodRequests);
+public record FullFoodRequest(Guid UserId, List<FoodRequest> FoodRequests);

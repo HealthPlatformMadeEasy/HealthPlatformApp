@@ -1,4 +1,5 @@
-﻿using DotNetServer.Modules.UserModule.Mapping;
+﻿using DotNetServer.Core.Wrappers;
+using DotNetServer.Modules.UserModule.Mapping;
 using DotNetServer.Modules.UserModule.Model.Requests;
 using DotNetServer.Modules.UserModule.Model.Responses;
 using DotNetServer.Modules.UserModule.Repositories;
@@ -7,47 +8,99 @@ namespace DotNetServer.Modules.UserModule.Services;
 
 public class UserService : IUserService
 {
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
     private readonly IUserRepository _userRepository;
 
     public UserService(IUserRepository userRepository)
     {
         _userRepository = userRepository;
+        _cancellationTokenSource.CancelAfter(10000);
     }
 
-    public UserResponse GetUser(Guid id)
+    public async Task<Response<UserResponse>> GetUserAsync(Guid id)
     {
-        var userDb = _userRepository.GetUserById(id);
+        try
+        {
+            var userDb = await _userRepository.GetUserByIdAsync(id, _cancellationTokenSource.Token);
 
-        return UserMapper.UserToUserResponse(userDb);
+            if (userDb is null)
+                return new Response<UserResponse>
+                {
+                    Succeeded = false
+                };
+
+
+            var response = UserMapper.UserToUserResponse(userDb);
+
+            return new Response<UserResponse>(response);
+        }
+        catch (Exception e)
+        {
+            return new Response<UserResponse>
+            {
+                Succeeded = false,
+                Errors = e.Message
+            };
+        }
     }
 
-    public UserIdResponse CreateUser(MinimalUserRequest minimalUserRequest)
+    public async Task<Response<UserIdResponse>> AddUserAsync(MinimalUserRequest minimalUserRequest)
     {
-        var userRequestDb = UserMapper.MinimalUserRequestToUserRequest(minimalUserRequest);
+        var userDb = UserMapper.MinimalUserRequestToUser(minimalUserRequest);
 
-        var userDb = UserMapper.UserRequestToUser(userRequestDb);
+        try
+        {
+            await _userRepository.AddUserAsync(userDb, _cancellationTokenSource.Token);
 
-        var response = _userRepository.CreateUser(userDb);
+            var response = new UserIdResponse(userDb.Id);
 
-        return new UserIdResponse(userDb.Id);
+            return new Response<UserIdResponse>(response);
+        }
+        catch (Exception e)
+        {
+            return new Response<UserIdResponse>
+            {
+                Succeeded = false,
+                Errors = e.Message
+            };
+        }
     }
 
-    public bool UpdateUser(Guid id, UserRequest userRequest)
+    public async Task UpdateUserAsync(Guid id, UserRequest userRequest)
     {
         var userDb = UserMapper.UserRequestToUser(userRequest);
 
-        var response = _userRepository.UpdateUser(id, userDb);
-
-        return response > 0;
+        await _userRepository.UpdateUserAsync(id, userDb, _cancellationTokenSource.Token);
     }
 
-    public void DeleteUser(Guid id)
+    public async Task DeleteUserAsync(Guid id)
     {
-        _userRepository.DeleteUser(id);
+        await _userRepository.DeleteUserAsync(id, _cancellationTokenSource.Token);
     }
 
-    public UserIdResponse GetUserId(MinimalUserRequest minimalUserRequest)
+    public async Task<Response<UserIdResponse>> GetUserIdAsync(MinimalUserRequest minimalUserRequest)
     {
-        return new UserIdResponse(_userRepository.GetUserId(minimalUserRequest).Id);
+        try
+        {
+            var responseDb = await _userRepository.GetUserIdAsync(minimalUserRequest, _cancellationTokenSource.Token);
+
+            if (responseDb is null)
+                return new Response<UserIdResponse>
+                {
+                    Succeeded = false
+                };
+
+            var response = new UserIdResponse(responseDb.Id);
+
+            return new Response<UserIdResponse>(response);
+        }
+        catch (Exception e)
+        {
+            return new Response<UserIdResponse>
+            {
+                Succeeded = false,
+                Errors = e.Message
+            };
+        }
     }
 }

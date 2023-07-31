@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetServer.Modules.UserModule.Controllers;
 
-//TODO Refactor this controller, more error checking.
 [ApiController]
 [Route("v1/api/[controller]")]
 public class UsersController : ControllerBase
@@ -25,54 +24,78 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public ActionResult<User> GetUser(Guid id)
+    public async Task<ActionResult<User>> GetUserAsync(Guid id)
     {
-        return Ok(_userService.GetUser(id));
-    }
+        var response = await _userService.GetUserAsync(id);
 
-    [Route("get-user-id")]
-    [HttpGet]
-    public ActionResult<UserIdResponse> GetUserId([FromQuery] MinimalUserRequest minimalUserRequest)
-    {
-        try
-        {
-            return _userService.GetUserId(minimalUserRequest);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e);
-        }
-    }
+        if (response.Succeeded) return Ok(response.Data);
 
-    [HttpPost]
-    public ActionResult<UserIdResponse> PostUser([FromBody] MinimalUserRequest minimalUserRequest)
-    {
-        var validator = _minimalValidator.Validate(minimalUserRequest);
-
-        if (!validator.IsValid) return BadRequest(validator.Errors);
-
-        var response = _userService.CreateUser(minimalUserRequest);
-
-        return CreatedAtAction("GetUser", new { id = response.UserId }, response);
-    }
-
-    [HttpDelete]
-    public ActionResult DeleteUser(Guid id)
-    {
-        _userService.DeleteUser(id);
+        if (response.Errors is not null) return BadRequest(response.Errors);
 
         return NoContent();
     }
 
-    [HttpPut("{id:guid}")]
-    public ActionResult<UserResponse> UpdateUser(Guid id, [FromBody] UserRequest userRequest)
+    [Route("get-user-id")]
+    [HttpGet]
+    public async Task<ActionResult<UserIdResponse>> GetUserIdAsync([FromQuery] MinimalUserRequest minimalUserRequest)
     {
-        var validator = _userValidator.Validate(userRequest);
+        var response = await _userService.GetUserIdAsync(minimalUserRequest);
+
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<UserIdResponse>> PostUserAsync([FromBody] MinimalUserRequest minimalUserRequest)
+    {
+        var validator = await _minimalValidator.ValidateAsync(minimalUserRequest);
 
         if (!validator.IsValid) return BadRequest(validator.Errors);
 
-        if (_userService.UpdateUser(id, userRequest)) return Ok(userRequest);
+        var response = await _userService.AddUserAsync(minimalUserRequest);
+
+        if (response.Succeeded)
+            return CreatedAtAction("GetUser", new { id = response.Data.UserId }, response);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
 
         return BadRequest();
+    }
+
+    [HttpDelete]
+    public async Task<ActionResult> DeleteUserAsync(Guid id)
+    {
+        try
+        {
+            await _userService.DeleteUserAsync(id);
+
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<UserResponse>> UpdateUserAsync(Guid id, [FromBody] UserRequest userRequest)
+    {
+        var validator = await _userValidator.ValidateAsync(userRequest);
+
+        if (!validator.IsValid) return BadRequest(validator.Errors);
+
+        try
+        {
+            await _userService.UpdateUserAsync(id, userRequest);
+
+            return Ok(userRequest);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

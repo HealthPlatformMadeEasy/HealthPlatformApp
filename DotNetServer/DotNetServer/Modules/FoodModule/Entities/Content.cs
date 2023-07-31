@@ -86,7 +86,7 @@ public class Content
 
     [Column("standard_content")]
     [Precision(15, 9)]
-    public decimal StandardContent { get; set; }
+    public decimal? StandardContent { get; set; }
 
     [Column("preparation_type")]
     [StringLength(255)]

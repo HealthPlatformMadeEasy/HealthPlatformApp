@@ -1,18 +1,21 @@
 ﻿using DotNetServer.Modules.UserContentModule.Entities;
+using DotNetServer.Modules.UserContentModule.Model.DTO;
 
 namespace DotNetServer.Modules.UserContentModule.Repositories;
 
 public interface IUserContentRepository
 {
-    UserContent GetUserContentById(Guid id);
+    Task<UserContent?> GetUserContentByIdAsync(Guid id, CancellationToken cancellationToken);
 
-    int CreateUserContent(UserContent userContent);
+    Task AddUserContentAsync(UserContent userContent, CancellationToken cancellationToken);
 
-    int UpdateUserContent(Guid id, UserContent userContent);
+    Task UpdateUserContentAsync(Guid id, UserContent userContent, CancellationToken cancellationToken);
 
-    void DeleteUserContent(Guid id);
+    Task DeleteUserContentAsync(Guid id, CancellationToken cancellationToken);
 
-    List<UserContent> GetUserContentByUserId(Guid id);
+    Task<List<UserContent>> GetUserContentByUserIdAsync(Guid id, CancellationToken cancellationToken);
 
-    void CreateMultipleUserContent(List<UserContent> userContents);
+    Task<MacrosAndEnergy> GetMacrosAndEnergyAsync(Guid id, CancellationToken cancellationToken);
+
+    Task AddMultipleUserContentAsync(List<UserContent> userContents, CancellationToken cancellationToken);
 }
