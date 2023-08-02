@@ -29,7 +29,7 @@ export function SignUpForm({setModalOpen}: Props) {
 
         CreateUser({name: username, email: email, password: password}).then(data => {
             setUserId(data);
-            console.log(JSON.stringify(data))
+            console.log("sig up" + JSON.stringify(data))
         })
 
         handleLogInClick();
@@ -53,7 +53,7 @@ export function SignUpForm({setModalOpen}: Props) {
                 </p>
                 <div>
                     <label id="UserName" className="text-sm font-medium leading-none text-gray-800">
-                        User Name
+                        Name
                     </label>
                     <input onChange={(e) => setUsername(e.target.value)}
                            value={username} aria-labelledby="userName" type="userName"

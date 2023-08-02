@@ -313,8 +313,6 @@ public partial class FoodbContext : DbContext
 
             entity.HasAlternateKey(e => e.Email).HasName("email_pk");
 
-            entity.HasAlternateKey(e => e.Password).HasName("password_pk");
-
             entity.HasAlternateKey(e => e.Name).HasName("name_pk");
 
             entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");

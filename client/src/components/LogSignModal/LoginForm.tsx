@@ -20,7 +20,7 @@ export function LoginForm({setModalOpen}: Props) {
 
         GetUserId({name: username, email: email, password: password}).then(data => {
             setUserId(data);
-            console.log(JSON.stringify(data))
+            console.log("login" + JSON.stringify(data))
         })
 
         setModalOpen(false);
@@ -102,7 +102,7 @@ export function LoginForm({setModalOpen}: Props) {
                 </div>
                 <div>
                     <label id="UserName" className="text-sm font-medium leading-none text-gray-800">
-                        User Name
+                        Name
                     </label>
                     <input value={username} aria-labelledby="userName" type="userName"
                            onChange={(e) => setUsername(e.target.value)}

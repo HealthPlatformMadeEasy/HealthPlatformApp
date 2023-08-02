@@ -9,6 +9,7 @@ namespace DotNetServer.Modules.UserModule.Controllers;
 
 [ApiController]
 [Route("v1/api/[controller]")]
+[ApiVersion("1.0")]
 public class UsersController : ControllerBase
 {
     private readonly IValidator<MinimalUserRequest> _minimalValidator;
@@ -58,7 +59,7 @@ public class UsersController : ControllerBase
         var response = await _userService.AddUserAsync(minimalUserRequest);
 
         if (response.Succeeded)
-            return CreatedAtAction("GetUser", new { id = response.Data.UserId }, response);
+            return CreatedAtAction("GetUser", new { id = response.Data.UserId }, response.Data);
 
         if (response.Errors is not null) return BadRequest(response.Errors);
 

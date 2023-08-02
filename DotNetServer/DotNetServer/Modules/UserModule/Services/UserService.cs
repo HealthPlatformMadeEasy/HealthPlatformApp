@@ -14,7 +14,7 @@ public class UserService : IUserService
     public UserService(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _cancellationTokenSource.CancelAfter(10000);
+        _cancellationTokenSource.CancelAfter(1000000);
     }
 
     public async Task<Response<UserResponse>> GetUserAsync(Guid id)
@@ -46,7 +46,9 @@ public class UserService : IUserService
 
     public async Task<Response<UserIdResponse>> AddUserAsync(MinimalUserRequest minimalUserRequest)
     {
-        var userDb = UserMapper.MinimalUserRequestToUser(minimalUserRequest);
+        var userRequest = UserMapper.MinimalUserRequestToUser(minimalUserRequest);
+
+        var userDb = UserMapper.UserRequestToUser(userRequest);
 
         try
         {

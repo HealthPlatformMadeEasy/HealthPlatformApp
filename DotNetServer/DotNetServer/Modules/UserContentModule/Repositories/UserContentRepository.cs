@@ -16,15 +16,11 @@ public class UserContentRepository : IUserContentRepository
 
     public async Task<UserContent?> GetUserContentByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         return await _context.UserContents.FindAsync(new object?[] { id }, cancellationToken);
     }
 
     public async Task AddUserContentAsync(UserContent userContent, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         _context.UserContents.Add(userContent);
 
         await _context.SaveChangesAsync(cancellationToken);
@@ -32,8 +28,6 @@ public class UserContentRepository : IUserContentRepository
 
     public async Task UpdateUserContentAsync(Guid id, UserContent userContent, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         _context.Entry(userContent).State = EntityState.Modified;
 
         await _context.SaveChangesAsync(cancellationToken);
@@ -41,8 +35,6 @@ public class UserContentRepository : IUserContentRepository
 
     public async Task DeleteUserContentAsync(Guid id, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         var userContent = await _context.UserContents.FindAsync(new object?[] { id }, cancellationToken);
 
         if (userContent is null) return;
@@ -53,15 +45,11 @@ public class UserContentRepository : IUserContentRepository
 
     public async Task<List<UserContent>> GetUserContentByUserIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         return await _context.UserContents.Where(u => u.UserId == id).ToListAsync(cancellationToken);
     }
 
     public async Task<MacrosAndEnergy> GetMacrosAndEnergyAsync(Guid id, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         var dbResponse = await _context.UserContents
             .Where(u => u.UserId == id)
             .Where(u =>
@@ -70,7 +58,8 @@ public class UserContentRepository : IUserContentRepository
                 u.OrigSourceName == "FAT" ||
                 u.OrigSourceName == "Energy"
             )
-            .GroupBy(u => u.OrigSourceName).ToListAsync(cancellationToken);
+            .GroupBy(u => u.OrigSourceName)
+            .ToListAsync(cancellationToken);
 
         var result = new MacrosAndEnergy();
         dbResponse.ForEach(row =>
@@ -92,13 +81,16 @@ public class UserContentRepository : IUserContentRepository
             }
         });
 
+        result.Energy = result.Energy.OrderBy(u => u.CreatedAt).ToList();
+        result.Fats = result.Fats.OrderBy(u => u.CreatedAt).ToList();
+        result.Carbs = result.Carbs.OrderBy(u => u.CreatedAt).ToList();
+        result.Proteins = result.Proteins.OrderBy(u => u.CreatedAt).ToList();
+
         return result;
     }
 
     public async Task AddMultipleUserContentAsync(List<UserContent> userContents, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         _context.UserContents.AddRange(userContents);
         await _context.SaveChangesAsync(cancellationToken);
     }

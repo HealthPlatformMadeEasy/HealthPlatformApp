@@ -21,11 +21,6 @@ interface IMacrosAndEnergy {
     energy: IUserContent[]
 }
 
-interface IChartDate {
-    x: Date,
-    y: number
-}
-
 export function UserContentCharts() {
     const [data, setData] = useState<IMacrosAndEnergy | undefined>()
     const {userId} = useUserId();
@@ -34,30 +29,37 @@ export function UserContentCharts() {
         if (typeof userId === undefined) {
             return
         }
-        const test = () => {
+        const getData = () => {
             GetMacrosAndEnergy(userId?.userId)
                 .then(data => setData(data));
         }
 
-        test();
+        getData();
+
     }, [userId])
 
-    let carbs: IChartDate[] | undefined = data?.carbs.map(row => {
-        return {x: row.createdAt, y: row.origContent}
-    })
-    let protein: IChartDate[] | undefined = data?.proteins.map(row => {
-        return {x: row.createdAt, y: row.origContent}
-    })
-    let fats: IChartDate[] | undefined = data?.fats.map(row => {
-        return {x: row.createdAt, y: row.origContent}
-    })
-
-
-    console.log(JSON.stringify(data));
+    console.log("data charts" + JSON.stringify(data));
 
     return (
+
         <>
-            <h1>Carbs</h1>
+            <p>userId: {userId?.userId}</p>
+            <h1 className="text-2xl font-extrabold text-pink-700">Energy</h1>
+            <VictoryChart name='Carbs'
+                          theme={VictoryTheme.material}
+            >
+
+                <VictoryStack>
+                    <VictoryBar name="carbs"
+                                colorScale='warm'
+                                data={data?.energy.map(row => {
+                                    return {x: row.createdAt, y: row.origContent}
+                                })}
+                    />
+                </VictoryStack>
+            </VictoryChart>
+
+            <h1 className="text-2xl font-extrabold text-pink-700">Carbs</h1>
             <VictoryChart name='Carbs'
                           theme={VictoryTheme.material}
             >
@@ -65,29 +67,37 @@ export function UserContentCharts() {
                 <VictoryStack>
                     <VictoryBar name="carbs"
                                 colorScale='heatmap'
-                                data={carbs}
+                                data={data?.carbs.map(row => {
+                                    return {x: row.createdAt, y: row.origContent}
+                                })}
                     />
                 </VictoryStack>
             </VictoryChart>
-            <h1>Fats</h1>
+
+            <h1 className="text-2xl font-extrabold text-pink-700">Fats</h1>
             <VictoryChart
                 theme={VictoryTheme.material}
             >
                 <VictoryStack>
                     <VictoryBar name="fats"
                                 colorScale='qualitative'
-                                data={fats}
+                                data={data?.fats.map(row => {
+                                    return {x: row.createdAt, y: row.origContent}
+                                })}
                     />
                 </VictoryStack>
             </VictoryChart>
-            <h1>Protein</h1>
+
+            <h1 className="text-2xl font-extrabold text-pink-700">Protein</h1>
             <VictoryChart
                 theme={VictoryTheme.material}
             >
                 <VictoryStack>
                     <VictoryBar name="protein"
                                 colorScale='red'
-                                data={protein}
+                                data={data?.proteins.map(row => {
+                                    return {x: row.createdAt, y: row.origContent}
+                                })}
                     />
                 </VictoryStack>
             </VictoryChart>
