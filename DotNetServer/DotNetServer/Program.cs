@@ -1,5 +1,6 @@
 using DotNetServer.Core;
 using DotNetServer.Modules.FoodModule;
+using DotNetServer.Modules.NorwegianFoodModule;
 using DotNetServer.Modules.UserContentModule;
 using DotNetServer.Modules.UserModule;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,7 @@ builder.Services.AddVersionedApiExplorer(
     });
 
 //Modules
+builder.Services.AddNorwegianFoodModuleLayer();
 builder.Services.AddFoodModuleLayer();
 builder.Services.AddUserModuleLayer();
 builder.Services.AddUserContentModuleLayer();

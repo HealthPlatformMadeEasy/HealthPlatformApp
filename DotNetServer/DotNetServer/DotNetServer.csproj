@@ -28,8 +28,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Modules\NorwegianFoodModule\Mapping\"/>
-        <Folder Include="Modules\NorwegianFoodModule\Model\"/>
         <Folder Include="Modules\NorwegianFoodModule\Validations\"/>
     </ItemGroup>
 

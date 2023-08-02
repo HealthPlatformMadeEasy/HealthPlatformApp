@@ -26,5 +26,9 @@
         <ProjectReference Include="..\DotNetServer\DotNetServer.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="ModulesTest\NorwegianFoodModuleTest\UnitityTests\"/>
+    </ItemGroup>
+
 
 </Project>

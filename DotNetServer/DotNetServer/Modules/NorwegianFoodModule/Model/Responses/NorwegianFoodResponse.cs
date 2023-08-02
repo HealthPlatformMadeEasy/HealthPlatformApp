@@ -1,14 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace DotNetServer.Modules.NorwegianFoodModule.Model.Responses;
 
-namespace DotNetServer.Modules.NorwegianFoodModule.Entities;
-
-public class NorwegianFood
+public class NorwegianFoodResponse
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
-
     public string? FoodName { get; set; }
     public double? SpiseligDel { get; set; }
     public double? Vann { get; set; }
