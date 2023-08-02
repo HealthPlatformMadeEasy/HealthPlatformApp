@@ -30,11 +30,7 @@ public class NorwegianFoodService : INorwegianFoodService
             var dbResponse =
                 await _norwegianFoodRepository.GetNorwegianFoodByName(request.FoodName, _cancellationTokenSource.Token);
 
-            if (dbResponse is null)
-                return new Response<NorwegianFoodResponse>
-                {
-                    Succeeded = false
-                };
+            if (dbResponse is null) return new Response<NorwegianFoodResponse> { Succeeded = false };
 
             var entityResponse = GetPerQuantityValues(dbResponse, request);
 
@@ -44,15 +40,52 @@ public class NorwegianFoodService : INorwegianFoodService
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            return new Response<NorwegianFoodResponse>
+            {
+                Succeeded = false,
+                Errors = e.Message
+            };
         }
     }
 
-    public async Task<Response<List<NorwegianFoodResponse>>> GetNorwegianFoodsByNameList(
+    // TODO make extra function to open endpoint for test
+    public async Task<TotalNutrientsResponse?> GetNorwegianFoodsByNameList(
         List<NorwegianFoodRequest> requests)
     {
-        throw new NotImplementedException();
+        var dbResponses = await
+            _norwegianFoodRepository.GetNorwegianFoodsByNameList(requests.Select(row => row.FoodName).ToList(),
+                _cancellationTokenSource.Token);
+
+        var sortedDbResponse = dbResponses!.OrderBy(row => row.FoodName).ToList();
+        var sortedRequests = requests.OrderBy(row => row.FoodName).ToList();
+
+        var entityResponse = sortedDbResponse.Select((item, index) => (item, index))
+            .Select(row => GetPerQuantityValues(row.item, sortedRequests[row.index])).ToList();
+
+        var response = GetTotalNutrientsResponse(entityResponse);
+
+        return response;
+    }
+
+    public async Task<Response<TotalNutrientsResponse>> GetNorwegianFoodsByNameListOpenEndPoint(
+        List<NorwegianFoodRequest> requests)
+    {
+        try
+        {
+            var response = await GetNorwegianFoodsByNameList(requests);
+
+            return response is null
+                ? new Response<TotalNutrientsResponse> { Succeeded = false }
+                : new Response<TotalNutrientsResponse>(response);
+        }
+        catch (Exception e)
+        {
+            return new Response<TotalNutrientsResponse>
+            {
+                Succeeded = false,
+                Errors = e.Message
+            };
+        }
     }
 
     // Check if Vitamin A RAE conversion is right
@@ -117,5 +150,72 @@ public class NorwegianFoodService : INorwegianFoodService
         food.JodMug = food.JodMug * request.Quantity * 10000;
 
         return food;
+    }
+
+    private static TotalNutrientsResponse GetTotalNutrientsResponse(List<NorwegianFood> requests)
+    {
+        var response = new TotalNutrientsResponse
+        {
+            CreatedAt = DateTime.Now,
+            SpiseligDel = requests.Sum(row => row.SpiseligDel),
+            Vann = requests.Sum(row => row.Vann),
+            KilojouleKJ = requests.Sum(row => row.KilojouleKJ),
+            KilokalorierKcal = requests.Sum(row => row.KilokalorierKcal),
+            Fett = requests.Sum(row => row.Fett),
+            Mettet = requests.Sum(row => row.Mettet),
+            C12_0g = requests.Sum(row => row.C12_0g),
+            C14_0 = requests.Sum(row => row.C14_0),
+            C16_0 = requests.Sum(row => row.C16_0),
+            C18_0 = requests.Sum(row => row.C18_0),
+            Trans = requests.Sum(row => row.Trans),
+            Enumettet = requests.Sum(row => row.Enumettet),
+            C16_1Sum = requests.Sum(row => row.C16_1Sum),
+            C18_1Sum = requests.Sum(row => row.C18_1Sum),
+            Flerumettet = requests.Sum(row => row.Flerumettet),
+            C18_2n_6 = requests.Sum(row => row.C18_2n_6),
+            C18_3n_3 = requests.Sum(row => row.C18_3n_3),
+            C20_3n_3 = requests.Sum(row => row.C20_3n_3),
+            C20_3n_6 = requests.Sum(row => row.C20_3n_6),
+            C20_4n_3 = requests.Sum(row => row.C20_4n_3),
+            C20_4n_6 = requests.Sum(row => row.C20_4n_6),
+            C20_5n_3_EPA = requests.Sum(row => row.C20_5n_3_EPA),
+            C22_5n_3_DPA = requests.Sum(row => row.C22_5n_3_DPA),
+            C22_6n_3_DHA = requests.Sum(row => row.C22_6n_3_DHA),
+            Omega_3 = requests.Sum(row => row.Omega_3),
+            Omega_6 = requests.Sum(row => row.Omega_6),
+            KolesterolMg = requests.Sum(row => row.KolesterolMg),
+            Karbohydrat = requests.Sum(row => row.Karbohydrat),
+            Stivelse = requests.Sum(row => row.Stivelse),
+            MonoPlusDisakk = requests.Sum(row => row.MonoPlusDisakk),
+            SukkerTilsatt = requests.Sum(row => row.SukkerTilsatt),
+            Kostfiber = requests.Sum(row => row.Kostfiber),
+            Protein = requests.Sum(row => row.Protein),
+            Salt = requests.Sum(row => row.Salt),
+            Alkohol = requests.Sum(row => row.Alkohol),
+            VitaminARAE = requests.Sum(row => row.VitaminARAE),
+            RetinolMug = requests.Sum(row => row.RetinolMug),
+            BetaKarotenMug = requests.Sum(row => row.BetaKarotenMug),
+            VitaminDMug = requests.Sum(row => row.VitaminDMug),
+            VitaminEAlfaTE = requests.Sum(row => row.VitaminEAlfaTE),
+            TiaminMg = requests.Sum(row => row.TiaminMg),
+            RiboflavinMg = requests.Sum(row => row.RiboflavinMg),
+            NiacinMg = requests.Sum(row => row.NiacinMg),
+            VitaminB6Mg = requests.Sum(row => row.VitaminB6Mg),
+            FolatMug = requests.Sum(row => row.FolatMug),
+            VitaminB12Mug = requests.Sum(row => row.VitaminB12Mug),
+            VitaminCMg = requests.Sum(row => row.VitaminCMg),
+            KalsiumMg = requests.Sum(row => row.KalsiumMg),
+            JernMg = requests.Sum(row => row.JernMg),
+            NatriumMg = requests.Sum(row => row.NatriumMg),
+            KaliumMg = requests.Sum(row => row.KaliumMg),
+            MagnesiumMg = requests.Sum(row => row.MagnesiumMg),
+            SinkMg = requests.Sum(row => row.SinkMg),
+            SelenMug = requests.Sum(row => row.SelenMug),
+            KopperMg = requests.Sum(row => row.KopperMg),
+            FosforMg = requests.Sum(row => row.FosforMg),
+            JodMug = requests.Sum(row => row.JodMug)
+        };
+
+        return response;
     }
 }

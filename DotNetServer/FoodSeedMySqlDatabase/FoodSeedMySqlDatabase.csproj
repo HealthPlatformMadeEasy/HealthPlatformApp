@@ -21,4 +21,8 @@
         <PackageReference Include="Riok.Mapperly" Version="2.8.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Migrations\"/>
+    </ItemGroup>
+
 </Project>

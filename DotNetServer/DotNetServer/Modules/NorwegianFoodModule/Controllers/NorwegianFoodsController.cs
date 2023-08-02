@@ -33,4 +33,18 @@ public class NorwegianFoodsController : ControllerBase
 
         return Ok(response.Data);
     }
+
+    [HttpPost]
+    [Route("[action]")]
+    public async Task<ActionResult<List<NorwegianFoodResponse>>> GetYourTotalNutrients(
+        [FromBody] List<NorwegianFoodRequest> requests)
+    {
+        var response = await _norwegianFoodService.GetNorwegianFoodsByNameListOpenEndPoint(requests);
+
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
+    }
 }

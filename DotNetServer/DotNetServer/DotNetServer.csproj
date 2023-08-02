@@ -29,6 +29,8 @@
 
     <ItemGroup>
         <Folder Include="Modules\NorwegianFoodModule\Validations\"/>
+        <Folder Include="Modules\NutrientModule\Controllers\"/>
+        <Folder Include="Modules\NutrientModule\Validations\"/>
     </ItemGroup>
 
 </Project>

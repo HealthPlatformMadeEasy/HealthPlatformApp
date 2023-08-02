@@ -18,6 +18,7 @@ public class NewFoodDbContext : DbContext
 
     public virtual DbSet<NewFood> Foods { get; set; } = null!;
 
+    public virtual DbSet<Nutrient> Nutrients { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -33,5 +34,16 @@ public class NewFoodDbContext : DbContext
         var seedData = SeedMapper.SeedClassFoodToNewFood(records);
 
         modelBuilder.Entity<NewFood>().HasData(seedData);
+
+        modelBuilder.Entity<Nutrient>();
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.HasAlternateKey(e => e.Email).HasName("email_pk");
+
+            entity.HasAlternateKey(e => e.Name).HasName("name_pk");
+        });
     }
 }
