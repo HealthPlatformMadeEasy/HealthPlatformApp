@@ -7,9 +7,9 @@ namespace DotNetServer.Modules.UserModule.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly FoodbContext _context;
+    private readonly NorwegianFoodDbContext _context;
 
-    public UserRepository(FoodbContext context)
+    public UserRepository(NorwegianFoodDbContext context)
     {
         _context = context;
     }

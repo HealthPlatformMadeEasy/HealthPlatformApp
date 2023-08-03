@@ -1,8 +1,11 @@
-﻿namespace DotNetServer.Modules.NutrientModule.Model.Requests;
+﻿using DotNetServer.Modules.NorwegianFoodModule.Model.Responses;
+
+namespace DotNetServer.Modules.NutrientModule.Model.Requests;
 
 public class NutrientRequest
 {
     public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid UserId { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; }
     public double? SpiseligDel { get; set; }
@@ -62,4 +65,66 @@ public class NutrientRequest
     public double? KopperMg { get; set; }
     public double? FosforMg { get; set; }
     public double? JodMug { get; set; }
+
+    public void SetNutrientRequest(TotalNutrientsResponse nutrient, Guid userId)
+    {
+        UserId = userId;
+        SpiseligDel = nutrient.SpiseligDel;
+        Vann = nutrient.Vann;
+        KilojouleKJ = nutrient.KilojouleKJ;
+        KilokalorierKcal = nutrient.KilokalorierKcal;
+        Fett = nutrient.Fett;
+        Mettet = nutrient.Mettet;
+        C12_0g = nutrient.C12_0g;
+        C14_0 = nutrient.C14_0;
+        C16_0 = nutrient.C16_0;
+        C18_0 = nutrient.C18_0;
+        Trans = nutrient.Trans;
+        Enumettet = nutrient.Enumettet;
+        C16_1Sum = nutrient.C16_1Sum;
+        C18_1Sum = nutrient.C18_1Sum;
+        Flerumettet = nutrient.Flerumettet;
+        C18_2n_6 = nutrient.C18_2n_6;
+        C18_3n_3 = nutrient.C18_3n_3;
+        C20_3n_3 = nutrient.C20_3n_3;
+        C20_3n_6 = nutrient.C20_3n_6;
+        C20_4n_3 = nutrient.C20_4n_3;
+        C20_4n_6 = nutrient.C20_4n_6;
+        C20_5n_3_EPA = nutrient.C20_5n_3_EPA;
+        C22_5n_3_DPA = nutrient.C22_5n_3_DPA;
+        C22_6n_3_DHA = nutrient.C22_6n_3_DHA;
+        Omega_3 = nutrient.Omega_3;
+        Omega_6 = nutrient.Omega_6;
+        KolesterolMg = nutrient.KolesterolMg;
+        Karbohydrat = nutrient.Karbohydrat;
+        Stivelse = nutrient.Stivelse;
+        MonoPlusDisakk = nutrient.MonoPlusDisakk;
+        SukkerTilsatt = nutrient.SukkerTilsatt;
+        Kostfiber = nutrient.Kostfiber;
+        Protein = nutrient.Protein;
+        Salt = nutrient.Salt;
+        Alkohol = nutrient.Alkohol;
+        VitaminARAE = nutrient.VitaminARAE;
+        RetinolMug = nutrient.RetinolMug;
+        BetaKarotenMug = nutrient.BetaKarotenMug;
+        VitaminDMug = nutrient.VitaminDMug;
+        VitaminEAlfaTE = nutrient.VitaminEAlfaTE;
+        TiaminMg = nutrient.TiaminMg;
+        RiboflavinMg = nutrient.RiboflavinMg;
+        NiacinMg = nutrient.NiacinMg;
+        VitaminB6Mg = nutrient.VitaminB6Mg;
+        FolatMug = nutrient.FolatMug;
+        VitaminB12Mug = nutrient.VitaminB12Mug;
+        VitaminCMg = nutrient.VitaminCMg;
+        KalsiumMg = nutrient.KalsiumMg;
+        JernMg = nutrient.JernMg;
+        NatriumMg = nutrient.NatriumMg;
+        KaliumMg = nutrient.KaliumMg;
+        MagnesiumMg = nutrient.MagnesiumMg;
+        SinkMg = nutrient.SinkMg;
+        SelenMug = nutrient.SelenMug;
+        KopperMg = nutrient.KopperMg;
+        FosforMg = nutrient.FosforMg;
+        JodMug = nutrient.JodMug;
+    }
 }

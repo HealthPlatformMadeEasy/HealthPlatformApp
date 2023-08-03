@@ -38,5 +38,7 @@ public class NutrientRepository : INutrientRepository
         if (nutrient is null) return;
 
         _context.Nutrients.Remove(nutrient);
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -88,6 +88,12 @@ public class NorwegianFoodService : INorwegianFoodService
         }
     }
 
+    public async Task<Response<TotalNutrientsResponse>> AddToNutrientsAndGetNorwegianFoods(
+        List<NorwegianFoodRequest> requests)
+    {
+        throw new NotImplementedException();
+    }
+
     // Check if Vitamin A RAE conversion is right
     private static NorwegianFood GetPerQuantityValues(NorwegianFood food, NorwegianFoodRequest request)
     {
