@@ -28,8 +28,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Modules\NorwegianFoodModule\Model\DTO\"/>
         <Folder Include="Modules\NorwegianFoodModule\Validations\"/>
         <Folder Include="Modules\NutrientModule\Validations\"/>
+        <Folder Include="Modules\UserModule\Model\DTO\"/>
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,7 @@
 ﻿using DotNetServer.Core.Context;
 using DotNetServer.Modules.NutrientModule.Entities;
+using DotNetServer.Modules.NutrientModule.Model.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.NutrientModule.Repositories;
 
@@ -40,5 +42,17 @@ public class NutrientRepository : INutrientRepository
         _context.Nutrients.Remove(nutrient);
 
         await _context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<List<EnergyAndMacros>?> GetEnergyAndMacros(Guid userId, CancellationToken cancellationToken)
+    {
+        return await _context.Nutrients.Where(nutrient => nutrient.UserId == userId)
+            .Select(row => new EnergyAndMacros(
+                row.CreatedAt,
+                row.KilokalorierKcal,
+                row.Fett,
+                row.Karbohydrat,
+                row.Protein))
+            .ToListAsync(cancellationToken);
     }
 }

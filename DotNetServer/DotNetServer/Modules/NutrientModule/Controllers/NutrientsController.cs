@@ -58,4 +58,17 @@ public class NutrientsController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet]
+    [Route("energy-macros/{id:guid}")]
+    public async Task<ActionResult<EnergyAndMacroResponse>> GetEnergyAndMacros(Guid id)
+    {
+        var response = await _nutrientService.GetEnergyAndMacros(id);
+
+        if (response.Succeeded) return Ok(response.Data);
+
+        if (response.Errors is not null) return BadRequest(response.Errors);
+
+        return NoContent();
+    }
 }

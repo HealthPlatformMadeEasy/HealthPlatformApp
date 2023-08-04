@@ -1,14 +1,15 @@
+import axios from "axios";
 import {useEffect, useState} from "react";
 import {useUserId} from "../../hooks";
 import {Loading} from "../Loading";
 
 type foodRequest = {
-    food: string,
-    quantity: number
+    FoodName: string,
+    Quantity: number
 }
 
 export function CalorieCalculator() {
-    const [data, setData] = useState<undefined>();
+    const [data, setData] = useState<undefined | any>();
     const [food1, setFood] = useState("");
     const [quantity1, setQuantity] = useState("");
     const [formData, setFormData] = useState(false);
@@ -28,16 +29,11 @@ export function CalorieCalculator() {
         setFormData(true)
 
         const food: foodRequest = {
-            food: food1,
-            quantity: parseFloat(quantity1)
+            FoodName: food1,
+            Quantity: parseFloat(quantity1)
         }
 
-        fetch('https://localhost:7247/v1/api/food/single', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(food)
-        })
-            .then(response => response.json())
+        axios.get('https://localhost:7247/api/norwegianfoods/gettotalresultofnorwegianfood', {params: food})
             .then(data => {
                 setData(data)
                 setLoading(false);

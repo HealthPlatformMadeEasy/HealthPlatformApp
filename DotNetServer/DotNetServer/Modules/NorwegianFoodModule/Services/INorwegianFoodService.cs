@@ -11,9 +11,8 @@ public interface INorwegianFoodService
 
     Task<Response<NorwegianFoodResponse>> GetNorwegianFoodByName(NorwegianFoodRequest request);
 
-    Task<TotalNutrientsResponse?> GetNorwegianFoodsByNameList(List<NorwegianFoodRequest> requests);
-
     Task<Response<TotalNutrientsResponse>> GetNorwegianFoodsByNameListOpenEndPoint(List<NorwegianFoodRequest> requests);
 
-    Task<Response<TotalNutrientsResponse>> AddToNutrientsAndGetNorwegianFoods(List<NorwegianFoodRequest> requests);
+    Task<Response<TotalNutrientsResponse>> GetNorwegianFoodsAndAddNutrients(Guid userId,
+        List<NorwegianFoodRequest> requests);
 }

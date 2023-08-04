@@ -37,12 +37,13 @@ builder.Services.AddVersionedApiExplorer(
     });
 
 //Modules
-builder.Services.AddNorwegianFoodModuleLayer();
-builder.Services.AddFoodModuleLayer();
-builder.Services.AddNutrientModuleLayer();
-builder.Services.AddUserModuleLayer();
-builder.Services.AddUserContentModuleLayer();
-builder.Services.AddCoreModuleLayer(builder);
+builder.Services
+    .AddNorwegianFoodModuleLayer()
+    .AddFoodModuleLayer()
+    .AddNutrientModuleLayer()
+    .AddUserModuleLayer()
+    .AddUserContentModuleLayer()
+    .AddCoreModuleLayer(builder);
 
 builder.Services.AddCors(options =>
 {

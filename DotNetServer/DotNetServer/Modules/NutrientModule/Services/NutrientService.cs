@@ -57,4 +57,28 @@ public class NutrientService : INutrientService
     {
         await _nutrientRepository.DeleteNutrientAsync(id, _cancellationTokenSource.Token);
     }
+
+    public async Task<Response<EnergyAndMacroResponse>> GetEnergyAndMacros(Guid userId)
+    {
+        try
+        {
+            var dbResponse = await _nutrientRepository.GetEnergyAndMacros(userId, _cancellationTokenSource.Token);
+
+            if (dbResponse is null) return new Response<EnergyAndMacroResponse> { Succeeded = false };
+
+            var response = new EnergyAndMacroResponse();
+
+            response.SetEnergyAndMacrosResponseFromList(dbResponse);
+
+            return new Response<EnergyAndMacroResponse>(response);
+        }
+        catch (Exception e)
+        {
+            return new Response<EnergyAndMacroResponse>
+            {
+                Succeeded = false,
+                Errors = e.Message
+            };
+        }
+    }
 }

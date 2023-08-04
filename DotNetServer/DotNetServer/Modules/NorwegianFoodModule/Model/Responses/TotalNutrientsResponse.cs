@@ -1,4 +1,6 @@
-﻿namespace DotNetServer.Modules.NorwegianFoodModule.Model.Responses;
+﻿using DotNetServer.Modules.NorwegianFoodModule.Entities;
+
+namespace DotNetServer.Modules.NorwegianFoodModule.Model.Responses;
 
 public class TotalNutrientsResponse
 {
@@ -60,4 +62,66 @@ public class TotalNutrientsResponse
     public double? KopperMg { get; set; }
     public double? FosforMg { get; set; }
     public double? JodMug { get; set; }
+
+    public void GetTotalNutrientsResponse(List<NorwegianFood> requests)
+    {
+        CreatedAt = DateTime.Now;
+        SpiseligDel = requests.Sum(row => row.SpiseligDel);
+        Vann = requests.Sum(row => row.Vann);
+        KilojouleKJ = requests.Sum(row => row.KilojouleKJ);
+        KilokalorierKcal = requests.Sum(row => row.KilokalorierKcal);
+        Fett = requests.Sum(row => row.Fett);
+        Mettet = requests.Sum(row => row.Mettet);
+        C12_0g = requests.Sum(row => row.C12_0g);
+        C14_0 = requests.Sum(row => row.C14_0);
+        C16_0 = requests.Sum(row => row.C16_0);
+        C18_0 = requests.Sum(row => row.C18_0);
+        Trans = requests.Sum(row => row.Trans);
+        Enumettet = requests.Sum(row => row.Enumettet);
+        C16_1Sum = requests.Sum(row => row.C16_1Sum);
+        C18_1Sum = requests.Sum(row => row.C18_1Sum);
+        Flerumettet = requests.Sum(row => row.Flerumettet);
+        C18_2n_6 = requests.Sum(row => row.C18_2n_6);
+        C18_3n_3 = requests.Sum(row => row.C18_3n_3);
+        C20_3n_3 = requests.Sum(row => row.C20_3n_3);
+        C20_3n_6 = requests.Sum(row => row.C20_3n_6);
+        C20_4n_3 = requests.Sum(row => row.C20_4n_3);
+        C20_4n_6 = requests.Sum(row => row.C20_4n_6);
+        C20_5n_3_EPA = requests.Sum(row => row.C20_5n_3_EPA);
+        C22_5n_3_DPA = requests.Sum(row => row.C22_5n_3_DPA);
+        C22_6n_3_DHA = requests.Sum(row => row.C22_6n_3_DHA);
+        Omega_3 = requests.Sum(row => row.Omega_3);
+        Omega_6 = requests.Sum(row => row.Omega_6);
+        KolesterolMg = requests.Sum(row => row.KolesterolMg);
+        Karbohydrat = requests.Sum(row => row.Karbohydrat);
+        Stivelse = requests.Sum(row => row.Stivelse);
+        MonoPlusDisakk = requests.Sum(row => row.MonoPlusDisakk);
+        SukkerTilsatt = requests.Sum(row => row.SukkerTilsatt);
+        Kostfiber = requests.Sum(row => row.Kostfiber);
+        Protein = requests.Sum(row => row.Protein);
+        Salt = requests.Sum(row => row.Salt);
+        Alkohol = requests.Sum(row => row.Alkohol);
+        VitaminARAE = requests.Sum(row => row.VitaminARAE);
+        RetinolMug = requests.Sum(row => row.RetinolMug);
+        BetaKarotenMug = requests.Sum(row => row.BetaKarotenMug);
+        VitaminDMug = requests.Sum(row => row.VitaminDMug);
+        VitaminEAlfaTE = requests.Sum(row => row.VitaminEAlfaTE);
+        TiaminMg = requests.Sum(row => row.TiaminMg);
+        RiboflavinMg = requests.Sum(row => row.RiboflavinMg);
+        NiacinMg = requests.Sum(row => row.NiacinMg);
+        VitaminB6Mg = requests.Sum(row => row.VitaminB6Mg);
+        FolatMug = requests.Sum(row => row.FolatMug);
+        VitaminB12Mug = requests.Sum(row => row.VitaminB12Mug);
+        VitaminCMg = requests.Sum(row => row.VitaminCMg);
+        KalsiumMg = requests.Sum(row => row.KalsiumMg);
+        JernMg = requests.Sum(row => row.JernMg);
+        NatriumMg = requests.Sum(row => row.NatriumMg);
+        KaliumMg = requests.Sum(row => row.KaliumMg);
+        MagnesiumMg = requests.Sum(row => row.MagnesiumMg);
+        SinkMg = requests.Sum(row => row.SinkMg);
+        SelenMug = requests.Sum(row => row.SelenMug);
+        KopperMg = requests.Sum(row => row.KopperMg);
+        FosforMg = requests.Sum(row => row.FosforMg);
+        JodMug = requests.Sum(row => row.JodMug);
+    }
 }
