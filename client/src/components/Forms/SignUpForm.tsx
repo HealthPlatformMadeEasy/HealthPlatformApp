@@ -1,6 +1,6 @@
 ﻿import React, {useState} from 'react';
+import {CreateUser} from "../../context/Fetch";
 import {useUserId} from "../../hooks";
-import {CreateUser} from "../Fetch";
 import {LoginForm} from "./LoginForm";
 
 type Props = {

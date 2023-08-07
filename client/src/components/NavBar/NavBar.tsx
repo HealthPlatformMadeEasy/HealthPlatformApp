@@ -1,7 +1,7 @@
 ﻿import {useState} from 'react'
 import Modal from "react-modal";
 import {NavLink} from "react-router-dom";
-import {LoginForm} from "../LogSignModal";
+import {LoginForm} from "../Forms";
 
 export function Navbar() {
     const [isModalOpen, setModalOpen] = useState(false);

@@ -33,7 +33,7 @@ public class NorwegianFoodRepositoryTests
         var result = await
             _norwegianFoodRepository.GetNorwegianFoodsByNameList(_foods, _cancellationTokenSource.Token);
 
-        Assert.Equal(3, result.Count);
+        Assert.Equal(3, result!.Count);
         Assert.Equal(new Guid("0174a46c-5ca0-4f4c-b7a0-d35fd2d7685a"), result[0].Id);
     }
 }

@@ -107,6 +107,8 @@ public class NorwegianFoodService : INorwegianFoodService
             _norwegianFoodRepository.GetNorwegianFoodsByNameList(requests.Select(row => row.FoodName).ToList(),
                 _cancellationTokenSource.Token);
 
+        if (dbResponses is null || !dbResponses.Any()) return null;
+
         var sortedDbResponse = dbResponses!.OrderBy(row => row.FoodName).ToList();
         var sortedRequests = requests.OrderBy(row => row.FoodName).ToList();
 

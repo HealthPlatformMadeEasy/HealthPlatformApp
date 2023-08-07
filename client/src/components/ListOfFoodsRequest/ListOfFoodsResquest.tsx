@@ -8,27 +8,81 @@ import {Loading} from "../Loading";
 
 type FoodItem = {
     id: number;
-    food: string;
-    quantity: number;
+    FoodName: string,
+    Quantity: number
 };
 
 type Food = {
-    food: string;
-    quantity: number;
+    FoodName: string,
+    Quantity: number
 }
 
 type FoodRequest = {
     userId: string | undefined,
-    foodRequests: Food[]
+    requests: Food[]
 }
 
-interface IData {
-    sourceType: string;
-    origSourceName: string;
-    origUnit: string;
-    origContent: number;
-    standardContent: number;
+export interface IData {
+    createdAt: string;
+    spiseligDel: number;
+    vann: number;
+    kilojouleKJ: number;
+    kilokalorierKcal: number;
+    fett: number;
+    mettet: number;
+    c12_0g: number;
+    c14_0: number;
+    c16_0: number;
+    c18_0: number;
+    trans: number;
+    enumettet: number;
+    c16_1Sum: number;
+    c18_1Sum: number;
+    flerumettet: number;
+    c18_2n_6: number;
+    c18_3n_3: number;
+    c20_3n_3: number;
+    c20_3n_6: number;
+    c20_4n_3: number;
+    c20_4n_6: number;
+    c20_5n_3_EPA: number;
+    c22_5n_3_DPA: number;
+    c22_6n_3_DHA: number;
+    omega_3: number;
+    omega_6: number;
+    kolesterolMg: number;
+    karbohydrat: number;
+    stivelse: number;
+    monoPlusDisakk: number;
+    sukkerTilsatt: number;
+    kostfiber: number;
+    protein: number;
+    salt: number;
+    alkohol: number;
+    vitaminARAE: number;
+    retinolMug: number;
+    betaKarotenMug: number;
+    vitaminDMug: number;
+    vitaminEAlfaTE: number;
+    tiaminMg: number;
+    riboflavinMg: number;
+    niacinMg: number;
+    vitaminB6Mg: number;
+    folatMug: number;
+    vitaminB12Mug: number;
+    vitaminCMg: number;
+    kalsiumMg: number;
+    jernMg: number;
+    natriumMg: number;
+    kaliumMg: number;
+    magnesiumMg: number;
+    sinkMg: number;
+    selenMug: number;
+    kopperMg: number;
+    fosforMg: number;
+    jodMug: number;
 }
+
 
 interface IError {
     response?: { data: { message: string } };
@@ -36,7 +90,7 @@ interface IError {
 
 const pushFoodData = async (request: FoodRequest | undefined) => {
     const response = await axios.post(
-        'https://localhost:7247/v1/api/foods/multiple',
+        'https://localhost:7247/api/norwegianfoods/getnutrientcalculationforuser',
         request,
         {headers: {'Content-Type': 'application/json'}}
     );
@@ -46,7 +100,7 @@ const pushFoodData = async (request: FoodRequest | undefined) => {
 const useSaveFoodData = () => {
     return useMutation(pushFoodData, {
             onError: (error: IError) => {
-                console.log('Error: ', error.response?.data.message || error);
+                console.log('Error: ', error.response?.data.message ?? error);
             },
             onSuccess: (data) => {
                 return data;
@@ -57,9 +111,8 @@ const useSaveFoodData = () => {
 
 
 export function ListOfFoods() {
-    const [form, setForm] = useState({food: "", quantity: 0});
+    const [form, setForm] = useState({FoodName: "", Quantity: 0});
     const [list, setList] = useState<FoodItem[]>([]);
-    const [foodRequest, setFoodRequest] = useState<FoodRequest>();
     const [isEditing, setIsEditing] = useState(false);
     const [currentItem, setCurrentItem] = useState<FoodItem | null>(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -81,8 +134,7 @@ export function ListOfFoods() {
         e.preventDefault();
         if (!isEditing) {
             setList([...list, {...form, id: Date.now()}]);
-            setForm({food: "", quantity: 0});
-            setFoodRequest({userId: userId?.userId, foodRequests: list})
+            setForm({FoodName: "", Quantity: 0});
         }
     };
 
@@ -102,35 +154,27 @@ export function ListOfFoods() {
     };
 
     const handleEdit = (item: FoodItem) => {
-        setForm({food: item.food, quantity: item.quantity});
+        setForm({FoodName: item.FoodName, Quantity: item.Quantity});
         setIsEditing(true);
         setCurrentItem(item);
         setModalIsOpen(true);
     };
 
     const callData = () => {
-        setLoading(true)
-        setFormData(true)
+        setLoading(true);
+        setFormData(true);
 
-        let request: Food[] = [];
-        list.map(row => request.fill({food: row.food, quantity: row.quantity}))
+        const request: Food[] = [];
+        list.forEach(row => request.fill({FoodName: row.FoodName, Quantity: row.Quantity}));
 
-        setFoodRequest({userId: userId?.userId, foodRequests: request})
-
-        mutation.mutateAsync({userId: userId?.userId, foodRequests: list})
+        mutation.mutateAsync({userId: userId?.userId, requests: list})
             .then(response => {
                 setData(response);
                 setLoading(false);
                 setShowData(true);
             })
-            .catch(error => console.error(error))
-
+            .catch(error => console.error(error));
     }
-
-    console.log('1' + JSON.stringify(foodRequest))
-    console.log('2' + JSON.stringify(foodRequest?.foodRequests))
-    console.log('3' + JSON.stringify(list))
-
 
     return (
         <>
@@ -142,18 +186,18 @@ export function ListOfFoods() {
                             <input
                                 type="text"
                                 required
-                                value={form.food}
+                                value={form.FoodName}
                                 placeholder="Food"
-                                onChange={(e) => setForm({...form, food: e.target.value})}
+                                onChange={(e) => setForm({...form, FoodName: e.target.value})}
                                 className="p-2 w-full border border-gray-200 rounded-md"
                             />
                             <input
                                 type="number"
                                 required
-                                value={form.quantity}
+                                value={form.Quantity}
                                 placeholder="Quantity in grams"
                                 onChange={(e) =>
-                                    setForm({...form, quantity: parseFloat(e.target.value)})
+                                    setForm({...form, Quantity: parseFloat(e.target.value)})
                                 }
                                 className="p-2 w-full border border-gray-200 rounded-md"
                             />
@@ -166,8 +210,8 @@ export function ListOfFoods() {
                                 <li key={item.id}
                                     className="flex items-center justify-between space-x-4 bg-gray-100 p-4 rounded-md">
                                     <div>
-                                        <span className="font-bold text-lg">{item.food}</span>
-                                        <span className="ml-6">{item.quantity}</span>
+                                        <span className="font-bold text-lg">{item.FoodName}</span>
+                                        <span className="ml-6">{item.Quantity}</span>
                                     </div>
                                     <div>
                                         <button onClick={() => handleEdit(item)}
@@ -207,16 +251,16 @@ export function ListOfFoods() {
                                 <input
                                     type="text"
                                     required
-                                    value={form.food}
-                                    onChange={(e) => setForm({...form, food: e.target.value})}
+                                    value={form.FoodName}
+                                    onChange={(e) => setForm({...form, FoodName: e.target.value})}
                                     className="p-2 border border-gray-200 rounded-md"
                                 />
                                 <input
                                     type="number"
                                     required
-                                    value={form.quantity}
+                                    value={form.Quantity}
                                     onChange={(e) =>
-                                        setForm({...form, quantity: parseInt(e.target.value, 10)})
+                                        setForm({...form, Quantity: parseInt(e.target.value, 10)})
                                     }
                                     className="p-2 border border-gray-200 rounded-md"
                                 />
@@ -252,55 +296,28 @@ export function ListOfFoods() {
                                 className=" w-full mb-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-5"
                         >Again
                         </button>
-                        <div className="flex flex-col">
-                            <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                    <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table className="min-w-full divide-y divide-gray-200">
-                                            <thead className="bg-gray-50">
-                                            <tr>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Source Type
-                                                </th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Original Source Name
-                                                </th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Original Unit
-                                                </th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Original Content
-                                                </th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Standard Content
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody className="bg-white divide-y divide-gray-200">
-                                            {data?.map((row, index) => (
-                                                <tr key={index}>
-                                                    <td className="px-6 py-4 whitespace-nowrap">
-                                                        <div className="text-sm text-gray-900">{row.sourceType}</div>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        {row.origSourceName}
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap">
-                                                        <div className="text-sm text-gray-900">{row.origUnit}</div>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap">
-                                                        <div className="text-sm text-gray-900">{row.origContent}</div>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        {row.standardContent}
-                                                    </td>
+                        <div className="w-full overflow-hidden rounded-lg shadow-xs">
+                            {data && (
+                                <div className="w-full overflow-x-auto">
+                                    <table className="w-full whitespace-no-wrap">
+                                        <thead>
+                                        <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                                            <th className="px-4 py-3">Property</th>
+                                            <th className="px-4 py-3">Value</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody className="bg-white divide-y">
+                                        {
+                                            Object.entries<any>(data).map(([key, value]) => (
+                                                <tr key={key} className="text-gray-700">
+                                                    <td className="px-4 py-3">{key}</td>
+                                                    <td className="px-4 py-3">{value}</td>
                                                 </tr>
                                             ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 }
