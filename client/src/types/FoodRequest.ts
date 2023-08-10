@@ -1,4 +1,4 @@
 ﻿export type foodRequest = {
-    food: string,
-    quantity: number
-}
+  FoodName: string;
+  Quantity: number;
+};

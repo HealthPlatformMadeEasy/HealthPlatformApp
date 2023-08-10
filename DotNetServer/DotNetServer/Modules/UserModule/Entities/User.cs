@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DotNetServer.Modules.NutrientModule.Entities;
 using DotNetServer.Modules.UserContentModule.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.UserModule.Entities;
 
+[Index("Password", Name = "users_password_index")]
 public class User
 {
     [Key] [Column("id")] public Guid Id { get; set; }
@@ -17,4 +20,6 @@ public class User
     [Column("created_at")] public DateTime CreatedAt { get; set; }
 
     public ICollection<UserContent> UserContents { get; set; } = null!;
+
+    public ICollection<Nutrient> Nutrients { get; set; } = null!;
 }

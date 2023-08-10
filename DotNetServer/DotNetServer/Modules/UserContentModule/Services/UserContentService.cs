@@ -14,7 +14,7 @@ public class UserContentService : IUserContentService
     public UserContentService(IUserContentRepository userContentRepository)
     {
         _userContentRepository = userContentRepository;
-        _cancellationTokenSource.CancelAfter(10000);
+        _cancellationTokenSource.CancelAfter(1000000);
     }
 
     public async Task<Response<UserContentResponse>> GetUserContentAsync(Guid id)

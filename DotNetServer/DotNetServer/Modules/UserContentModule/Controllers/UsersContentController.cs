@@ -9,6 +9,7 @@ namespace DotNetServer.Modules.UserContentModule.Controllers;
 
 [ApiController]
 [Route("v1/api/[controller]")]
+[ApiVersion("1.0")]
 public class UsersContentController : ControllerBase
 {
     private readonly IUserContentService _userContentService;

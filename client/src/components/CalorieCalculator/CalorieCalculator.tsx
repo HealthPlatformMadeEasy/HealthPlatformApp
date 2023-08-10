@@ -1,94 +1,106 @@
-import {useEffect, useState} from "react";
-import {useUserId} from "../../hooks";
-import {Loading} from "../Loading";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useUserId } from "../../hooks";
+import { SingleFoodForm } from "../Forms";
+import { Loading } from "../Loading";
+import { foodRequest, INorwegianFoodResponse } from "../../types";
 
-type foodRequest = {
-    food: string,
-    quantity: number
+interface IError {
+  Error: string;
 }
 
 export function CalorieCalculator() {
-    const [data, setData] = useState<undefined>();
-    const [food1, setFood] = useState("");
-    const [quantity1, setQuantity] = useState("");
-    const [formData, setFormData] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [showData, setShowData] = useState(false);
-    const {userId} = useUserId();
-    const [login, setLogin] = useState(false);
+  const [data, setData] = useState<IError | INorwegianFoodResponse>();
+  const [foodInput, setFoodInput] = useState("");
+  const [quantityInput, setQuantityInput] = useState("");
+  const [formData, setFormData] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const { userId } = useUserId();
+  const [login, setLogin] = useState(false);
 
-    useEffect(() => {
-        if (userId !== null) {
-            setLogin(true);
-        }
-    }, [userId])
-
-    const callData = () => {
-        setLoading(true);
-        setFormData(true)
-
-        const food: foodRequest = {
-            food: food1,
-            quantity: parseFloat(quantity1)
-        }
-
-        fetch('https://localhost:7247/v1/api/food/single', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(food)
-        })
-            .then(response => response.json())
-            .then(data => {
-                setData(data)
-                setLoading(false);
-                setShowData(true);
-            })
+  useEffect(() => {
+    if (userId !== null) {
+      setLogin(true);
     }
+  }, [userId]);
 
-    return (
-        <>
-            {!login && <div className="grid w-1/3 border border-solid p-10 border-blue-800 rounded-xl m-auto my-16">
-                <h1 className="text-9xl font-extrabold text-pink-700">Please Login</h1>
-            </div>}
-            {login && <div>
-                {!formData &&
-                    <div className="grid w-1/3 border border-solid p-10 border-blue-800 rounded-xl m-auto my-16">
-                        <h1>Intro Food Name and Quantity</h1>
-                        <input type="text" name="food" id="price" value={food1}
-                               onChange={e => setFood(e.target.value)}
-                               className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 my-3"
-                               placeholder="food"/>
+  const callData = () => {
+    setLoading(true);
+    setFormData(true);
 
-                        <input type="text" name="price" id="price" value={quantity1}
-                               onChange={e => setQuantity(e.target.value)}
-                               className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-grey-900 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                               placeholder="quantity"/>
+    const food: foodRequest = {
+      FoodName: foodInput,
+      Quantity: parseFloat(quantityInput),
+    };
 
-                        <button onClick={callData}
-                                className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-5"
-                        >Submit
-                        </button>
-                    </div>
-                }
-                {loading &&
-                    <div className="space-x-5 w-1/3 border-2 border-solid p-10 border-blue-800 rounded-xl m-auto my-16">
-                        <Loading/>
-                    </div>}
-                {showData &&
-                    <div className=" w-1/3 border-2 border-solid p-10 border-blue-800 rounded-xl m-auto my-16">
-                        <button onClick={() => {
-                            setFormData(false)
-                            setShowData(false)
-                        }}
-                                className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-5"
-                        >Again
-                        </button>
-                        <h1>{JSON.stringify(data)}</h1>
-                    </div>
+    axios
+      .get<IError, INorwegianFoodResponse>(
+        "https://localhost:7247/api/norwegianfoods/gettotalresultofnorwegianfood",
+        { params: food },
+      )
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+        setShowData(true);
+      });
+  };
 
-                }
+  function getOnChangeFood() {
+    return (e: React.ChangeEvent<HTMLInputElement>) =>
+      setFoodInput(e.target.value);
+  }
+
+  function getOnChangeQuantity() {
+    return (e: React.ChangeEvent<HTMLInputElement>) =>
+      setQuantityInput(e.target.value);
+  }
+
+  function setInputAgain() {
+    return () => {
+      setFormData(false);
+      setShowData(false);
+    };
+  }
+
+  return (
+    <>
+      {!login && (
+        <div className="m-auto my-16 grid w-1/3 rounded-xl border border-solid border-blue-800 p-10">
+          <h1 className="text-9xl font-extrabold text-pink-700">
+            Please Login
+          </h1>
+        </div>
+      )}
+      {login && (
+        <div>
+          {!formData && (
+            <SingleFoodForm
+              foodProp={foodInput}
+              setFoodInputCB={getOnChangeFood()}
+              quantityProp={quantityInput}
+              setQuantityInputCB={getOnChangeQuantity()}
+              onClick={callData}
+            />
+          )}
+          {loading && (
+            <div className="m-auto my-16 w-1/3 space-x-5 rounded-xl border-2 border-solid border-blue-800 p-10">
+              <Loading />
             </div>
-            }
-        </>
-    )
+          )}
+          {showData && (
+            <div className=" m-auto my-16 w-1/3 rounded-xl border-2 border-solid border-blue-800 p-10">
+              <button
+                onClick={setInputAgain()}
+                className="mt-5 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
+              >
+                Again
+              </button>
+              <h1>{JSON.stringify(data)}</h1>
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  );
 }

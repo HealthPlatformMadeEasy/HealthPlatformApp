@@ -18,7 +18,7 @@ public class FoodService : IFoodService
     {
         _foodRepository = foodRepository;
         _userContentService = userContentService;
-        _cancellationTokenSource.CancelAfter(10000);
+        _cancellationTokenSource.CancelAfter(1000000);
     }
 
     public async Task<Response<FoodResponse>> GetFood(FoodRequest request)

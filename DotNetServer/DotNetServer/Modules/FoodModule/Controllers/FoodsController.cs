@@ -8,6 +8,7 @@ namespace DotNetServer.Modules.FoodModule.Controllers;
 
 [ApiController]
 [Route("v1/api/[controller]")]
+[ApiVersion("1.0")]
 public class FoodsController : ControllerBase
 {
     private readonly IFoodService _foodService;

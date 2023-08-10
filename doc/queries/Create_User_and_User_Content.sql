@@ -6,12 +6,12 @@
     email      VARCHAR(255) NOT NULL,
     created_at DATETIME     NOT NULL,
     PRIMARY KEY (Id),
-    constraint email_pk
-        unique (password),
     constraint name_pk
         unique (name),
     constraint email_pk
-        unique (email)
+        unique (email),
+    CREATE     INDEX users_password_index
+        ON users (password)
 );
 
 CREATE TABLE UserContents

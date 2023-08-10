@@ -15,8 +15,6 @@ public class FoodRepository : IFoodRepository
 
     public async Task<List<Food>> GetFood(string foodName, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         var response = await _context.Foods.Where(food => food.Name == foodName)
             .Include(prop => prop.Contents)
             .Select(food => new Food
@@ -39,8 +37,6 @@ public class FoodRepository : IFoodRepository
 
     public async Task<List<Food>> GetFoodsFromRequestList(List<string> foodList, CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested) throw new TaskCanceledException();
-
         return await _context.Foods.Where(food => foodList.Any(item => food.Name == item))
             .Include(prop => prop.Contents)
             .Select(food => new Food

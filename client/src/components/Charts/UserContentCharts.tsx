@@ -1,96 +1,101 @@
-﻿import {useEffect, useState} from "react";
-import {VictoryBar, VictoryChart, VictoryStack, VictoryTheme} from "victory";
-import {useUserId} from "../../hooks";
-import {GetMacrosAndEnergy} from "../Fetch";
-
-
-interface IUserContent {
-    sourceType: string,
-    origUnit: string,
-    origSourceName: string,
-    origContent: number,
-    standardContent: number,
-    createdAt: Date,
-    userId: string
-}
-
-interface IMacrosAndEnergy {
-    carbs: IUserContent[],
-    proteins: IUserContent[],
-    fats: IUserContent[],
-    energy: IUserContent[]
-}
-
-interface IChartDate {
-    x: Date,
-    y: number
-}
+﻿import { useEffect, useState } from "react";
+import { GetMacrosAndEnergy } from "../../context/Fetch";
+import { useUserId } from "../../hooks";
+import { IEnergyAndMacros, IGenericMacroDataChart } from "../../types";
+import { MacroChart } from "./MacrosChart.tsx";
 
 export function UserContentCharts() {
-    const [data, setData] = useState<IMacrosAndEnergy | undefined>()
-    const {userId} = useUserId();
+  const [data, setData] = useState<IEnergyAndMacros>({
+    energyDtos: [],
+    carbDtos: [],
+    fatDtos: [],
+    proteinDtos: [],
+  });
+  const [isDataNotUndefined, setIsDataNotUndefined] = useState(false);
+  const { userId } = useUserId();
 
-    useEffect(() => {
-        if (typeof userId === undefined) {
-            return
-        }
-        const test = () => {
-            GetMacrosAndEnergy(userId?.userId)
-                .then(data => setData(data));
-        }
+  useEffect(() => {
+    if (
+      data.carbDtos.length !== 0 &&
+      data.energyDtos.length !== 0 &&
+      data.fatDtos.length !== 0 &&
+      data.proteinDtos.length !== 0
+    )
+      setIsDataNotUndefined(true);
+  }, [data]);
 
-        test();
-    }, [userId])
+  useEffect(() => {
+    if (typeof userId === undefined) {
+      return;
+    }
+    const getData = () => {
+      GetMacrosAndEnergy(userId?.userId).then((data) => setData(data));
+    };
 
-    let carbs: IChartDate[] | undefined = data?.carbs.map(row => {
-        return {x: row.createdAt, y: row.origContent}
-    })
-    let protein: IChartDate[] | undefined = data?.proteins.map(row => {
-        return {x: row.createdAt, y: row.origContent}
-    })
-    let fats: IChartDate[] | undefined = data?.fats.map(row => {
-        return {x: row.createdAt, y: row.origContent}
-    })
+    getData();
+  }, [userId]);
 
+  const genericEnergyData: IGenericMacroDataChart[] = data?.energyDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.kilokalorierKcal,
+    }),
+  );
 
-    console.log(JSON.stringify(data));
+  const genericCarbData: IGenericMacroDataChart[] = data?.carbDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.karbohydrat,
+    }),
+  );
 
-    return (
+  const genericFatData: IGenericMacroDataChart[] = data?.fatDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.fett,
+    }),
+  );
+
+  const genericProteinData: IGenericMacroDataChart[] = data?.proteinDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.protein,
+    }),
+  );
+
+  return (
+    <>
+      <p>userId: {userId?.userId}</p>
+
+      {!isDataNotUndefined && (
+        <div className="m-auto my-16 grid w-1/2 rounded-xl border border-solid border-blue-800 p-10">
+          <h1 className="text-5xl font-extrabold text-pink-700">No Content</h1>
+        </div>
+      )}
+      {isDataNotUndefined && (
         <>
-            <h1>Carbs</h1>
-            <VictoryChart name='Carbs'
-                          theme={VictoryTheme.material}
-            >
-
-                <VictoryStack>
-                    <VictoryBar name="carbs"
-                                colorScale='heatmap'
-                                data={carbs}
-                    />
-                </VictoryStack>
-            </VictoryChart>
-            <h1>Fats</h1>
-            <VictoryChart
-                theme={VictoryTheme.material}
-            >
-                <VictoryStack>
-                    <VictoryBar name="fats"
-                                colorScale='qualitative'
-                                data={fats}
-                    />
-                </VictoryStack>
-            </VictoryChart>
-            <h1>Protein</h1>
-            <VictoryChart
-                theme={VictoryTheme.material}
-            >
-                <VictoryStack>
-                    <VictoryBar name="protein"
-                                colorScale='red'
-                                data={protein}
-                    />
-                </VictoryStack>
-            </VictoryChart>
+          <h1 className="text-2xl font-extrabold text-pink-700">Energy</h1>
+          <MacroChart color={"warm"} data={genericEnergyData} />
         </>
-    );
+      )}
+      {isDataNotUndefined && (
+        <>
+          <h1 className="text-2xl font-extrabold text-pink-700">Carbs</h1>
+          <MacroChart color={"heatmap"} data={genericCarbData} />
+        </>
+      )}
+      {isDataNotUndefined && (
+        <>
+          <h1 className="text-2xl font-extrabold text-pink-700">Fats</h1>
+          <MacroChart color={"qualitative"} data={genericFatData} />
+        </>
+      )}
+      {isDataNotUndefined && (
+        <>
+          <h1 className="text-2xl font-extrabold text-pink-700">Protein</h1>
+          <MacroChart color={"red"} data={genericProteinData} />
+        </>
+      )}
+    </>
+  );
 }
