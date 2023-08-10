@@ -1,1 +1,1 @@
-﻿export * from "./ListOfFoodsResquest"
+﻿export * from "./ListOfFoodsResquest";

@@ -1,1 +1,1 @@
-﻿export * from "./UserContentCharts"
+﻿export * from "./UserContentCharts";

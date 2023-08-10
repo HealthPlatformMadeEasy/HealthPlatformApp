@@ -1,15 +1,14 @@
-﻿import {CalorieCalculator, ListOfFoods} from "../components";
-import {useUserId} from "../hooks";
-
+﻿import { CalorieCalculator, ListOfFoods } from "../components";
+import { useUserId } from "../hooks";
 
 export function UserHomePage() {
-    const {userId} = useUserId();
+  const { userId } = useUserId();
 
-    return (
-        <>
-            <h1>{userId?.userId}</h1>
-            <CalorieCalculator/>
-            <ListOfFoods/>
-        </>
-    )
+  return (
+    <>
+      <h1>{userId?.userId}</h1>
+      <CalorieCalculator />
+      <ListOfFoods />
+    </>
+  );
 }
