@@ -3,7 +3,7 @@ import { LoginButton } from "../Buttons";
 
 export function Navbar() {
   return (
-    <nav className="sticky z-50 flex w-full items-center justify-between bg-opacity-10 p-6">
+    <nav className="sticky top-0 z-50 flex w-full items-center justify-between bg-white p-6">
       <div className="flex-no-shrink mr-6 flex items-center text-green-700">
         <span className="text-3xl font-semibold">Health App</span>
       </div>
@@ -61,10 +61,6 @@ export function Navbar() {
               Test
             </NavLink>
           </button>
-          <button
-            className="mr-4 transform font-raleway text-lg font-semibold transition duration-300 ease-in-out
-            hover:scale-125"
-          ></button>
         </div>
         <LoginButton />
       </div>

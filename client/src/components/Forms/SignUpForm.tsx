@@ -49,9 +49,9 @@ export function SignUpForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
+      className="mb-4 rounded px-8 pb-8 pt-6 shadow-md"
     >
-      <div className="m-auto w-full rounded bg-white p-10 shadow">
+      <div className="m-auto w-1/3 rounded bg-white p-10 shadow">
         <p className="mb-4 text-2xl font-extrabold leading-6 text-gray-800 focus:outline-none">
           Created Account
         </p>
@@ -67,7 +67,7 @@ export function SignUpForm() {
             value={username}
             aria-labelledby="userName"
             type="userName"
-            className="mt-2 w-full rounded  border bg-gray-200 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
+            className="mt-2 w-full rounded border bg-gray-200 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
           />
         </div>
         <div>

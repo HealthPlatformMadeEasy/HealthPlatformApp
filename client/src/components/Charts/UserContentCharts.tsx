@@ -1,34 +1,8 @@
 ﻿import { useEffect, useState } from "react";
-import { VictoryBar, VictoryChart, VictoryStack, VictoryTheme } from "victory";
 import { GetMacrosAndEnergy } from "../../context/Fetch";
 import { useUserId } from "../../hooks";
-
-interface IEnergyDto {
-  createdAt: Date;
-  kilokalorierKcal: number;
-}
-
-interface ICarbDto {
-  createdAt: Date;
-  karbohydrat: number;
-}
-
-interface IFatDto {
-  createdAt: Date;
-  fett: number;
-}
-
-interface IProteinDto {
-  createdAt: Date;
-  protein: number;
-}
-
-interface IEnergyAndMacros {
-  energyDtos: IEnergyDto[];
-  carbDtos: ICarbDto[];
-  fatDtos: IFatDto[];
-  proteinDtos: IProteinDto[];
-}
+import { IEnergyAndMacros, IGenericMacroDataChart } from "../../types";
+import { MacroChart } from "./MacrosChart.tsx";
 
 export function UserContentCharts() {
   const [data, setData] = useState<IEnergyAndMacros>({
@@ -61,87 +35,66 @@ export function UserContentCharts() {
     getData();
   }, [userId]);
 
+  const genericEnergyData: IGenericMacroDataChart[] = data?.energyDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.kilokalorierKcal,
+    }),
+  );
+
+  const genericCarbData: IGenericMacroDataChart[] = data?.carbDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.karbohydrat,
+    }),
+  );
+
+  const genericFatData: IGenericMacroDataChart[] = data?.fatDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.fett,
+    }),
+  );
+
+  const genericProteinData: IGenericMacroDataChart[] = data?.proteinDtos.map(
+    (item) => ({
+      createdAt: item.createdAt,
+      value: item.protein,
+    }),
+  );
+
   return (
     <>
       <p>userId: {userId?.userId}</p>
-      <h1 className="text-2xl font-extrabold text-pink-700">Energy</h1>
-      {!isDataNotUndefined && (
-        <div className="m-auto my-16 grid w-1/2 rounded-xl border border-solid border-blue-800 p-10">
-          <h1 className="text-5xl font-extrabold text-pink-700">No Content</h1>
-        </div>
-      )}
-      {isDataNotUndefined && (
-        <VictoryChart name="Energy" theme={VictoryTheme.material}>
-          <VictoryStack>
-            <VictoryBar
-              name="carbs"
-              colorScale="warm"
-              data={data?.energyDtos.map((row) => {
-                return { x: row.createdAt, y: row.kilokalorierKcal };
-              })}
-            />
-          </VictoryStack>
-        </VictoryChart>
-      )}
 
-      <h1 className="text-2xl font-extrabold text-pink-700">Carbs</h1>
       {!isDataNotUndefined && (
         <div className="m-auto my-16 grid w-1/2 rounded-xl border border-solid border-blue-800 p-10">
           <h1 className="text-5xl font-extrabold text-pink-700">No Content</h1>
         </div>
       )}
       {isDataNotUndefined && (
-        <VictoryChart name="Carbs" theme={VictoryTheme.material}>
-          <VictoryStack>
-            <VictoryBar
-              name="carbs"
-              colorScale="heatmap"
-              data={data?.carbDtos.map((row) => {
-                return { x: row.createdAt, y: row.karbohydrat };
-              })}
-            />
-          </VictoryStack>
-        </VictoryChart>
-      )}
-
-      <h1 className="text-2xl font-extrabold text-pink-700">Fats</h1>
-      {!isDataNotUndefined && (
-        <div className="m-auto my-16 grid w-1/2 rounded-xl border border-solid border-blue-800 p-10">
-          <h1 className="text-5xl font-extrabold text-pink-700">No Content</h1>
-        </div>
+        <>
+          <h1 className="text-2xl font-extrabold text-pink-700">Energy</h1>
+          <MacroChart color={"warm"} data={genericEnergyData} />
+        </>
       )}
       {isDataNotUndefined && (
-        <VictoryChart theme={VictoryTheme.material}>
-          <VictoryStack>
-            <VictoryBar
-              name="fats"
-              colorScale="qualitative"
-              data={data?.fatDtos.map((row) => {
-                return { x: row.createdAt, y: row.fett };
-              })}
-            />
-          </VictoryStack>
-        </VictoryChart>
-      )}
-
-      <h1 className="text-2xl font-extrabold text-pink-700">Protein</h1>
-      {!isDataNotUndefined && (
-        <div className="m-auto my-16 grid w-1/2 rounded-xl border border-solid border-blue-800 p-10">
-          <h1 className="text-5xl font-extrabold text-pink-700">No Content</h1>
-        </div>
+        <>
+          <h1 className="text-2xl font-extrabold text-pink-700">Carbs</h1>
+          <MacroChart color={"heatmap"} data={genericCarbData} />
+        </>
       )}
       {isDataNotUndefined && (
-        <VictoryChart theme={VictoryTheme.material}>
-          <VictoryStack>
-            <VictoryBar
-              name="protein"
-              colorScale="red"
-              data={data?.proteinDtos.map((row) => {
-                return { x: row.createdAt, y: row.protein };
-              })}
-            />
-          </VictoryStack>
-        </VictoryChart>
+        <>
+          <h1 className="text-2xl font-extrabold text-pink-700">Fats</h1>
+          <MacroChart color={"qualitative"} data={genericFatData} />
+        </>
+      )}
+      {isDataNotUndefined && (
+        <>
+          <h1 className="text-2xl font-extrabold text-pink-700">Protein</h1>
+          <MacroChart color={"red"} data={genericProteinData} />
+        </>
       )}
     </>
   );
