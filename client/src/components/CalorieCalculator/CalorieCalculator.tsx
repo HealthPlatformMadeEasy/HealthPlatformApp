@@ -2,20 +2,15 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {useUserId} from "../../hooks";
 import {SingleFoodForm} from "../Forms";
-import {IData} from "../ListOfFoodsRequest";
 import {Loading} from "../Loading";
-
-type foodRequest = {
-    FoodName: string,
-    Quantity: number
-}
+import {foodRequest, INorwegianFoodResponse} from "../../types";
 
 interface IError {
     Error: string
 }
 
 export function CalorieCalculator() {
-    const [data, setData] = useState<IError | IData>();
+    const [data, setData] = useState<IError | INorwegianFoodResponse>();
     const [foodInput, setFoodInput] = useState("");
     const [quantityInput, setQuantityInput] = useState("");
     const [formData, setFormData] = useState(false);
@@ -39,7 +34,7 @@ export function CalorieCalculator() {
             Quantity: parseFloat(quantityInput)
         }
 
-        axios.get<IError, IData>('https://localhost:7247/api/norwegianfoods/gettotalresultofnorwegianfood', {params: food})
+        axios.get<IError, INorwegianFoodResponse>('https://localhost:7247/api/norwegianfoods/gettotalresultofnorwegianfood', {params: food})
             .then(data => {
                 setData(data);
                 setLoading(false);

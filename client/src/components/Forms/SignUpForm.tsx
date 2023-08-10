@@ -22,7 +22,7 @@ export function SignUpForm({setModalOpen}: Props) {
             return;
         }
 
-        if (!password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/)) {
+        if (!RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/).exec(password)) {
             alert('Password should be minimum eight characters, at least one letter and one number');
             return;
         }
@@ -47,7 +47,7 @@ export function SignUpForm({setModalOpen}: Props) {
     return (
         <form onSubmit={handleSubmit}
               className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 m-auto">
+            <div className="bg-white shadow rounded w-full p-10 m-auto">
                 <p className="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800 mb-4">
                     Created Account
                 </p>
