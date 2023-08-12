@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BirdLogoSmall } from "../../assets";
 
 export function Footer() {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -17,14 +18,17 @@ export function Footer() {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="https://flowbite.com/" className="flex items-center">
+            <a
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              className="flex items-center"
+            >
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
+                src={BirdLogoSmall}
                 className="mr-3 h-8"
                 alt="FlowBite Logo"
               />
               <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-                Flowbite
+                ACME
               </span>
             </a>
           </div>
@@ -35,8 +39,11 @@ export function Footer() {
               </h2>
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 <li className="mb-4">
-                  <a href="https://flowbite.com/" className="hover:underline">
-                    Flowbite
+                  <a
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    className="hover:underline"
+                  >
+                    ACME
                   </a>
                 </li>
                 <li>
@@ -63,7 +70,10 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a
+                    href="https://www.linkedin.com/in/maximiliano-barrientos-nunez-964b03a7/"
+                    className="hover:underline"
+                  >
                     LinkedIn
                   </a>
                 </li>
@@ -75,12 +85,18 @@ export function Footer() {
               </h2>
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <a
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    className="hover:underline"
+                  >
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    className="hover:underline"
+                  >
                     Terms &amp; Conditions
                   </a>
                 </li>
@@ -92,16 +108,21 @@ export function Footer() {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
             © 2023{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              Flowbite™
+            <a
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              className="hover:underline"
+            >
+              ACME™
             </a>
-            . All Rights Reserved.
+            . Creative Commons.
           </span>
           <div className="relative mt-4 flex space-x-5 sm:mt-0 sm:justify-center">
             {isPopoverOpen && (
               <div className="absolute bottom-10 right-8 flex w-52 animate-[fade-in_0.15s_ease-in-out] flex-col items-center justify-center rounded-xl border bg-white p-4 shadow-lg">
-                <p>Maximiliano Barrientos</p>
-                <p>Phone: {phoneNumber}</p>
+                <h6 className="font-semibold">Maximiliano Barrientos</h6>
+                <p>
+                  phone: <span className="text-blue-700">{phoneNumber}</span>
+                </p>
                 <p className="text-sm text-red-500">Click for copy</p>
               </div>
             )}

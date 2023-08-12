@@ -1,1 +1,1 @@
-export { default as PinkFruitLeft } from "./pink-fruit-left.png";
+export { default as BirdLogoSmall } from "./BirdLogo10Porcent.png";

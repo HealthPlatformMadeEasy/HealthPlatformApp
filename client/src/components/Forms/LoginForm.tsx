@@ -50,8 +50,7 @@ export function LoginForm() {
           Dont have account?
           <button
             onClick={handleSignUpClick}
-            className="ml-1 cursor-pointer text-sm font-medium leading-none text-gray-800 hover:text-gray-500
-              hover:underline focus:text-gray-500  focus:underline focus:outline-none"
+            className="ml-1 cursor-pointer text-sm font-medium leading-none text-gray-800 hover:text-gray-500 hover:underline focus:text-gray-500  focus:underline focus:outline-none"
           >
             Sign up here
           </button>
@@ -59,8 +58,7 @@ export function LoginForm() {
         <button
           aria-label="Continue with google"
           role="button"
-          className="m-auto mt-10 flex w-3/4 transform items-center justify-center rounded-full border border-gray-700
-            px-4 py-3.5 transition duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
+          className="m-auto mt-10 flex w-3/4 transform items-center justify-center rounded-full border border-gray-700 px-4 py-3.5 transition duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
         >
           <svg
             width="19"
@@ -93,8 +91,7 @@ export function LoginForm() {
         <button
           aria-label="Continue with github"
           role="button"
-          className="m-auto mt-4 flex w-3/4 transform items-center justify-center rounded-full border border-gray-700
-            px-4 py-3.5 transition duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
+          className="m-auto mt-4 flex w-3/4 transform items-center justify-center rounded-full border border-gray-700 px-4 py-3.5 transition duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
         >
           <svg
             width="21"
@@ -115,9 +112,7 @@ export function LoginForm() {
         <button
           aria-label="Continue with twitter"
           role="button"
-          className="m-auto mt-4 flex w-3/4 transform items-center justify-center rounded-full border border-gray-700
-            px-4 py-3.5 transition duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2
-            focus:ring-gray-700 focus:ring-offset-1"
+          className="m-auto mt-4 flex w-3/4 transform items-center justify-center rounded-full border border-gray-700 px-4 py-3.5 transition duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-1"
         >
           <svg
             width="24"
@@ -154,8 +149,7 @@ export function LoginForm() {
             aria-labelledby="userName"
             type="userName"
             onChange={(e) => setUsername(e.target.value)}
-            className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none
-              text-gray-800"
+            className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
           />
         </div>
         <div>
@@ -170,8 +164,7 @@ export function LoginForm() {
             value={email}
             aria-labelledby="email"
             type="email"
-            className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none
-              text-gray-800"
+            className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
           />
         </div>
         <div className="mt-6  w-full">
@@ -184,8 +177,7 @@ export function LoginForm() {
               value={password}
               id="pass"
               type={passwordType}
-              className="mt-2 w-full rounded-full  border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none
-                text-gray-800"
+              className="mt-2 w-full rounded-full  border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
             />
             <div
               onClick={togglePasswordVisibility}

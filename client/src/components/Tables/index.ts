@@ -1,1 +1,1 @@
-export * from "./FoodItemRequestTable.tsx";
+export * from "./FoodItemRequestRow.tsx";

@@ -109,13 +109,16 @@ export function ListOfFoods() {
   };
 
   return (
-    <>
+    <div>
       {login && (
         <div>
           {!formData && (
-            <div className="m-auto my-16 grid w-1/3 border border-solid border-blue-800 p-10">
+            <div className="grid bg-white p-10">
               <h1 className="mb-4 text-2xl font-bold">List of Food Items</h1>
-              <form onSubmit={handleSubmit} className="flex space-x-4 ">
+              <form
+                onSubmit={handleSubmit}
+                className="flex items-center justify-center space-x-2"
+              >
                 <input
                   type="text"
                   required
@@ -124,7 +127,7 @@ export function ListOfFoods() {
                   onChange={(e) =>
                     setForm({ ...form, FoodName: e.target.value })
                   }
-                  className="w-5/12 rounded-md border border-gray-200 p-2"
+                  className="w-5/12 rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
                 />
                 <input
                   type="number"
@@ -134,7 +137,7 @@ export function ListOfFoods() {
                   onChange={(e) =>
                     setForm({ ...form, Quantity: parseFloat(e.target.value) })
                   }
-                  className="w-5/12 space-x-2 rounded-md border border-gray-200 p-2  "
+                  className="w-5/12 rounded-full border bg-tea_green-100 px-3 py-3 text-xs font-medium leading-none text-gray-800"
                 />
                 <AddButton />
               </form>
@@ -171,7 +174,7 @@ export function ListOfFoods() {
                 <h2 className="mb-4 text-2xl font-bold">Update Food Item</h2>
                 <form
                   onSubmit={handleUpdate}
-                  className="grid grid-cols-2 gap-3"
+                  className="grid grid-cols-2 gap-2"
                 >
                   <input
                     type="text"
@@ -180,7 +183,7 @@ export function ListOfFoods() {
                     onChange={(e) =>
                       setForm({ ...form, FoodName: e.target.value })
                     }
-                    className="rounded-md border border-gray-200 p-2"
+                    className="w-full rounded-full border bg-tea_green-100 px-3 py-2 text-xs font-medium leading-none text-gray-800"
                   />
                   <input
                     type="number"
@@ -192,51 +195,49 @@ export function ListOfFoods() {
                         Quantity: parseInt(e.target.value, 10),
                       })
                     }
-                    className="rounded-md border border-gray-200 p-2"
+                    className="w-full rounded-full border bg-tea_green-100 px-3 py-2 text-xs font-medium leading-none text-gray-800"
                   />
-                  <button
-                    type="submit"
-                    className="col-span-2 mt-5 w-full rounded border border-blue-500 bg-transparent px-4 py-2
-                    font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
-                  >
-                    Submit
-                  </button>
+                  <div className="col-span-2 flex justify-end gap-2">
+                    <button
+                      onClick={() => setModalIsOpen(false)}
+                      className="group relative flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-gradient-to-r from-madder-500 via-madder-600 to-madder-800 px-6 transition duration-300 ease-in-out hover:scale-110"
+                    >
+                      <span className="text-m relative text-white">Cancel</span>
+                    </button>
+                    <button
+                      type="submit"
+                      className="group relative flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-gradient-to-r from-marian_blue-400 via-marian_blue-500 to-marian_blue-800 px-6 transition duration-300 ease-in-out hover:scale-110"
+                    >
+                      <span className="text-m relative text-white">Submit</span>
+                    </button>
+                  </div>
                 </form>
-                <button
-                  onClick={() => setModalIsOpen(false)}
-                  className="mt-5 w-full rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold
-                  text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
-                >
-                  Cancel
-                </button>
               </Modal>
               <button
                 onClick={callData}
-                className="mt-5 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700
-                hover:border-transparent hover:bg-blue-500 hover:text-white"
+                className="group relative mx-auto mt-3 flex h-12 transform items-center overflow-hidden rounded-full bg-gradient-to-r from-marian_blue-400 via-marian_blue-500 to-marian_blue-800 px-6 transition duration-300 ease-in-out hover:scale-110"
               >
-                Call Data
+                <span className="text-m relative text-white">Call Data</span>
               </button>
             </div>
           )}
           {loading && (
-            <div className="m-auto my-16 w-1/3 space-x-5 rounded-xl border-2 border-solid border-blue-800 p-10">
+            <div className="m-auto my-16 w-full space-x-5 bg-white p-10">
               <Loading />
             </div>
           )}
           {showData && (
-            <div className="m-auto my-16 w-3/4 rounded-xl border-2 border-solid border-blue-800 p-10">
+            <div className="bg-white p-10">
               <button
                 onClick={() => {
                   setFormData(false);
                   setShowData(false);
                 }}
-                className="mb-5 mt-5 w-full rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold
-                text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
+                className="mb-5 mt-5 w-full rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
               >
                 Again
               </button>
-              <div className="shadow-xs w-full overflow-hidden rounded-lg">
+              <div className="shadow-xs h-96 w-full overflow-auto">
                 {data && (
                   <div className="w-full overflow-x-auto">
                     <table className="whitespace-no-wrap w-full">
@@ -265,6 +266,6 @@ export function ListOfFoods() {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

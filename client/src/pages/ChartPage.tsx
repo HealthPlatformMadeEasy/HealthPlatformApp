@@ -17,8 +17,8 @@ export function ChartPage() {
       {login && (
         <div>
           <h1>Login</h1>
-          <div className="m-auto my-16 grid w-1/3 rounded-xl border border-solid border-blue-800 p-10">
-            <UserContentCharts />
+          <div className="m-auto my-16 grid p-10">
+            <UserContentCharts trigger={false} />
           </div>
         </div>
       )}

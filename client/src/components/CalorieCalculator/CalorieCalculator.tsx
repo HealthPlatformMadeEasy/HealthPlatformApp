@@ -64,9 +64,9 @@ export function CalorieCalculator() {
   }
 
   return (
-    <>
+    <div className="">
       {!login && (
-        <div className="m-auto my-16 grid w-1/3 rounded-xl border border-solid border-blue-800 p-10">
+        <div className="grid bg-white p-10">
           <h1 className="text-9xl font-extrabold text-pink-700">
             Please Login
           </h1>
@@ -84,23 +84,23 @@ export function CalorieCalculator() {
             />
           )}
           {loading && (
-            <div className="m-auto my-16 w-1/3 space-x-5 rounded-xl border-2 border-solid border-blue-800 p-10">
+            <div className="bg-white p-10">
               <Loading />
             </div>
           )}
           {showData && (
-            <div className=" m-auto my-16 w-1/3 rounded-xl border-2 border-solid border-blue-800 p-10">
+            <div className="bg-white p-10">
               <button
                 onClick={setInputAgain()}
                 className="mt-5 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
               >
                 Again
               </button>
-              <h1>{JSON.stringify(data)}</h1>
+              <h1 className="h-96 overflow-auto">{JSON.stringify(data)}</h1>
             </div>
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
