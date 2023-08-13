@@ -9,58 +9,55 @@ export function Navbar() {
       </div>
       <div id="nav-content" className="flex items-center">
         <div className="mr-auto space-x-4 text-sm lg:flex-grow">
-          <button className="mr-4 transform text-lg transition duration-300 ease-in-out hover:scale-125">
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                isActive
-                  ? "p-2 text-green-700 hover:font-bold hover:text-green-700"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
-              }
-            >
-              Home
-            </NavLink>
-          </button>
-          <button className="mr-4 transform text-lg transition duration-300 ease-in-out hover:scale-125">
-            <NavLink
-              to="/user-food"
-              className={({ isActive }) =>
-                isActive
-                  ? "p-2 text-green-700 hover:font-bold hover:text-green-700"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
-              }
-            >
-              User Food
-            </NavLink>
-          </button>
-          <button className="mr-4 transform text-lg transition duration-300 ease-in-out hover:scale-125">
-            <NavLink
-              to="/charts"
-              className={({ isActive }) =>
-                isActive
-                  ? "p-2 text-green-700 hover:font-bold hover:text-green-700"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
-              }
-            >
-              Charts
-            </NavLink>
-          </button>
-          <button
-            className="mr-4 transform font-raleway text-lg font-semibold transition duration-300 ease-in-out
-            hover:scale-125"
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive
+                ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
+                  " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
+                : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
+                  " font-bold transition duration-300 ease-in-out hover:scale-125"
+            }
           >
-            <NavLink
-              to="/test"
-              className={({ isActive }) =>
-                isActive
-                  ? "p-2 text-marian_blue-700 hover:font-bold hover:text-marian_blue-900"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
-              }
-            >
-              Test
-            </NavLink>
-          </button>
+            Home
+          </NavLink>
+          <NavLink
+            to="/food"
+            className={({ isActive }) =>
+              isActive
+                ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
+                  " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
+                : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
+                  " font-bold transition duration-300 ease-in-out hover:scale-125"
+            }
+          >
+            Food
+          </NavLink>
+          <NavLink
+            to="/charts"
+            className={({ isActive }) =>
+              isActive
+                ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
+                  " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
+                : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
+                  " font-bold transition duration-300 ease-in-out hover:scale-125"
+            }
+          >
+            Charts
+          </NavLink>
+          <NavLink
+            to="/test"
+            className={({ isActive }) =>
+              isActive
+                ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
+                  " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
+                : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
+                  " font-bold transition duration-300 ease-in-out hover:scale-125"
+            }
+          >
+            Test
+          </NavLink>
         </div>
         <LoginButton />
       </div>

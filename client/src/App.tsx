@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<NavBarLayout />}>
             <Route index element={<LandingPage />} />
-            <Route path="user-food" element={<UserHomePage />} />
+            <Route path="food" element={<UserHomePage />} />
             <Route path="charts" element={<ChartPage />} />
             <Route path="test" element={<TestPage />} />
           </Route>
