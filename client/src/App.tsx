@@ -1,10 +1,10 @@
 import { UserIdProvider } from "./hooks";
 import {
-  ChartPage,
   ErrorPage,
   FoodPage,
   LandingPage,
   LoginPage,
+  NewFeaturePage,
   SignUpPage,
   TestPage,
 } from "./pages";
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<NavBarLayout />}>
             <Route index path="food" element={<FoodPage />} />
-            <Route path="charts" element={<ChartPage />} />
+            <Route path="charts" element={<NewFeaturePage />} />
             <Route path="test" element={<TestPage />} />
           </Route>
 

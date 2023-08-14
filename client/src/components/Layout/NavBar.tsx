@@ -32,7 +32,7 @@ export function Navbar() {
                     " font-bold transition duration-300 ease-in-out hover:scale-125"
               }
             >
-              Charts
+              New Feature
             </NavLink>
             <NavLink
               to="/test"
