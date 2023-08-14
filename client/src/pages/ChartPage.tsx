@@ -13,7 +13,7 @@ export function ChartPage() {
   }, [userId]);
 
   return (
-    <>
+    <main>
       {login && (
         <div>
           <h1>Login</h1>
@@ -32,6 +32,6 @@ export function ChartPage() {
           </div>
         </div>
       )}
-    </>
+    </main>
   );
 }

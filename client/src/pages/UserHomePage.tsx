@@ -11,7 +11,7 @@ export function UserHomePage() {
   const [triggerLoad, setTriggerLoad] = useState(false);
 
   return (
-    <>
+    <main>
       <h1>{userId?.userId}</h1>
       <button onClick={() => setTriggerLoad(!triggerLoad)}>reload</button>
       <div className="grid grid-cols-3 gap-2 bg-light-green-fruit-around bg-cover bg-fixed p-8">
@@ -23,6 +23,6 @@ export function UserHomePage() {
           <UserContentCharts trigger={triggerLoad} />
         </div>
       </div>
-    </>
+    </main>
   );
 }

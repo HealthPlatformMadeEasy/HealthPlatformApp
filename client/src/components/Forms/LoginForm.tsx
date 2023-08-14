@@ -30,7 +30,7 @@ export function LoginForm() {
   };
 
   if (isSignUp) {
-    navigate("/user-food");
+    navigate("/food");
   }
 
   const togglePasswordVisibility = () => {
