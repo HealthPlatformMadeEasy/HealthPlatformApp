@@ -2,6 +2,7 @@
 import { CreateUser } from "../../context/Fetch";
 import { useUserId } from "../../hooks";
 import { useNavigate } from "react-router-dom";
+import { CancelBackPreviousRouteButton, SubmitLoginButton } from "../Buttons";
 
 export function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -43,7 +44,7 @@ export function SignUpForm() {
   };
 
   if (isLogIn) {
-    navigate("/user-food");
+    navigate("/food");
   }
 
   return (
@@ -67,7 +68,7 @@ export function SignUpForm() {
             value={username}
             aria-labelledby="userName"
             type="userName"
-            className="mt-2 w-full rounded border bg-gray-200 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
+            className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
           />
         </div>
         <div>
@@ -82,7 +83,7 @@ export function SignUpForm() {
             value={email}
             aria-labelledby="email"
             type="email"
-            className="mt-2 w-full rounded  border bg-gray-200 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
+            className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
           />
         </div>
         <div className="mt-6  w-full">
@@ -95,7 +96,7 @@ export function SignUpForm() {
               value={password}
               id="pass"
               type="password"
-              className="mt-2 w-full rounded  border bg-gray-200 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
+              className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
             />
             <div className="absolute right-0 mr-3 mt-2 cursor-pointer">
               <svg
@@ -123,7 +124,7 @@ export function SignUpForm() {
               value={repeatPassword}
               id="pass"
               type="password"
-              className="mt-2 w-full rounded  border bg-gray-200 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
+              className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
             />
             <div className="absolute right-0 mr-3 mt-2 cursor-pointer">
               <svg
@@ -141,12 +142,9 @@ export function SignUpForm() {
             </div>
           </div>
         </div>
-        <div className="mt-8">
-          <input
-            type="submit"
-            value="Sign Up"
-            className="w-full rounded border bg-indigo-700 py-4 text-sm font-semibold leading-none text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2"
-          />
+        <div className="mt-8 flex items-center justify-around">
+          <CancelBackPreviousRouteButton />
+          <SubmitLoginButton />
         </div>
       </div>
     </form>

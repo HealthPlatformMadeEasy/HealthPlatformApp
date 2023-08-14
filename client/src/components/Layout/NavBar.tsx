@@ -3,67 +3,53 @@ import { LoginButton } from "../Buttons";
 
 export function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 flex w-full items-center justify-between bg-white p-6">
-      <div className="flex-no-shrink mr-6 flex items-center text-green-700">
-        <span className="text-3xl font-semibold">Health App</span>
-      </div>
-      <div id="nav-content" className="flex items-center">
-        <div className="mr-auto space-x-4 text-sm lg:flex-grow">
-          <button className="mr-4 transform text-lg transition duration-300 ease-in-out hover:scale-125">
+    <header>
+      <nav className="sticky top-0 z-50 flex w-full items-center justify-between bg-white p-6">
+        <div className="flex-no-shrink mr-6 flex items-center text-green-700">
+          <span className="text-3xl font-semibold">Health App</span>
+        </div>
+        <div id="nav-content" className="flex items-center">
+          <div className="mr-auto space-x-4 text-sm lg:flex-grow">
             <NavLink
-              to="/"
-              end
+              to="/food"
               className={({ isActive }) =>
                 isActive
-                  ? "p-2 text-green-700 hover:font-bold hover:text-green-700"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
+                  ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
+                    " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
+                  : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
+                    " font-bold transition duration-300 ease-in-out hover:scale-125"
               }
             >
-              Home
+              Food
             </NavLink>
-          </button>
-          <button className="mr-4 transform text-lg transition duration-300 ease-in-out hover:scale-125">
-            <NavLink
-              to="/user-food"
-              className={({ isActive }) =>
-                isActive
-                  ? "p-2 text-green-700 hover:font-bold hover:text-green-700"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
-              }
-            >
-              User Food
-            </NavLink>
-          </button>
-          <button className="mr-4 transform text-lg transition duration-300 ease-in-out hover:scale-125">
             <NavLink
               to="/charts"
               className={({ isActive }) =>
                 isActive
-                  ? "p-2 text-green-700 hover:font-bold hover:text-green-700"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
+                  ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
+                    " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
+                  : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
+                    " font-bold transition duration-300 ease-in-out hover:scale-125"
               }
             >
-              Charts
+              New Feature
             </NavLink>
-          </button>
-          <button
-            className="mr-4 transform font-raleway text-lg font-semibold transition duration-300 ease-in-out
-            hover:scale-125"
-          >
             <NavLink
               to="/test"
               className={({ isActive }) =>
                 isActive
-                  ? "p-2 text-marian_blue-700 hover:font-bold hover:text-marian_blue-900"
-                  : "p-2 text-gray-500 hover:font-bold hover:text-green-700"
+                  ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
+                    " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
+                  : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
+                    " font-bold transition duration-300 ease-in-out hover:scale-125"
               }
             >
               Test
             </NavLink>
-          </button>
+          </div>
+          <LoginButton />
         </div>
-        <LoginButton />
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }

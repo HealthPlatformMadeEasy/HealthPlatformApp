@@ -10,10 +10,10 @@ export function FoodItemRequestRow(props: {
   onClick1: () => void;
 }) {
   return (
-    <li className="flex items-center justify-between space-x-4 rounded-md bg-gray-100 p-4">
-      <div>
-        <span className="text-lg font-bold">{props.item.FoodName}</span>
-        <span className="ml-6">{props.item.Quantity}</span>
+    <li className="flex items-center justify-between rounded-full border bg-pine_green-100 py-1 pl-3 text-xs font-medium leading-none text-gray-800">
+      <div className="flex items-center justify-center gap-4 p-1 text-xl font-light">
+        <span>{props.item.FoodName}:</span>
+        <span>{props.item.Quantity}gr.</span>
       </div>
       <div className="flex items-center justify-between">
         <EditFoodRequestItemButton onClick={props.onClick} />

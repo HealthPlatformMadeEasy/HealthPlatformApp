@@ -6,7 +6,7 @@ export function SubmitLoginButton() {
       bg-gradient-to-r from-marian_blue-400 via-marian_blue-500 to-marian_blue-800 px-6 transition duration-300 ease-in-out
       hover:scale-110"
     >
-      <span className="text-m relative text-white">Login</span>
+      <span className="text-m relative text-white">Submit</span>
     </button>
   );
 }

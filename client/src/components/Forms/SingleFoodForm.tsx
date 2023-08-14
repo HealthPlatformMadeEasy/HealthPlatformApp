@@ -8,7 +8,7 @@ export function SingleFoodForm(props: {
   onClick: () => void;
 }) {
   return (
-    <div className="m-auto my-16 grid w-1/3 rounded-xl border border-solid border-blue-800 p-10">
+    <div className="grid gap-2 bg-white p-10">
       <h1>Intro Food Name and Quantity</h1>
       <input
         id="price"
@@ -17,8 +17,7 @@ export function SingleFoodForm(props: {
         value={props.foodProp}
         placeholder="food"
         onChange={props.setFoodInputCB}
-        className="my-3 block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-blue-300
-        placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+        className="w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
       />
 
       <input
@@ -28,16 +27,14 @@ export function SingleFoodForm(props: {
         value={props.quantityProp}
         placeholder="quantity"
         onChange={props.setQuantityInputCB}
-        className="text-grey-900 block w-full rounded-md border-0 py-1.5 pl-7 pr-20 ring-1 ring-inset ring-blue-300
-        placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+        className="mt-2 w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
       />
 
       <button
         onClick={props.onClick}
-        className="mt-5 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700
-        hover:border-transparent hover:bg-blue-500 hover:text-white"
+        className="group relative m-auto flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-gradient-to-r from-marian_blue-400 via-marian_blue-500 to-marian_blue-800 px-6 transition duration-300 ease-in-out hover:scale-110"
       >
-        Submit
+        <span className="text-m relative text-white">Submit</span>
       </button>
     </div>
   );
