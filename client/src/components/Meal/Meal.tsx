@@ -37,7 +37,7 @@ const useSaveFoodData = () => {
   });
 };
 
-export function ListOfFoods() {
+export function Meal(props: { loadChart: () => void }) {
   const [form, setForm] = useState({ FoodName: "", Quantity: 0 });
   const [list, setList] = useState<FoodItem[]>([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -104,6 +104,7 @@ export function ListOfFoods() {
         setData(response);
         setLoading(false);
         setShowData(true);
+        props.loadChart();
       })
       .catch((error) => console.error(error));
   };

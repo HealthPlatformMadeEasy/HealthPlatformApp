@@ -2,11 +2,11 @@ import { UserIdProvider } from "./hooks";
 import {
   ChartPage,
   ErrorPage,
+  FoodPage,
   LandingPage,
   LoginPage,
   SignUpPage,
   TestPage,
-  UserHomePage,
 } from "./pages";
 import { Footer, NavBarLayout } from "./components";
 import { Route, Routes } from "react-router-dom";
@@ -17,7 +17,7 @@ function App() {
       <UserIdProvider>
         <Routes>
           <Route path="/" element={<NavBarLayout />}>
-            <Route index path="food" element={<UserHomePage />} />
+            <Route index path="food" element={<FoodPage />} />
             <Route path="charts" element={<ChartPage />} />
             <Route path="test" element={<TestPage />} />
           </Route>

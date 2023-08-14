@@ -1,5 +1,5 @@
 ﻿export * from "./LandingPage";
-export * from "./UserHomePage";
+export * from "./FoodPage.tsx";
 export * from "./ChartPage.tsx";
 export * from "./TestPage.tsx";
 export * from "./LoginPage.tsx";
