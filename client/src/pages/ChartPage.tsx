@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { UserContentCharts } from "../components";
+import { MacroChartsLayout } from "../components";
 import { useUserId } from "../hooks";
 
 export function ChartPage() {
@@ -18,7 +18,7 @@ export function ChartPage() {
         <div>
           <h1>Login</h1>
           <div className="m-auto my-16 grid p-10">
-            <UserContentCharts trigger={false} />
+            <MacroChartsLayout trigger={false} />
           </div>
         </div>
       )}

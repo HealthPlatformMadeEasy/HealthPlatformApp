@@ -1,7 +1,7 @@
 ﻿import {
   CalorieCalculator,
   ListOfFoods,
-  UserContentCharts,
+  MacroChartsLayout,
 } from "../components";
 import { useUserId } from "../hooks";
 import { useState } from "react";
@@ -20,7 +20,7 @@ export function UserHomePage() {
           <ListOfFoods />
         </div>
         <div className="col-span-2">
-          <UserContentCharts trigger={triggerLoad} />
+          <MacroChartsLayout trigger={triggerLoad} />
         </div>
       </div>
     </main>

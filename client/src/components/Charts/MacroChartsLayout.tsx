@@ -2,9 +2,9 @@
 import { GetMacrosAndEnergy } from "../../context/Fetch";
 import { useUserId } from "../../hooks";
 import { IEnergyAndMacros, IGenericMacroDataChart } from "../../types";
-import { MacroChart } from "./MacrosChart.tsx";
+import { SingleMacroChart } from "./SingleMacroChart.tsx";
 
-export function UserContentCharts(props: { trigger: boolean }) {
+export function MacroChartsLayout(props: { trigger: boolean }) {
   const [data, setData] = useState<IEnergyAndMacros>({
     energyDtos: [],
     carbDtos: [],
@@ -66,22 +66,38 @@ export function UserContentCharts(props: { trigger: boolean }) {
   return (
     <div>
       {!isDataNotUndefined && (
-        <div className="grid w-1/2 rounded-xl border border-solid border-blue-800 p-10">
+        <div className="grid w-1/2 bg-white p-10">
           <h1 className="text-5xl font-extrabold text-pink-700">No Content</h1>
         </div>
       )}
       <div className="grid grid-cols-2 gap-2">
         {isDataNotUndefined && (
-          <MacroChart name="Energy" color="warm" data={genericEnergyData} />
+          <SingleMacroChart
+            name="Energy"
+            color="warm"
+            data={genericEnergyData}
+          />
         )}
         {isDataNotUndefined && (
-          <MacroChart name="Carbs" color="heatmap" data={genericCarbData} />
+          <SingleMacroChart
+            name="Carbs"
+            color="heatmap"
+            data={genericCarbData}
+          />
         )}
         {isDataNotUndefined && (
-          <MacroChart name="Fats" color="qualitative" data={genericFatData} />
+          <SingleMacroChart
+            name="Fats"
+            color="qualitative"
+            data={genericFatData}
+          />
         )}
         {isDataNotUndefined && (
-          <MacroChart name="Protein" color="red" data={genericProteinData} />
+          <SingleMacroChart
+            name="Protein"
+            color="red"
+            data={genericProteinData}
+          />
         )}
       </div>
     </div>

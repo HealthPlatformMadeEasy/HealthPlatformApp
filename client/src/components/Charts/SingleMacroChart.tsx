@@ -7,7 +7,7 @@ import {
   VictoryTheme,
 } from "victory";
 
-export function MacroChart(props: {
+export function SingleMacroChart(props: {
   name: string;
   data: IGenericMacroDataChart[];
   color: ColorScalePropType | undefined;

@@ -17,7 +17,7 @@ function App() {
       <UserIdProvider>
         <Routes>
           <Route path="/" element={<NavBarLayout />}>
-            <Route path="food" element={<UserHomePage />} />
+            <Route index path="food" element={<UserHomePage />} />
             <Route path="charts" element={<ChartPage />} />
             <Route path="test" element={<TestPage />} />
           </Route>
