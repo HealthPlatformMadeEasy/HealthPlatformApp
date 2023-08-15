@@ -15,11 +15,13 @@
     "@tanstack/react-query-devtools": "^4.32.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
+    "fuse.js": "^6.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.14.2",
+    "react-select": "^5.7.4",
     "tw-elements": "^1.0.0-beta2",
     "victory": "^36.6.11"
   },

@@ -1,5 +1,5 @@
-﻿import { NavLink } from "react-router-dom";
-import { LoginButton } from "../Buttons";
+﻿import {NavLink} from "react-router-dom";
+import {LoginButton} from "../Buttons";
 
 export function Navbar() {
   return (
@@ -23,7 +23,7 @@ export function Navbar() {
               Food
             </NavLink>
             <NavLink
-              to="/charts"
+                to="/new-feature"
               className={({ isActive }) =>
                 isActive
                   ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
