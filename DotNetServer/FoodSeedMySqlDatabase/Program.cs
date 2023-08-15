@@ -9,5 +9,9 @@ builder.Services.AddDbContext<NewFoodDbContext>(opt =>
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
+app.MapGet("/foods", (NewFoodDbContext db) =>
+{
+    return db.Foods.Select(row => row.FoodName);
+});
 
 app.Run();
