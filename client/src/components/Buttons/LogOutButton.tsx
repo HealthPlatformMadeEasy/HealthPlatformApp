@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export function LoginButton() {
+export function LogOutButton() {
   return (
     <Link
       to="/"
@@ -8,7 +8,7 @@ export function LoginButton() {
       from-tea_green-800 via-pine_green-600 to-pine_green-700 px-6 transition duration-300
       ease-in-out hover:scale-110"
     >
-      <span className="text-m relative text-white">Login Out</span>
+      <span className="text-m relative text-white">Log Out</span>
       <div className="flex translate-x-3 items-center -space-x-3">
         <div
           className="h-[1.6px] w-2.5 origin-left scale-x-0 rounded bg-white transition duration-300

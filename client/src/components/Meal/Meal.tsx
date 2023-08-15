@@ -12,6 +12,8 @@ import {
 } from "../../types";
 import { AddButton } from "../Buttons";
 import { FoodItemRequestRow } from "../Tables";
+import Fuse from "fuse.js";
+import { listOfDbFoods } from "../../utils/ListOfDbFoods.ts";
 
 interface IError {
   response?: { data: { message: string } };
@@ -37,6 +39,17 @@ const useSaveFoodData = () => {
   });
 };
 
+const fuseOptions: Fuse.IFuseOptions<{ title: string }> = {
+  keys: ["title"],
+  includeMatches: true,
+  threshold: 0.3,
+};
+
+const fuse = new Fuse(
+  listOfDbFoods.map((food) => ({ title: food })),
+  fuseOptions,
+);
+
 export function Meal(props: { loadChart: () => void }) {
   const [form, setForm] = useState({ FoodName: "", Quantity: 0 });
   const [list, setList] = useState<FoodItem[]>([]);
@@ -49,6 +62,19 @@ export function Meal(props: { loadChart: () => void }) {
   const mutation = useSaveFoodData();
   const { userId } = useUserId();
   const [login, setLogin] = useState(false);
+  const [showSearchItem, setShowSearchItem] = useState(true);
+  const [results, setResults] = useState<Fuse.FuseResult<{ title: string }>[]>(
+    [],
+  );
+
+  useEffect(() => {
+    if (form.FoodName) {
+      const searchResults = fuse.search(form.FoodName);
+      setResults(searchResults);
+    } else {
+      setResults([]);
+    }
+  }, [form.FoodName]);
 
   useEffect(() => {
     if (userId !== null) {
@@ -117,14 +143,34 @@ export function Meal(props: { loadChart: () => void }) {
               onSubmit={handleSubmit}
               className="flex items-center justify-center space-x-2"
             >
-              <input
-                type="text"
-                required
-                value={form.FoodName}
-                placeholder="Food"
-                onChange={(e) => setForm({ ...form, FoodName: e.target.value })}
-                className="w-5/12 rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search for a food..."
+                  value={form.FoodName}
+                  onChange={(e) => {
+                    setForm({ ...form, FoodName: e.target.value });
+                    setShowSearchItem(true);
+                  }}
+                  className="w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
+                />
+                {showSearchItem && (
+                  <ul className="absolute z-50 my-2 max-h-60 w-full overflow-auto bg-white py-1 pl-2">
+                    {results.map((result) => (
+                      <li
+                        key={result.item.title}
+                        onClick={() => {
+                          setForm({ ...form, FoodName: result.item.title });
+                          setShowSearchItem(false);
+                        }}
+                        className="hover:cursor-pointer"
+                      >
+                        {result.item.title}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
               <input
                 type="number"
                 required
