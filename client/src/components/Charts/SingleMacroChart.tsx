@@ -32,7 +32,7 @@ export function SingleMacroChart(props: {
             tickFormat={props.data.map((row) => {
               const date = new Date(row.createdAt);
               const day = date.getDate();
-              const month = date.getMonth() + 1; // JavaScript months are 0-based
+              const month = date.getMonth() + 1;
               return `${day}/${month}`;
             })}
           />
