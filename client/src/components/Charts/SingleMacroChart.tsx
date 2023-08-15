@@ -1,7 +1,8 @@
 import { IGenericMacroDataChart } from "../../types";
 import {
   ColorScalePropType,
-  VictoryBar,
+  VictoryArea,
+  VictoryAxis,
   VictoryChart,
   VictoryStack,
   VictoryTheme,
@@ -17,13 +18,25 @@ export function SingleMacroChart(props: {
       <h1 className="text-2xl font-extrabold text-pink-700">{props.name}</h1>
       <VictoryChart name="Energy" theme={VictoryTheme.material}>
         <VictoryStack>
-          <VictoryBar
+          <VictoryArea
             name="carbs"
             colorScale={props.color}
             data={props.data.map((row) => {
               return { x: row.createdAt, y: row.value };
             })}
+            interpolation="linear"
+            label={props.name}
           />
+          <VictoryAxis
+            tickValues={props.data.map((row) => row.createdAt)}
+            tickFormat={props.data.map((row) => {
+              const date = new Date(row.createdAt);
+              const day = date.getDate();
+              const month = date.getMonth() + 1; // JavaScript months are 0-based
+              return `${day}/${month}`;
+            })}
+          />
+          <VictoryAxis dependentAxis tickFormat={(y) => `${y}`} />
         </VictoryStack>
       </VictoryChart>
     </div>

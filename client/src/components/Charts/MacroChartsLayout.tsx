@@ -73,28 +73,28 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
       <div className="grid grid-cols-2 gap-2">
         {isDataNotUndefined && (
           <SingleMacroChart
-            name="Energy"
+            name="Energy in Kcal"
             color="warm"
             data={genericEnergyData}
           />
         )}
         {isDataNotUndefined && (
           <SingleMacroChart
-            name="Carbs"
+            name="Carbs in gr"
             color="heatmap"
             data={genericCarbData}
           />
         )}
         {isDataNotUndefined && (
           <SingleMacroChart
-            name="Fats"
+            name="Fats in gr"
             color="qualitative"
             data={genericFatData}
           />
         )}
         {isDataNotUndefined && (
           <SingleMacroChart
-            name="Protein"
+            name="Protein in gr"
             color="red"
             data={genericProteinData}
           />

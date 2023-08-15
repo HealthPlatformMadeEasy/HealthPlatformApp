@@ -154,9 +154,9 @@ export function Meal(props: { loadChart: () => void }) {
                   }}
                   className="w-full rounded-full border bg-tea_green-100 py-3 pl-3 text-xs font-medium leading-none text-gray-800"
                 />
-                <ul className="absolute z-50 my-2 max-h-60 w-full overflow-auto bg-white py-1 pl-2">
-                  {showSearchItem &&
-                    results.map((result) => (
+                {showSearchItem && (
+                  <ul className="absolute z-50 my-2 max-h-60 w-full overflow-auto bg-white py-1 pl-2">
+                    {results.map((result) => (
                       <li
                         key={result.item.title}
                         onClick={() => {
@@ -168,7 +168,8 @@ export function Meal(props: { loadChart: () => void }) {
                         {result.item.title}
                       </li>
                     ))}
-                </ul>
+                  </ul>
+                )}
               </div>
               <input
                 type="number"
