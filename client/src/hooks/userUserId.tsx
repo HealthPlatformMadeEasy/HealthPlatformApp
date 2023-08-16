@@ -1,5 +1,5 @@
 ﻿import React, { ReactNode, useState } from "react";
-import { UserIdResponse } from "../types";
+import { UserIdResponse } from "../Model";
 import { UserIdContext } from ".";
 
 export interface UserIdContextType {

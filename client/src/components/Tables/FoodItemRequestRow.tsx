@@ -1,4 +1,4 @@
-import { FoodItem } from "../../types";
+import { FoodItem } from "../../Model";
 import {
   DeleteFoodRequestItemButton,
   EditFoodRequestItemButton,

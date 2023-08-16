@@ -1,7 +1,7 @@
 ﻿import { useEffect, useState } from "react";
-import { GetMacrosAndEnergy } from "../../context/Fetch";
+import { GetMacrosAndEnergy } from "../../context/Axios";
 import { useUserId } from "../../hooks";
-import { IEnergyAndMacros, IGenericMacroDataChart } from "../../types";
+import { IEnergyAndMacros, IGenericMacroDataChart } from "../../Model";
 import { SingleMacroChart } from "./SingleMacroChart.tsx";
 
 export function MacroChartsLayout(props: { trigger: boolean }) {

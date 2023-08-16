@@ -1,5 +1,5 @@
 ﻿import axios from "axios";
-import { UserIdResponse, UserRequest } from "../../types";
+import { UserIdResponse, UserRequest } from "../../Model";
 
 export async function CreateUser(user: UserRequest) {
   const { data } = await axios.post(

@@ -9,7 +9,7 @@ import {
   FoodItem,
   FoodRequest,
   INorwegianFoodResponse,
-} from "../../types";
+} from "../../Model";
 import { AddButton } from "../Buttons";
 import { FoodItemRequestRow } from "../Tables";
 import Fuse from "fuse.js";

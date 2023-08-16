@@ -1,4 +1,4 @@
-import { IGenericMacroDataChart } from "../../types";
+import { IGenericMacroDataChart } from "../../Model";
 import {
   ColorScalePropType,
   VictoryArea,
@@ -25,7 +25,6 @@ export function SingleMacroChart(props: {
               return { x: row.createdAt, y: row.value };
             })}
             interpolation="linear"
-            label={props.name}
           />
           <VictoryAxis
             tickValues={props.data.map((row) => row.createdAt)}

@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import { Footer, NavBarLayout } from "./components";
 import { UserIdProvider } from "./hooks";
 import {
-  AboutPage,
   ErrorPage,
   FoodPage,
   LandingPage,
@@ -17,7 +16,6 @@ function App() {
         <Routes>
           <Route path="/" element={<NavBarLayout />}>
             <Route index path="food" element={<FoodPage />} />
-            <Route path="about" element={<AboutPage />} />
           </Route>
 
           <Route index element={<LandingPage />} />
