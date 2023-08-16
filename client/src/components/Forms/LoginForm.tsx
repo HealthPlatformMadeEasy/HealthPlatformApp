@@ -1,14 +1,13 @@
 ﻿import React, { useState } from "react";
 import { GetUserId } from "../../context/Axios";
 import { useUserId } from "../../hooks";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CancelBackPreviousRouteButton, SubmitLoginButton } from "../Buttons";
 
 export function LoginForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const { setUserId } = useUserId();
   const navigate = useNavigate();
@@ -22,16 +21,8 @@ export function LoginForm() {
       },
     );
 
-    setIsSignUp(true);
-  };
-
-  const handleSignUpClick = () => {
-    navigate("/signup");
-  };
-
-  if (isSignUp) {
     navigate("/food");
-  }
+  };
 
   const togglePasswordVisibility = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
@@ -48,13 +39,12 @@ export function LoginForm() {
         </p>
         <p className="mt-4 text-sm font-medium leading-none text-gray-500 focus:outline-none">
           Dont have account?
-          <button
-            type="button"
-            onClick={handleSignUpClick}
+          <Link
+            to="/signup"
             className="ml-1 cursor-pointer text-sm font-medium leading-none text-gray-800 hover:text-gray-500 hover:underline focus:text-gray-500  focus:underline focus:outline-none"
           >
             Sign up here
-          </button>
+          </Link>
         </p>
         <button
           aria-label="Continue with google"
