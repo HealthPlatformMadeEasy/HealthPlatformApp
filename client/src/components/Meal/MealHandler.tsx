@@ -50,7 +50,7 @@ const fuse = new Fuse(
   fuseOptions,
 );
 
-export function Meal(props: { loadChart: () => void }) {
+export function MealHandler(props: { loadChart: () => void }) {
   const [form, setForm] = useState({ FoodName: "", Quantity: 0 });
   const [list, setList] = useState<FoodItem[]>([]);
   const [isEditing, setIsEditing] = useState(false);

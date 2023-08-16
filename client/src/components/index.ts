@@ -1,4 +1,4 @@
-﻿export * from "./CalorieCalculator";
+﻿export * from "./Food";
 export * from "./Layout";
 export * from "./Loading";
 export * from "./Meal";

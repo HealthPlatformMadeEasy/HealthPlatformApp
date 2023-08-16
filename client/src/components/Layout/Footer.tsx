@@ -40,7 +40,7 @@ export function Footer() {
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 <li className="mb-4">
                   <a
-                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    href="https://github.com/HealthPlatformMadeEasy"
                     className="hover:underline"
                   >
                     ACME
@@ -86,7 +86,7 @@ export function Footer() {
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 <li className="mb-4">
                   <a
-                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    href="https://github.com/HealthPlatformMadeEasy"
                     className="hover:underline"
                   >
                     Privacy Policy
@@ -94,7 +94,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    href="https://github.com/HealthPlatformMadeEasy"
                     className="hover:underline"
                   >
                     Terms &amp; Conditions
@@ -109,7 +109,7 @@ export function Footer() {
           <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
             © 2023{" "}
             <a
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              href="https://github.com/HealthPlatformMadeEasy"
               className="hover:underline"
             >
               ACME™

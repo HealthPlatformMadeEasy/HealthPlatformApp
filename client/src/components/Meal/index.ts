@@ -1,1 +1,1 @@
-﻿export * from "./Meal.tsx";
+﻿export * from "./MealHandler.tsx";

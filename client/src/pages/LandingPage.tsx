@@ -3,21 +3,24 @@ import { Link } from "react-router-dom";
 
 export function LandingPage() {
   return (
-    <main className="p-12">
-      <h1 className="text-7xl text-green-700">Landing Page</h1>
+    <main className="h-[630px] bg-[url('./assets/ruler-apple-size.png')] bg-cover bg-fixed p-12 py-20">
+      <h1 className="mb-8 text-7xl text-green-700">
+        Welcome to the Health App
+      </h1>
       <hr />
-      <div>
+      <div className="my-4 ml-16 w-1/3 py-6 text-left">
+        <h3>This is a product that care of your health and wellness.</h3>
+        <h2 className="py-4 text-3xl font-light italic text-marian_blue-700">
+          "We Are What We Eat."
+        </h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-          suscipit justo et porttitor venenatis. Duis tristique dignissim
-          imperdiet. Pellentesque non augue sed ante tempus venenatis in vitae
-          nisi. Etiam sit amet orci interdum quam sagittis molestie a dignissim
-          lectus. Vivamus efficitur tortor non dui fermentum, vel eleifend
-          sapien laoreet. Nulla non neque ultrices, pharetra mauris at, tempus
-          turpis. Suspendisse hendrerit risus et orci consequat pharetra.
-          Vivamus aliquet facilisis nunc ut convallis. Pellentesque ac hendrerit
-          ligula.{" "}
+          Following this premise we ask ourself. How can we know what we eat?.
         </p>
+        <p>
+          This App will provided you comprehensive tools to keep track of
+          energy, macros, vitamins minerals and nutrients of each meal.
+        </p>
+        <p className="mt-6 text-right">You are welcome to sign up and try.</p>
       </div>
       <hr />
       <div className="mr-12 mt-8 flex items-center justify-end gap-4">

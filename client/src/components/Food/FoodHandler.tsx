@@ -21,7 +21,7 @@ const fuse = new Fuse(
   fuseOptions,
 );
 
-export function CalorieCalculator() {
+export function FoodHandler() {
   const [data, setData] = useState<IError | INorwegianFoodResponse>();
   const [foodInput, setFoodInput] = useState("");
   const [quantityInput, setQuantityInput] = useState("");
