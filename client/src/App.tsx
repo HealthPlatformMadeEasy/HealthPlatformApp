@@ -1,7 +1,14 @@
-import {Route, Routes} from "react-router-dom";
-import {Footer, NavBarLayout} from "./components";
-import {UserIdProvider} from "./hooks";
-import {ErrorPage, FoodPage, LandingPage, LoginPage, NewFeaturePage, SignUpPage, TestPage,} from "./pages";
+import { Route, Routes } from "react-router-dom";
+import { Footer, NavBarLayout } from "./components";
+import { UserIdProvider } from "./hooks";
+import {
+  AboutPage,
+  ErrorPage,
+  FoodPage,
+  LandingPage,
+  LoginPage,
+  SignUpPage,
+} from "./pages";
 
 function App() {
   return (
@@ -10,8 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<NavBarLayout />}>
             <Route index path="food" element={<FoodPage />} />
-            <Route path="new-feature" element={<NewFeaturePage/>}/>
-            <Route path="test" element={<TestPage />} />
+            <Route path="about" element={<AboutPage />} />
           </Route>
 
           <Route index element={<LandingPage />} />

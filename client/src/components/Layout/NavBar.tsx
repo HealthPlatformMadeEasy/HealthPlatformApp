@@ -23,7 +23,7 @@ export function Navbar() {
               Food
             </NavLink>
             <NavLink
-              to="/new-feature"
+              to="/about"
               className={({ isActive }) =>
                 isActive
                   ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
@@ -32,19 +32,7 @@ export function Navbar() {
                     " font-bold transition duration-300 ease-in-out hover:scale-125"
               }
             >
-              New Feature
-            </NavLink>
-            <NavLink
-              to="/test"
-              className={({ isActive }) =>
-                isActive
-                  ? "mr-4 transform p-2 font-raleway text-lg font-bold text-marian_blue-700 transition" +
-                    " duration-300 ease-in-out hover:scale-125 hover:font-bold hover:text-marian_blue-900"
-                  : "mr-4 transform p-2 font-raleway text-lg text-gray-500 hover:font-bold hover:text-green-700" +
-                    " font-bold transition duration-300 ease-in-out hover:scale-125"
-              }
-            >
-              Test
+              About
             </NavLink>
           </div>
           <LogOutButton />

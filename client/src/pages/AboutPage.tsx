@@ -1,4 +1,4 @@
-﻿export function NewFeaturePage() {
+﻿export function AboutPage() {
   return (
     <main>
       <h1>Under Construction</h1>
