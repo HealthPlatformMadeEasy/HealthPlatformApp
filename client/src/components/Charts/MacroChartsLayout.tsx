@@ -3,6 +3,7 @@ import { GetMacrosAndEnergy } from "../../context/Axios";
 import { useUserId } from "../../hooks";
 import { IEnergyAndMacros, IGenericMacroDataChart } from "../../Model";
 import { SingleMacroChart } from "./SingleMacroChart.tsx";
+import { Loading } from "../Loading";
 
 export function MacroChartsLayout(props: { trigger: boolean }) {
   const [data, setData] = useState<IEnergyAndMacros>({
@@ -13,6 +14,7 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
   });
   const [isDataNotUndefined, setIsDataNotUndefined] = useState(false);
   const { userId } = useUserId();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (
@@ -29,7 +31,10 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
       return;
     }
     const getData = () => {
-      GetMacrosAndEnergy(userId?.userId).then((data) => setData(data));
+      GetMacrosAndEnergy(userId?.userId).then((data) => {
+        setData(data);
+        setLoading(false);
+      });
     };
 
     getData();
@@ -63,13 +68,10 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
     }),
   );
 
+  if (loading) return <Loading />;
+
   return (
     <div>
-      {!isDataNotUndefined && (
-        <div className="grid w-1/2 bg-white p-10">
-          <h1 className="text-5xl font-extrabold text-pink-700">No Content</h1>
-        </div>
-      )}
       <div className="grid grid-cols-2 gap-2">
         {isDataNotUndefined && (
           <SingleMacroChart

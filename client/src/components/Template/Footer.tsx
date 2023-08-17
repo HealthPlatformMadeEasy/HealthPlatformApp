@@ -14,50 +14,37 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
-    <footer className="bg-white dark:bg-gray-900">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <footer className="mt-20 bg-pine_green-900 text-white">
+      <div className=" p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              className="flex items-center"
-            >
+            <a className="flex items-center gap-4">
               <img
                 src={BirdLogoSmall}
-                className="mr-3 h-8"
+                className="mr-3 h-14 w-14 rounded-full bg-white p-1 outline outline-4 outline-offset-2 outline-pine_green-600"
                 alt="FlowBite Logo"
               />
-              <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-                ACME
+              <span className="self-center whitespace-nowrap font-playfair text-4xl">
+                Maximiliano Barrientos
               </span>
             </a>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400 dark:text-white">
                 Resources
               </h2>
               <ul className="font-medium text-gray-500 dark:text-gray-400">
                 <li className="mb-4">
-                  <a
-                    href="https://github.com/HealthPlatformMadeEasy"
-                    className="hover:underline"
-                  >
-                    ACME
-                  </a>
+                  <a className="hover:underline">React</a>
                 </li>
                 <li>
-                  <a
-                    href="https://tailwindcss.com/"
-                    className="hover:underline"
-                  >
-                    Tailwind CSS
-                  </a>
+                  <a className="hover:underline">Tailwind CSS</a>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400 dark:text-white">
                 Follow us
               </h2>
               <ul className="font-medium text-gray-500 dark:text-gray-400">
@@ -79,49 +66,20 @@ export function Footer() {
                 </li>
               </ul>
             </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
-                Legal
-              </h2>
-              <ul className="font-medium text-gray-500 dark:text-gray-400">
-                <li className="mb-4">
-                  <a
-                    href="https://github.com/HealthPlatformMadeEasy"
-                    className="hover:underline"
-                  >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/HealthPlatformMadeEasy"
-                    className="hover:underline"
-                  >
-                    Terms &amp; Conditions
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
         <hr className="my-6 border-gray-200 dark:border-gray-700 sm:mx-auto lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
-            © 2023{" "}
-            <a
-              href="https://github.com/HealthPlatformMadeEasy"
-              className="hover:underline"
-            >
-              ACME™
-            </a>
-            . Creative Commons.
+            © 2023 <a className="hover:underline">Maximiliano Barrientos</a>.
+            Creative Commons.
           </span>
           <div className="relative mt-4 flex space-x-5 sm:mt-0 sm:justify-center">
             {isPopoverOpen && (
-              <div className="absolute bottom-10 right-8 flex w-52 animate-[fade-in_0.15s_ease-in-out] flex-col items-center justify-center rounded-xl border bg-white p-4 shadow-lg">
+              <div className="absolute bottom-10 right-8 flex w-60 animate-[fade-in_0.15s_ease-in-out] flex-col items-center justify-center rounded-xl border bg-pine_green-900 p-4 shadow-lg">
                 <h6 className="font-semibold">Maximiliano Barrientos</h6>
                 <p>
-                  phone: <span className="text-blue-700">{phoneNumber}</span>
+                  phone: <span className="text-blue-200">{phoneNumber}</span>
                 </p>
                 <p className="text-sm text-red-500">Click for copy</p>
               </div>

@@ -17,11 +17,8 @@ module.exports = {
         "grey-fruit-right": "url('./assets/grey-fruit-right.png')",
       },
       fontFamily: {
-        lato: ["Lato", "sans-serif"],
-        raleway: ["Raleway", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
-        rowdies: ["Rowdies", "sans-serif"],
-        yeseva: ["Yeseva", "sans-serif"],
+        playfair: ["Playfair Display", "Montserrat", "sans-serif"],
       },
       colors: {
         tea_green: {

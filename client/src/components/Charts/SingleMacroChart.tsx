@@ -14,8 +14,10 @@ export function SingleMacroChart(props: {
   color: ColorScalePropType | undefined;
 }) {
   return (
-    <div className="bg-white p-8">
-      <h1 className="text-2xl font-extrabold text-pink-700">{props.name}</h1>
+    <div className="rounded-xl border-2 border-pine_green-600  p-8">
+      <h1 className="font-playfair text-3xl text-pine_green-200">
+        {props.name}
+      </h1>
       <VictoryChart name="Energy" theme={VictoryTheme.material}>
         <VictoryStack>
           <VictoryArea

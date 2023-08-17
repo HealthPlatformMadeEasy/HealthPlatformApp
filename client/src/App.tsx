@@ -11,7 +11,7 @@ import {
 
 function App() {
   return (
-    <div>
+    <div className="bg-pine_green-900 font-montserrat text-white">
       <UserIdProvider>
         <Routes>
           <Route path="/" element={<NavBarLayout />}>

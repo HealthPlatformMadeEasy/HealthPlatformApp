@@ -2,7 +2,7 @@ import { SignUpForm } from "../components";
 
 export function SignUpPage() {
   return (
-    <main className="bg-coral-fruit-around bg-cover bg-fixed">
+    <main className="bg-pine_green-900">
       <SignUpForm />
     </main>
   );

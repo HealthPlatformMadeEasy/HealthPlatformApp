@@ -1,5 +1,5 @@
 ﻿export * from "./Food";
-export * from "./Layout";
+export * from "./Template";
 export * from "./Loading";
 export * from "./Meal";
 export * from "./Forms";

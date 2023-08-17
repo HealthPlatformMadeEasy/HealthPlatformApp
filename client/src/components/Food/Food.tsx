@@ -17,7 +17,7 @@ const fuse = new Fuse(
   fuseOptions,
 );
 
-export function FoodHandler() {
+export function Food() {
   const [data, setData] = useState<INorwegianFoodResponse | null>(null);
   const [foodInput, setFoodInput] = useState("");
   const [quantityInput, setQuantityInput] = useState("");
@@ -73,13 +73,6 @@ export function FoodHandler() {
 
   return (
     <div className="">
-      {!login && (
-        <div className="grid bg-white p-10">
-          <h1 className="text-9xl font-extrabold text-pink-700">
-            Please Login
-          </h1>
-        </div>
-      )}
       {login && (
         <div>
           <div className="grid bg-white p-10">
