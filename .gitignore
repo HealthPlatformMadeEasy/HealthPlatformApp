@@ -949,3 +949,8 @@ buildNumber.properties
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
+/doc/queries/Create_Database.sql
+/DotNetServer/DotNetServer/.config/dotnet-tools.json
+/DotNetServer/DotNetServer/Migrations/NorwegianFoodDbContextModelSnapshot.cs
+/DotNetServer/DotNetServer/Migrations/20230818090350_InitialDatabaseSeed.cs
+/DotNetServer/DotNetServer/Migrations/20230818090350_InitialDatabaseSeed.Designer.cs
