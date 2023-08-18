@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.UserModule.Entities;
 
+[Table("users")]
 [Index("Password", Name = "users_password_index")]
 public class User
 {

@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using DotNetServer.Modules.UserModule.Entities;
 
 namespace DotNetServer.Modules.NutrientModule.Entities;
 
+[Table("nutrients")]
 public class Nutrient
 {
     [Key] public Guid Id { get; set; }

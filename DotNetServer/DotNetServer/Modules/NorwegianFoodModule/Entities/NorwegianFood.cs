@@ -4,6 +4,7 @@ using DotNetServer.Modules.NorwegianFoodModule.Model.Requests;
 
 namespace DotNetServer.Modules.NorwegianFoodModule.Entities;
 
+[Table("foods")]
 public class NorwegianFood
 {
     [Key]

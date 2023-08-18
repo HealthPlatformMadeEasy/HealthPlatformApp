@@ -14,7 +14,7 @@ public class UserService : IUserService
     public UserService(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _cancellationTokenSource.CancelAfter(1000000);
+        _cancellationTokenSource.CancelAfter(10000);
     }
 
     public async Task<Response<UserResponse>> GetUserAsync(Guid id)
