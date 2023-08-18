@@ -1,6 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 
-namespace FoodSeedMySqlDatabase.Context.DataSeed;
+namespace DotNetServer.Core.Context.DataSeed;
 
 public class SeedFood
 {
