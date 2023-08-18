@@ -4,6 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>869f52b1-f933-4af9-b413-958416ddfbf5</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,6 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Migrations\"/>
         <Folder Include="Modules\NorwegianFoodModule\Model\DTO\"/>
         <Folder Include="Modules\NorwegianFoodModule\Validations\"/>
         <Folder Include="Modules\NutrientModule\Validations\"/>
