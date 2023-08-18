@@ -9,12 +9,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "light-green-fruit-around":
-          "url('./assets/ligth-green-fruit-around.png')",
-        "yellow-fruit-left": "url('./assets/yellow-fruit-left.png')",
-        "coral-fruit-around": "url('./assets/coral-fruit-around.png')",
-        "grey-fruit-left": "url('./assets/grey-fruit-left.png')",
-        "grey-fruit-right": "url('./assets/grey-fruit-right.png')",
+        "yellow-fruit-left": "url('./assets/yellow-fruit-left.png')"
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
