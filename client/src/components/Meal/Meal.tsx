@@ -152,7 +152,7 @@ export function Meal(props: { loadChart: () => void }) {
                       id="UserName"
                       className="text-sm font-medium leading-none text-gray-400"
                     >
-                      Search for a food...
+                      Search
                     </label>
                     <input
                       type="text"
@@ -173,7 +173,8 @@ export function Meal(props: { loadChart: () => void }) {
                   {showSearchItem && (
                     <ul className="absolute z-50 my-2 max-h-60 w-full overflow-auto rounded border-2 border-pine_green-600 bg-pine_green-800 py-1 pl-2 text-gray-300">
                       {results.map((result) => (
-                        <li
+                        <button
+                          type="button"
                           key={result.item.title}
                           onClick={() => {
                             setForm({ ...form, FoodName: result.item.title });
@@ -182,7 +183,7 @@ export function Meal(props: { loadChart: () => void }) {
                           className="hover:cursor-pointer"
                         >
                           {result.item.title}
-                        </li>
+                        </button>
                       ))}
                     </ul>
                   )}
@@ -250,7 +251,7 @@ export function Meal(props: { loadChart: () => void }) {
                     id="UserName"
                     className="text-sm font-medium leading-none text-gray-400"
                   >
-                    Search for a food...
+                    Food
                   </label>
                   <input
                     disabled={true}

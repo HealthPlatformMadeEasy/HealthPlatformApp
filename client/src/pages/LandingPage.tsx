@@ -9,13 +9,12 @@ export function LandingPage() {
       </h1>
       <hr className="my-6 border-gray-400 dark:border-gray-700 sm:mx-auto lg:my-8" />
       <div className="my-4 ml-16 w-1/3 rounded-xl border-2 border-pine_green-600 p-10 text-left">
-        <h3>This is a product that care of your health and wellness.</h3>
+        <h3>
+          This is a product that helps you visualise your nutrition journey.
+        </h3>
         <h2 className="py-4 font-playfair text-3xl font-light italic text-marian_blue-100">
           "We Are What We Eat."
         </h2>
-        <p>
-          Following this premise we ask ourself. How can we know what we eat?.
-        </p>
         <p>
           This App will provided you comprehensive tools to keep track of
           energy, macros, vitamins minerals and nutrients of each meal.
