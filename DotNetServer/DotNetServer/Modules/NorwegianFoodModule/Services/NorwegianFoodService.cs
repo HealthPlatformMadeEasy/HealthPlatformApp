@@ -19,7 +19,7 @@ public class NorwegianFoodService : INorwegianFoodService
     {
         _norwegianFoodRepository = norwegianFoodRepository;
         _nutrientService = nutrientService;
-        _cancellationTokenSource.CancelAfter(10000);
+        _cancellationTokenSource.CancelAfter(1000000);
     }
 
     public NorwegianFood? GetNorwegianFoodById(Guid id)

@@ -1,9 +1,7 @@
-﻿import { CalorieCalculator, MacroChartsLayout, Meal } from "../components";
-import { useUserId } from "../hooks";
+﻿import { MacroChartsLayout, Meal } from "../components";
 import { useState } from "react";
 
 export function FoodPage() {
-  const { userId } = useUserId();
   const [triggerLoad, setTriggerLoad] = useState(false);
 
   function reLoadChart() {
@@ -11,17 +9,13 @@ export function FoodPage() {
   }
 
   return (
-    <main>
-      <h1>{userId?.userId}</h1>
-      <div className="grid grid-cols-3 gap-2 bg-light-green-fruit-around bg-cover bg-fixed p-8">
-        <div className="flex flex-col gap-2">
-          <CalorieCalculator />
-          <Meal loadChart={reLoadChart} />
-        </div>
-        <div className="col-span-2">
-          <MacroChartsLayout trigger={triggerLoad} />
-        </div>
+    <div className="grid grid-cols-3 gap-2 bg-pine_green-800 p-2">
+      <div className="flex flex-col gap-2">
+        <Meal loadChart={reLoadChart} />
       </div>
-    </main>
+      <div className="col-span-2">
+        <MacroChartsLayout trigger={triggerLoad} />
+      </div>
+    </div>
   );
 }

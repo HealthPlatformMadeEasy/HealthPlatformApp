@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DotNetServer.Modules.NutrientModule.Entities;
-using DotNetServer.Modules.UserContentModule.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.UserModule.Entities;
 
+[Table("users")]
 [Index("Password", Name = "users_password_index")]
 public class User
 {
@@ -18,8 +18,4 @@ public class User
     [Column("email")] public required string Email { get; set; }
 
     [Column("created_at")] public DateTime CreatedAt { get; set; }
-
-    public ICollection<UserContent> UserContents { get; set; } = null!;
-
-    public ICollection<Nutrient> Nutrients { get; set; } = null!;
 }

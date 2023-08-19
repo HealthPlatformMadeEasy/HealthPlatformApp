@@ -1,17 +1,21 @@
-import {Route, Routes} from "react-router-dom";
-import {Footer, NavBarLayout} from "./components";
-import {UserIdProvider} from "./hooks";
-import {ErrorPage, FoodPage, LandingPage, LoginPage, NewFeaturePage, SignUpPage, TestPage,} from "./pages";
+import { Route, Routes } from "react-router-dom";
+import { Footer, NavBarLayout } from "./components";
+import { UserIdProvider } from "./hooks";
+import {
+  ErrorPage,
+  FoodPage,
+  LandingPage,
+  LoginPage,
+  SignUpPage,
+} from "./pages";
 
 function App() {
   return (
-    <div>
+    <div className="bg-pine_green-900 font-montserrat text-white">
       <UserIdProvider>
         <Routes>
           <Route path="/" element={<NavBarLayout />}>
             <Route index path="food" element={<FoodPage />} />
-            <Route path="new-feature" element={<NewFeaturePage/>}/>
-            <Route path="test" element={<TestPage />} />
           </Route>
 
           <Route index element={<LandingPage />} />

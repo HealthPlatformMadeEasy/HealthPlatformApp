@@ -2,11 +2,9 @@ export function SubmitLoginButton() {
   return (
     <button
       type="submit"
-      className="group relative flex h-12 w-24 transform items-center justify-center space-x-2 overflow-hidden rounded-full
-      bg-gradient-to-r from-marian_blue-400 via-marian_blue-500 to-marian_blue-800 px-6 transition duration-300 ease-in-out
-      hover:scale-110"
+      className="text-m group relative flex h-12 transform items-center justify-center space-x-2 overflow-hidden rounded-full border-4 border-celestial_blue px-6 text-celestial_blue-200 transition duration-300 ease-in-out hover:scale-110"
     >
-      <span className="text-m relative text-white">Submit</span>
+      Sign In
     </button>
   );
 }

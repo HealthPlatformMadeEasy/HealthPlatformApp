@@ -1,8 +1,6 @@
 using DotNetServer.Core;
-using DotNetServer.Modules.FoodModule;
 using DotNetServer.Modules.NorwegianFoodModule;
 using DotNetServer.Modules.NutrientModule;
-using DotNetServer.Modules.UserContentModule;
 using DotNetServer.Modules.UserModule;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -39,10 +37,8 @@ builder.Services.AddVersionedApiExplorer(
 //Modules
 builder.Services
     .AddNorwegianFoodModuleLayer()
-    .AddFoodModuleLayer()
     .AddNutrientModuleLayer()
     .AddUserModuleLayer()
-    .AddUserContentModuleLayer()
     .AddCoreModuleLayer(builder);
 
 builder.Services.AddCors(options =>
@@ -70,7 +66,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    builder.Configuration.AddUserSecrets<Program>();
 }
+
+if (app.Environment.IsProduction()) builder.Configuration.AddUserSecrets<Program>();
 
 app.UseHttpsRedirection();
 

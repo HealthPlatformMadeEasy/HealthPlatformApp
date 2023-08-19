@@ -1,13 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using DotNetServer.Modules.UserModule.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetServer.Modules.NutrientModule.Entities;
 
+[Table("nutrients")]
+[Index("UserId", Name=("IX_Nutrients_UserId"))]
 public class Nutrient
 {
     [Key] public Guid Id { get; set; }
     public Guid UserId { get; set; }
-    public User User { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public double? SpiseligDel { get; set; }
