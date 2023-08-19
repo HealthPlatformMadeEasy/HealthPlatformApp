@@ -1,6 +1,6 @@
 ﻿export function Loading() {
   return (
-    <div className="inline-flex items-center rounded-xl border-2 border-pine_green-600 px-5 py-2.5 text-2xl font-medium ">
+    <div className="inline-flex items-center rounded-xl border-2 border-pine_green-600 bg-pine_green-900 px-5 py-2.5 text-2xl font-medium ">
       <svg
         aria-hidden="true"
         role="status"

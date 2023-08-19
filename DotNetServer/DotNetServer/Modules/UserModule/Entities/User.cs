@@ -18,6 +18,4 @@ public class User
     [Column("email")] public required string Email { get; set; }
 
     [Column("created_at")] public DateTime CreatedAt { get; set; }
-
-    public ICollection<Nutrient> Nutrients { get; set; } = null!;
 }

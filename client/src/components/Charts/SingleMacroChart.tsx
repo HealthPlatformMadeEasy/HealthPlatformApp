@@ -14,7 +14,7 @@ export function SingleMacroChart(props: {
   color: ColorScalePropType | undefined;
 }) {
   return (
-    <div className="rounded-xl border-2 border-pine_green-600  p-8">
+    <div className="rounded-xl border-2 border-pine_green-600 bg-pine_green-900 p-8">
       <h1 className="font-playfair text-3xl text-pine_green-200">
         {props.name}
       </h1>

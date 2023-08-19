@@ -2,7 +2,7 @@
 import { CreateUser } from "../../context/Axios";
 import { useUserId } from "../../hooks";
 import { useNavigate } from "react-router-dom";
-import { CancelBackPreviousRouteButton, SubmitLoginButton } from "../Buttons";
+import { CancelBackPreviousRouteButton } from "../Buttons";
 
 export function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -49,7 +49,7 @@ export function SignUpForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mb-4 px-8 pb-8 pt-6">
-      <div className="m-auto w-1/3 rounded-xl border-2 border-pine_green-600 p-10">
+      <div className="w-1/3 rounded-xl border-2 border-pine_green-600 bg-pine_green-900 p-10">
         <p className="mb-4 font-playfair text-3xl leading-6 text-gray-200 focus:outline-none">
           Created Account
         </p>
@@ -105,7 +105,12 @@ export function SignUpForm() {
         </div>
         <div className="mt-8 flex items-center justify-around">
           <CancelBackPreviousRouteButton />
-          <SubmitLoginButton />
+          <button
+            type="submit"
+            className="flex h-12 transform items-center justify-center space-x-2 overflow-hidden rounded-full border-2 border-tea_green px-6 text-tea_green transition duration-300 ease-in-out hover:scale-125 hover:bg-tea_green hover:font-semibold hover:text-pine_green-900"
+          >
+            Sign In
+          </button>
         </div>
       </div>
     </form>

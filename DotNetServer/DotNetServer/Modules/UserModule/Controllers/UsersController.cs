@@ -1,5 +1,4 @@
-﻿using DotNetServer.Core.Context;
-using DotNetServer.Modules.UserModule.Entities;
+﻿using DotNetServer.Modules.UserModule.Entities;
 using DotNetServer.Modules.UserModule.Model.Requests;
 using DotNetServer.Modules.UserModule.Model.Responses;
 using DotNetServer.Modules.UserModule.Services;
@@ -13,18 +12,16 @@ namespace DotNetServer.Modules.UserModule.Controllers;
 [ApiVersion("1.0")]
 public class UsersController : ControllerBase
 {
-    private readonly NorwegianFoodDbContext _db;
     private readonly IValidator<MinimalUserRequest> _minimalValidator;
     private readonly IUserService _userService;
     private readonly IValidator<UserRequest> _userValidator;
 
     public UsersController(IUserService userService, IValidator<UserRequest> userValidator,
-        IValidator<MinimalUserRequest> minimalValidator, NorwegianFoodDbContext db)
+        IValidator<MinimalUserRequest> minimalValidator)
     {
         _userService = userService;
         _userValidator = userValidator;
         _minimalValidator = minimalValidator;
-        _db = db;
     }
 
     [HttpGet("{id:guid}")]
@@ -101,15 +98,5 @@ public class UsersController : ControllerBase
         {
             return BadRequest(e.Message);
         }
-    }
-
-    [Route("test")]
-    [HttpPost]
-    public ActionResult TestPost([FromBody] User user)
-    {
-        _db.Users.Add(user);
-        _db.SaveChanges();
-
-        return Ok();
     }
 }

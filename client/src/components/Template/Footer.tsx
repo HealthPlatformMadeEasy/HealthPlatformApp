@@ -14,7 +14,7 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
-    <footer className="mt-20 bg-pine_green-900 text-white">
+    <div className="border-t-2 border-pine_green-600 bg-pine_green-900 text-white">
       <div className=" p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -167,6 +167,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }

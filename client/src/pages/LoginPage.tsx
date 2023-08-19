@@ -2,8 +2,8 @@ import { LoginForm } from "../components";
 
 export function LoginPage() {
   return (
-    <main className="bg-pine_green-900">
+    <div className="bg-fancy-food bg-cover bg-fixed">
       <LoginForm />
-    </main>
+    </div>
   );
 }

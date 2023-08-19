@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "yellow-fruit-left": "url('./assets/yellow-fruit-left.png')"
+        "yellow-fruit-left": "url('./assets/yellow-fruit-left.png')",
+        "fancy-food": "url('./assets/fancy_food.jpeg')",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
@@ -75,6 +76,42 @@ module.exports = {
           300: "#f5adaf",
           200: "#f9c8ca",
           100: "#fce4e4",
+        },
+        celestial_blue: {
+          DEFAULT: "#1e91d6",
+          900: "#061d2b",
+          800: "#0c3a56",
+          700: "#125681",
+          600: "#1873ab",
+          500: "#1e91d6",
+          400: "#45a7e4",
+          300: "#74bdeb",
+          200: "#a2d3f2",
+          100: "#d1e9f8",
+        },
+        hunyadi_yellow: {
+          DEFAULT: "#f6ae2d",
+          900: "#382502",
+          800: "#704a05",
+          700: "#a76f07",
+          600: "#df9409",
+          500: "#f6ae2d",
+          400: "#f8bf57",
+          300: "#facf81",
+          200: "#fbdfab",
+          100: "#fdefd5",
+        },
+        chocolate_cosmos: {
+          DEFAULT: "#66101f",
+          900: "#140306",
+          800: "#29060c",
+          700: "#3d0a12",
+          600: "#510d18",
+          500: "#66101f",
+          400: "#a91a32",
+          300: "#df3350",
+          200: "#ea778a",
+          100: "#f4bbc5",
         },
       },
     },
