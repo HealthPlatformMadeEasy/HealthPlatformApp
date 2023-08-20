@@ -14,9 +14,9 @@ export function ErrorPage() {
           <div className="flex">
             <button
               onClick={() => navigate("/")}
-              className="flex h-14 transform items-center justify-center space-x-2 overflow-hidden rounded-full border-4 border-celestial_blue px-8 text-celestial_blue-200 transition duration-300 ease-in-out hover:scale-110 hover:bg-celestial_blue hover:font-semibold hover:text-pine_green-900"
+              className="flex h-14 transform items-center justify-center space-x-2 overflow-hidden rounded-full bg-marian_blue px-8 font-semibold text-white transition duration-300 ease-in-out hover:scale-125 hover:bg-celestial_blue"
             >
-              back to homepage
+              Back
             </button>
           </div>
         </div>

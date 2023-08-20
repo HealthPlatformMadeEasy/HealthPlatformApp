@@ -147,7 +147,7 @@ export function Meal(props: { loadChart: () => void }) {
                 className="flex items-center justify-center space-x-2"
               >
                 <div className="flex items-center justify-evenly gap-6">
-                  <div>
+                  <div className="relative">
                     <div>
                       <label
                         id="UserName"
@@ -181,7 +181,7 @@ export function Meal(props: { loadChart: () => void }) {
                               setForm({ ...form, FoodName: result.item.title });
                               setShowSearchItem(false);
                             }}
-                            className="m-1 text-left hover:cursor-pointer"
+                            className="m-1 w-full text-left hover:cursor-pointer"
                           >
                             {result.item.title}
                           </button>
@@ -296,47 +296,47 @@ export function Meal(props: { loadChart: () => void }) {
                   <div className="col-span-2 mt-6 flex justify-end gap-8">
                     <button
                       onClick={() => setModalIsOpen(false)}
-                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full border-2 border-madder px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-madder"
+                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-madder px-6 transition duration-300 ease-in-out hover:scale-125"
                     >
-                      <span className="text-madder-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                        Cancel
-                      </span>
+                      <span className="font-semibold text-white">Cancel</span>
                     </button>
                     <button
                       type="submit"
-                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full border-2 border-celestial_blue px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-celestial_blue"
+                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
                     >
-                      <span className="text-celestial_blue-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                        Done
-                      </span>
+                      <span className="font-semibold text-white ">Done</span>
                     </button>
                   </div>
                 </form>
               </Modal>
-              <button
-                onClick={callData}
-                className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full border-2 border-celestial_blue px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-celestial_blue"
-              >
-                <span className="text-celestial_blue-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                  Done
-                </span>
-              </button>
+              {!showData && (
+                <button
+                  onClick={callData}
+                  className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
+                >
+                  <span className="font-semibold text-white">Done</span>
+                </button>
+              )}
+              {showData && (
+                <button
+                  onClick={() => {
+                    setList([]);
+                    setShowData(false);
+                    setForm({ FoodName: "", Quantity: 0 });
+                  }}
+                  className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
+                >
+                  <span className="font-semibold text-white">New Meal</span>
+                </button>
+              )}
             </div>
             {showData && (
               <div className=" border-t border-pine_green-600">
-                <button
-                  onClick={() => setShowData(false)}
-                  className="group mx-auto my-5 flex h-12 transform items-center overflow-hidden rounded-full border-2 border-madder px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-madder"
-                >
-                  <span className="text-madder-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                    Close
-                  </span>
-                </button>
                 <div className="h-96 overflow-auto">
                   {data && (
                     <div>
                       <table className="w-full">
-                        <thead className="sticky top-0 bg-pine_green-900">
+                        <thead className="sticky top-0 h-10 bg-pine_green-900">
                           <tr className="font-semibold uppercase tracking-wide text-marian_blue-100">
                             <th>Property</th>
                             <th>Value</th>

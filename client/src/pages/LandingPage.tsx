@@ -16,16 +16,16 @@ export function LandingPage() {
         <Link
           to="/login"
           type="button"
-          className="text-m group relative flex h-12 w-36 transform items-center justify-center space-x-2 overflow-hidden rounded-full border-4 border-celestial_blue px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-celestial_blue"
+          className="text-m group relative flex h-12 w-36 transform items-center justify-center space-x-2 overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
         >
-          <span className="text-m relative text-celestial_blue-200 group-hover:font-semibold group-hover:text-pine_green-900">
+          <span className="text-m relative font-semibold text-white">
             Log in
           </span>
           <div className="flex translate-x-3 items-center -space-x-3">
-            <div className="h-[1.6px] w-2.5 origin-left scale-x-0 rounded bg-pine_green-900 transition duration-300 group-hover:scale-x-100 " />
+            <div className="h-[1.6px] w-2.5 origin-left scale-x-0 rounded bg-white transition duration-300 group-hover:scale-x-100 " />
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 -translate-x-2 stroke-celestial_blue-400 transition duration-300 group-hover:translate-x-0 group-hover:stroke-pine_green-900"
+              className="h-5 w-5 -translate-x-2 stroke-white transition duration-300 group-hover:translate-x-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -42,16 +42,16 @@ export function LandingPage() {
         <Link
           to="/signup"
           type="button"
-          className="group relative flex h-12 transform items-center justify-center space-x-2 overflow-hidden rounded-full border-4 border-tea_green px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-tea_green"
+          className="group relative flex h-12 transform items-center justify-center space-x-2 overflow-hidden rounded-full bg-tea_green px-6 transition duration-300 ease-in-out hover:scale-125"
         >
-          <span className="text-m relative text-tea_green group-hover:font-semibold group-hover:text-pine_green-900">
+          <span className="text-m relative font-semibold text-pine_green-900">
             Sign in
           </span>
           <div className="flex translate-x-3 items-center -space-x-3">
             <div className="h-[1.6px] w-2.5 origin-left scale-x-0 rounded bg-pine_green-900 transition duration-300 group-hover:scale-x-100" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 -translate-x-2 stroke-tea_green transition duration-300 group-hover:translate-x-0 group-hover:stroke-pine_green-900"
+              className="h-5 w-5 -translate-x-2 stroke-pine_green-900 transition duration-300 group-hover:translate-x-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

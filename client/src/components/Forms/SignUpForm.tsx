@@ -107,7 +107,7 @@ export function SignUpForm() {
           <CancelBackPreviousRouteButton />
           <button
             type="submit"
-            className="flex h-12 transform items-center justify-center space-x-2 overflow-hidden rounded-full border-2 border-tea_green px-6 text-tea_green transition duration-300 ease-in-out hover:scale-125 hover:bg-tea_green hover:font-semibold hover:text-pine_green-900"
+            className="flex h-12 transform items-center justify-center space-x-2 overflow-hidden rounded-full bg-tea_green px-6 font-semibold text-pine_green-900 transition duration-300 ease-in-out hover:scale-125"
           >
             Sign In
           </button>
