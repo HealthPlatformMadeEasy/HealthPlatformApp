@@ -59,6 +59,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Configuration.AddUserSecrets<Program>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -70,6 +72,9 @@ if (app.Environment.IsDevelopment())
 }
 
 if (app.Environment.IsProduction()) builder.Configuration.AddUserSecrets<Program>();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
