@@ -10,7 +10,7 @@ export function Parallax() {
         </h2>
         <p>
           This App will provided you comprehensive tools to keep track of
-          energy, macros, vitamins minerals and nutrients of each meal.
+            energy, macros, vitamins, minerals and nutrients of each meal.
         </p>
         <p className="mt-6 text-right">You are welcome to sign up and try.</p>
       </div>
