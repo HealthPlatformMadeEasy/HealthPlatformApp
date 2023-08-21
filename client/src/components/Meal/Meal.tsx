@@ -10,10 +10,9 @@ import {
   FoodRequest,
   INorwegianFoodResponse,
 } from "../../Model";
-import { AddButton } from "../Buttons";
-import { FoodItemRequestRow } from "../Tables";
 import Fuse from "fuse.js";
 import { listOfDbFoods } from "../../utils/ListOfDbFoods.ts";
+import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 interface IError {
   response?: { data: { message: string } };
@@ -142,87 +141,120 @@ export function Meal(props: { loadChart: () => void }) {
               <h1 className="mb-4 font-playfair text-3xl font-light">
                 List of Food Items
               </h1>
-              <form
-                onSubmit={handleSubmit}
-                className="flex items-center justify-center space-x-2"
-              >
-                <div className="flex items-center justify-evenly gap-6">
-                  <div>
-                    <div>
+              {!showData && (
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex items-center justify-center space-x-2"
+                >
+                  <div className="flex items-center justify-evenly gap-6">
+                    <div className="relative">
+                      <div>
+                        <label
+                          id="UserName"
+                          className="text-sm font-medium leading-none text-gray-400"
+                        >
+                          Search
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          disabled={showData}
+                          aria-labelledby="userName"
+                          value={form.FoodName}
+                          onChange={(e) => {
+                            setForm({ ...form, FoodName: e.target.value });
+                            if (e.target.value !== "") {
+                              setShowSearchItem(true);
+                            } else {
+                              setShowSearchItem(false);
+                            }
+                          }}
+                          className="mt-2 w-full appearance-none border-b border-pine_green-100 bg-transparent px-2 py-1 leading-tight text-gray-100 focus:outline-none"
+                        />
+                      </div>
+                      {showSearchItem && (
+                        <ul className="absolute z-50 my-2 max-h-60 w-full overflow-auto rounded border-2 border-pine_green-600 bg-pine_green-800 p-2 text-gray-300">
+                          {results.map((result) => (
+                            <button
+                              type="button"
+                              key={result.item.title}
+                              onClick={() => {
+                                setForm({
+                                  ...form,
+                                  FoodName: result.item.title,
+                                });
+                                setShowSearchItem(false);
+                              }}
+                              className="m-1 w-full text-left hover:cursor-pointer"
+                            >
+                              {result.item.title}
+                            </button>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <div className="w-60">
                       <label
                         id="UserName"
                         className="text-sm font-medium leading-none text-gray-400"
                       >
-                        Search
+                        Quantity in grams
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         required
+                        disabled={showData}
+                        value={form.Quantity}
                         aria-labelledby="userName"
-                        value={form.FoodName}
-                        onChange={(e) => {
-                          setForm({ ...form, FoodName: e.target.value });
-                          if (e.target.value !== "") {
-                            setShowSearchItem(true);
-                          } else {
-                            setShowSearchItem(false);
-                          }
-                        }}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            Quantity: parseFloat(e.target.value),
+                          })
+                        }
                         className="mt-2 w-full appearance-none border-b border-pine_green-100 bg-transparent px-2 py-1 leading-tight text-gray-100 focus:outline-none"
                       />
                     </div>
-                    {showSearchItem && (
-                      <ul className="absolute z-50 my-2 max-h-60 w-full overflow-auto rounded border-2 border-pine_green-600 bg-pine_green-800 p-2 text-gray-300">
-                        {results.map((result) => (
-                          <button
-                            type="button"
-                            key={result.item.title}
-                            onClick={() => {
-                              setForm({ ...form, FoodName: result.item.title });
-                              setShowSearchItem(false);
-                            }}
-                            className="m-1 text-left hover:cursor-pointer"
-                          >
-                            {result.item.title}
-                          </button>
-                        ))}
-                      </ul>
-                    )}
+                    <div>
+                      <button
+                        type="submit"
+                        className="group flex h-9 w-9 transform items-center justify-center rounded-full bg-marian_blue transition duration-300 ease-in-out hover:scale-125"
+                      >
+                        <PlusIcon className="h-6 w-6 text-white" />
+                      </button>
+                    </div>
                   </div>
-                  <div className="w-60">
-                    <label
-                      id="UserName"
-                      className="text-sm font-medium leading-none text-gray-400"
-                    >
-                      Quantity in grams
-                    </label>
-                    <input
-                      type="number"
-                      required
-                      value={form.Quantity}
-                      aria-labelledby="userName"
-                      onChange={(e) =>
-                        setForm({
-                          ...form,
-                          Quantity: parseFloat(e.target.value),
-                        })
-                      }
-                      className="mt-2 w-full appearance-none border-b border-pine_green-100 bg-transparent px-2 py-1 leading-tight text-gray-100 focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <AddButton />
-                  </div>
-                </div>
-              </form>
+                </form>
+              )}
               <ul className="mt-8 space-y-4">
                 {list.map((item) => (
-                  <FoodItemRequestRow
-                    key={item.id}
-                    item={item}
-                    onClick={() => handleEdit(item)}
-                    onClick1={() => handleDelete(item.id)}
-                  />
+                  <li
+                    key={item.FoodName}
+                    className="flex justify-between gap-4 border-b border-pine_green-100 p-1"
+                  >
+                    <div className="flex w-full items-center justify-between py-1 text-xl font-light leading-none text-gray-400">
+                      <div>{item.FoodName}:</div>
+                      <div>{item.Quantity}gr.</div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      {!showData && (
+                        <div className="grid grid-cols-2 gap-4">
+                          <button
+                            onClick={() => handleEdit(item)}
+                            className="group mx-1 flex h-9 w-9 transform items-center justify-center rounded-full bg-hunyadi_yellow transition duration-300 ease-in-out hover:scale-125"
+                          >
+                            <PencilIcon className="h-5 w-5 text-pine_green-900" />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(item.id)}
+                            className="group mx-1 flex h-9  w-9 transform items-center justify-center rounded-full bg-madder transition duration-300 ease-in-out hover:scale-125"
+                          >
+                            <TrashIcon className="h-5 w-5 text-white" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </li>
                 ))}
               </ul>
               <Modal
@@ -296,47 +328,47 @@ export function Meal(props: { loadChart: () => void }) {
                   <div className="col-span-2 mt-6 flex justify-end gap-8">
                     <button
                       onClick={() => setModalIsOpen(false)}
-                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full border-2 border-madder px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-madder"
+                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-madder px-6 transition duration-300 ease-in-out hover:scale-125"
                     >
-                      <span className="text-madder-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                        Cancel
-                      </span>
+                      <span className="font-semibold text-white">Cancel</span>
                     </button>
                     <button
                       type="submit"
-                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full border-2 border-celestial_blue px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-celestial_blue"
+                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
                     >
-                      <span className="text-celestial_blue-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                        Done
-                      </span>
+                      <span className="font-semibold text-white ">Done</span>
                     </button>
                   </div>
                 </form>
               </Modal>
-              <button
-                onClick={callData}
-                className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full border-2 border-celestial_blue px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-celestial_blue"
-              >
-                <span className="text-celestial_blue-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                  Done
-                </span>
-              </button>
+              {!showData && (
+                <button
+                  onClick={callData}
+                  className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
+                >
+                  <span className="font-semibold text-white">Done</span>
+                </button>
+              )}
+              {showData && (
+                <button
+                  onClick={() => {
+                    setList([]);
+                    setShowData(false);
+                    setForm({ FoodName: "", Quantity: 0 });
+                  }}
+                  className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
+                >
+                  <span className="font-semibold text-white">New Meal</span>
+                </button>
+              )}
             </div>
             {showData && (
               <div className=" border-t border-pine_green-600">
-                <button
-                  onClick={() => setShowData(false)}
-                  className="group mx-auto my-5 flex h-12 transform items-center overflow-hidden rounded-full border-2 border-madder px-6 transition duration-300 ease-in-out hover:scale-125 hover:bg-madder"
-                >
-                  <span className="text-madder-200 group-hover:font-semibold group-hover:text-pine_green-900">
-                    Close
-                  </span>
-                </button>
                 <div className="h-96 overflow-auto">
                   {data && (
                     <div>
                       <table className="w-full">
-                        <thead className="sticky top-0 bg-pine_green-900">
+                        <thead className="sticky top-0 h-10 bg-pine_green-900">
                           <tr className="font-semibold uppercase tracking-wide text-marian_blue-100">
                             <th>Property</th>
                             <th>Value</th>

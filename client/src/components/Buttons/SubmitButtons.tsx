@@ -4,9 +4,9 @@ export function AddButton() {
   return (
     <button
       type="submit"
-      className="group flex h-9 w-9 transform items-center justify-center rounded-full border-2 border-celestial_blue transition duration-300 ease-in-out hover:scale-125 hover:bg-celestial_blue"
+      className="group flex h-9 w-9 transform items-center justify-center rounded-full bg-marian_blue transition duration-300 ease-in-out hover:scale-125"
     >
-      <PlusIcon className="h-6 w-6 text-celestial_blue group-hover:text-pine_green-900" />
+      <PlusIcon className="h-6 w-6 text-white" />
     </button>
   );
 }
@@ -15,9 +15,9 @@ export function EditFoodRequestItemButton(props: { onClick: () => void }) {
   return (
     <button
       onClick={props.onClick}
-      className="group mx-1 flex h-9 w-9 transform items-center justify-center rounded-full border-2 border-hunyadi_yellow transition duration-300 ease-in-out hover:scale-125 hover:bg-hunyadi_yellow"
+      className="group mx-1 flex h-9 w-9 transform items-center justify-center rounded-full bg-hunyadi_yellow transition duration-300 ease-in-out hover:scale-125"
     >
-      <PencilIcon className="h-5 w-5 text-hunyadi_yellow group-hover:text-pine_green-900" />
+      <PencilIcon className="h-5 w-5 text-pine_green-900" />
     </button>
   );
 }
@@ -26,9 +26,9 @@ export function DeleteFoodRequestItemButton(props: { onClick: () => void }) {
   return (
     <button
       onClick={props.onClick}
-      className="group mx-1 flex h-9  w-9 transform items-center justify-center rounded-full border-2 border-madder transition duration-300 ease-in-out hover:scale-125 hover:bg-madder"
+      className="group mx-1 flex h-9  w-9 transform items-center justify-center rounded-full bg-madder transition duration-300 ease-in-out hover:scale-125"
     >
-      <TrashIcon className="h-5 w-5 text-madder group-hover:text-pine_green-900" />
+      <TrashIcon className="h-5 w-5 text-white" />
     </button>
   );
 }

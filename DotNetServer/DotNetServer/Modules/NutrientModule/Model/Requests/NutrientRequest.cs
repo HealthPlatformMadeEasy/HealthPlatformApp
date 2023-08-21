@@ -6,8 +6,8 @@ public class NutrientRequest
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid UserId { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public double? SpiseligDel { get; set; }
     public double? Vann { get; set; }
     public double? KilojouleKJ { get; set; }

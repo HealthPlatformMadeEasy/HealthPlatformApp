@@ -9,7 +9,7 @@ export function FoodPage() {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2 bg-pine_green-800 p-2">
+    <div className="grid min-h-[420px] grid-cols-3 gap-2 bg-pine_green-800 p-2">
       <div className="flex flex-col gap-2">
         <Meal loadChart={reLoadChart} />
       </div>

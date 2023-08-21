@@ -7,12 +7,12 @@ public static class CoreModuleExtension
 {
     public static IServiceCollection AddCoreModuleLayer(this IServiceCollection services, WebApplicationBuilder builder)
     {
-        // services.AddDbContext<NorwegianFoodDbContext>(opt =>
-        //     opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:ProNorwegianFoodDbMySQL")!));
-
-
         services.AddDbContext<NorwegianFoodDbContext>(opt =>
-            opt.UseMySQL(builder.Configuration.GetValue<string>("ConnectionString:DevNorwegianFoodDbMySQL")!));
+            opt.UseNpgsql(builder.Configuration.GetValue<string>("ConnectionString:ProNorwegianFoodDbMySQL")!));
+
+
+        // services.AddDbContext<NorwegianFoodDbContext>(opt =>
+        //     opt.UseNpgsql(builder.Configuration.GetValue<string>("ConnectionString:DevNorwegianFoodDbMySQL")!));
 
         return services;
     }
