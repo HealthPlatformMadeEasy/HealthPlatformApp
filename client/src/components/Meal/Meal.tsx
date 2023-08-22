@@ -1,18 +1,13 @@
-﻿import axios from "axios";
-import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
-import { useMutation } from "react-query";
-import { useUserId } from "../../hooks";
-import { Loading } from "../Loading";
-import {
-  Food,
-  FoodItem,
-  FoodRequest,
-  INorwegianFoodResponse,
-} from "../../Model";
+﻿import {PencilIcon, PlusIcon, TrashIcon} from "@heroicons/react/24/outline";
+import axios from "axios";
 import Fuse from "fuse.js";
-import { listOfDbFoods } from "../../utils/ListOfDbFoods.ts";
-import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import React, {useEffect, useState} from "react";
+import Modal from "react-modal";
+import {useMutation} from "react-query";
+import {useUserId} from "../../hooks";
+import {Food, FoodItem, FoodRequest, INorwegianFoodResponse,} from "../../Model";
+import {listOfDbFoods} from "../../utils/ListOfDbFoods.ts";
+import {Loading} from "../Loading";
 
 interface IError {
   response?: { data: { message: string } };
@@ -20,7 +15,7 @@ interface IError {
 
 const pushFoodData = async (request: FoodRequest | undefined) => {
   const response = await axios.post(
-    "https://localhost:7247/api/norwegianfoods/getnutrientcalculationforuser",
+      "https://meal-diary.azurewebsites.net/api/norwegianfoods/getnutrientcalculationforuser",
     request,
     { headers: { "Content-Type": "application/json" } },
   );
