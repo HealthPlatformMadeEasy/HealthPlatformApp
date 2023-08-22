@@ -7,13 +7,15 @@ public static class CoreModuleExtension
 {
     public static IServiceCollection AddCoreModuleLayer(this IServiceCollection services, WebApplicationBuilder builder)
     {
-        services.AddDbContext<NorwegianFoodDbContext>(opt =>
-            opt.UseNpgsql(builder.Configuration["Production"] ??
-                          throw new InvalidOperationException("Connection string not found.")));
+        if (builder.Environment.IsProduction())
+            services.AddDbContext<ProductionNorwegianFoodDbContext>(opt =>
+                opt.UseNpgsql(builder.Configuration["Production"] ??
+                              throw new InvalidOperationException("Connection string not found.")));
 
-
-        // services.AddDbContext<NorwegianFoodDbContext>(opt =>
-        //     opt.UseNpgsql(builder.Configuration["Development"] ?? throw new InvalidOperationException("Connection string not found.")));
+        if (builder.Environment.IsDevelopment())
+            services.AddDbContext<NorwegianFoodDbContext>(opt =>
+                opt.UseNpgsql(builder.Configuration["Development"] ??
+                              throw new InvalidOperationException("Connection string not found.")));
 
         return services;
     }
