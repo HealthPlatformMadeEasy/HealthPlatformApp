@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-using CsvHelper;
-using CsvHelper.Configuration;
-using DotNetServer.Core.Context.DataSeed;
-using DotNetServer.Modules.NorwegianFoodModule.Entities;
+﻿using DotNetServer.Modules.NorwegianFoodModule.Entities;
 using DotNetServer.Modules.NutrientModule.Entities;
 using DotNetServer.Modules.UserModule.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -27,17 +23,19 @@ public class NorwegianFoodDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        using var reader = new StreamReader("Core/Context/DataSeed/food_data_seed.csv");
-        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            HasHeaderRecord = true
-        };
-        using var csv = new CsvReader(reader, config);
+        // using var reader = new StreamReader("Core/Context/DataSeed/food_data_seed.csv");
+        // var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        // {
+        //     HasHeaderRecord = true
+        // };
+        // using var csv = new CsvReader(reader, config);
+        //
+        // var records = csv.GetRecords<SeedFood>();
+        // var seedData = SeedMapper.SeedClassFoodToNewFood(records);
+        //
+        // modelBuilder.Entity<NorwegianFood>().HasData(seedData);
 
-        var records = csv.GetRecords<SeedFood>();
-        var seedData = SeedMapper.SeedClassFoodToNewFood(records);
-
-        modelBuilder.Entity<NorwegianFood>().HasData(seedData);
+        modelBuilder.Entity<NorwegianFood>();
 
         modelBuilder.Entity<Nutrient>();
 
