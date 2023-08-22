@@ -73,6 +73,10 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseCors("FrontEnd");
 
 app.UseAuthorization();

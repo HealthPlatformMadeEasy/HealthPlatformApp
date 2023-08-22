@@ -1,15 +1,15 @@
-﻿import React, { useState } from "react";
-import { CreateUser } from "../../context/Axios";
-import { useUserId } from "../../hooks";
-import { useNavigate } from "react-router-dom";
-import { CancelBackPreviousRouteButton } from "../Buttons";
+﻿import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {CreateUser} from "../../context/Axios";
+import {useUserId} from "../../hooks";
+import {CancelBackPreviousRouteButton} from "../Buttons";
 
+//TODO make a loader while sign in
 export function SignUpForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [isLogIn, setIsLogIn] = useState(false);
   const { setUserId } = useUserId();
   const navigate = useNavigate();
 
@@ -32,20 +32,10 @@ export function SignUpForm() {
     CreateUser({ name: username, email: email, password: password }).then(
       (data) => {
         setUserId(data);
-        console.log("sig up" + JSON.stringify(data));
+        navigate("/food");
       },
     );
-
-    handleLogInClick();
   };
-
-  const handleLogInClick = () => {
-    setIsLogIn(true);
-  };
-
-  if (isLogIn) {
-    navigate("/food");
-  }
 
   return (
     <form onSubmit={handleSubmit} className="mb-4 px-8 pb-8 pt-6">

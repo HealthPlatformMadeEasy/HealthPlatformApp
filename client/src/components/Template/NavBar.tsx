@@ -1,6 +1,5 @@
-﻿import { NavLink } from "react-router-dom";
-import { LogOutButton } from "../Buttons";
-import { BirdLogoSmall } from "../../assets";
+﻿import {NavLink} from "react-router-dom";
+import {LogOutButton} from "../Buttons";
 
 export function Navbar() {
   return (
@@ -8,11 +7,8 @@ export function Navbar() {
       <div className="flex-no-shrink mr-6 flex items-center">
         <div className="mb-6 md:mb-0">
           <a className="flex items-center gap-6">
-            <img
-              src={BirdLogoSmall}
-              className="mr-3 h-14 w-14 rounded-full bg-white p-1 outline outline-4 outline-offset-2 outline-pine_green-600"
-              alt="FlowBite Logo"
-            />
+            <div
+                className="mr-3 h-14 w-14 rounded-full bg-white bg-small-bird-logo p-1 outline outline-4 outline-offset-2 outline-pine_green-600"/>
             <span className="self-center whitespace-nowrap font-playfair text-5xl">
               Meal Diary
             </span>

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { BirdLogoSmall } from "../../assets";
+import {useState} from "react";
 
 export function Footer() {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -19,11 +18,8 @@ export function Footer() {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <a className="flex items-center gap-4">
-              <img
-                src={BirdLogoSmall}
-                className="mr-3 h-14 w-14 rounded-full bg-white p-1 outline outline-4 outline-offset-2 outline-pine_green-600"
-                alt="FlowBite Logo"
-              />
+              <div
+                  className="mr-3 h-14 w-14 rounded-full bg-white bg-small-bird-logo p-1 outline outline-4 outline-offset-2 outline-pine_green-600"/>
               <span className="self-center whitespace-nowrap font-playfair text-4xl">
                 Maximiliano Barrientos
               </span>
