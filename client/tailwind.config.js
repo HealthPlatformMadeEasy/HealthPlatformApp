@@ -11,7 +11,7 @@ module.exports = {
       backgroundImage: {
         "yellow-fruit-left": "url('./assets/yellow-fruit-left.png')",
         "fancy-food": "url('./assets/fancy_food.jpeg')",
-          "small-bird-logo": "url('./assets/BirdLogo10Percent.png')",
+        "bird-logo": "url('./assets/BirdLogo10Percent.png')",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],

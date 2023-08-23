@@ -7,8 +7,10 @@ export function Navbar() {
       <div className="flex-no-shrink mr-6 flex items-center">
         <div className="mb-6 md:mb-0">
           <a className="flex items-center gap-6">
-            <div
-                className="mr-3 h-14 w-14 rounded-full bg-white bg-small-bird-logo p-1 outline outline-4 outline-offset-2 outline-pine_green-600"/>
+              <div
+                  className="mr-3 flex h-14 w-14 items-center justify-center rounded-full bg-white outline outline-4 outline-offset-2 outline-pine_green-600">
+                  <div className=" h-11 w-11 rounded-full bg-bird-logo bg-cover "/>
+              </div>
             <span className="self-center whitespace-nowrap font-playfair text-5xl">
               Meal Diary
             </span>

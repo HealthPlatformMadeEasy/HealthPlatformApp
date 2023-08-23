@@ -133,9 +133,7 @@ export function Meal(props: { loadChart: () => void }) {
         <div>
           <div className="grid rounded-xl border-2 border-pine_green-600">
             <div className="p-10">
-              <h1 className="mb-4 font-playfair text-3xl font-light">
-                List of Food Items
-              </h1>
+                <h1 className="mb-4 font-playfair text-3xl font-light">Meal</h1>
               {!showData && (
                 <form
                   onSubmit={handleSubmit}
@@ -213,7 +211,7 @@ export function Meal(props: { loadChart: () => void }) {
                     <div>
                       <button
                         type="submit"
-                        className="group flex h-9 w-9 transform items-center justify-center rounded-full bg-marian_blue transition duration-300 ease-in-out hover:scale-125"
+                        className="group mt-3 flex h-9 w-9 transform items-center justify-center rounded-full bg-marian_blue transition duration-300 ease-in-out hover:scale-125"
                       >
                         <PlusIcon className="h-6 w-6 text-white" />
                       </button>
@@ -229,7 +227,7 @@ export function Meal(props: { loadChart: () => void }) {
                   >
                     <div className="flex w-full items-center justify-between py-1 text-xl font-light leading-none text-gray-400">
                       <div>{item.FoodName}:</div>
-                      <div>{item.Quantity}gr.</div>
+                        <div>{item.Quantity} g.</div>
                     </div>
                     <div className="flex items-center justify-between">
                       {!showData && (
@@ -331,7 +329,7 @@ export function Meal(props: { loadChart: () => void }) {
                       type="submit"
                       className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
                     >
-                      <span className="font-semibold text-white ">Done</span>
+                        <span className="font-semibold text-white ">Update</span>
                     </button>
                   </div>
                 </form>
@@ -341,7 +339,7 @@ export function Meal(props: { loadChart: () => void }) {
                   onClick={callData}
                   className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
                 >
-                  <span className="font-semibold text-white">Done</span>
+                    <span className="font-semibold text-white">Register</span>
                 </button>
               )}
               {showData && (

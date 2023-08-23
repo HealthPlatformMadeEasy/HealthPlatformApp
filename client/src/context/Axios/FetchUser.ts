@@ -17,8 +17,8 @@ export async function GetUserId(user: UserRequest): Promise<UserIdResponse> {
         name: user.name,
         password: user.password,
         email: user.email,
-      },
-    },
+      }
+    }
   );
   return data;
 }

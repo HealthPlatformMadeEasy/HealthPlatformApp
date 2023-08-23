@@ -44,7 +44,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetUserIdAsync(MinimalUserRequest minimalUserRequest, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(user =>
+        var user = await _context.Users.SingleAsync(user =>
             user.Email == minimalUserRequest.Email &&
             user.Name == minimalUserRequest.Name &&
             user.Password == minimalUserRequest.Password, cancellationToken);
