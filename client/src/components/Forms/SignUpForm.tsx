@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {CreateUser} from "../../context/Axios";
 import {useUserId} from "../../hooks";
 import {CancelBackPreviousRouteButton} from "../Buttons";
+import {Loading} from "../Loading";
 
 //TODO make a loader while sign in
 export function SignUpForm() {
@@ -10,6 +11,7 @@ export function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { setUserId } = useUserId();
   const navigate = useNavigate();
 
@@ -31,11 +33,19 @@ export function SignUpForm() {
 
     CreateUser({ name: username, email: email, password: password }).then(
       (data) => {
+        setLoading(true);
         setUserId(data);
+        setLoading(false);
         navigate("/food");
       },
     );
   };
+
+  if (loading) {
+    setTimeout(() => {
+    }, 300)
+    return <Loading/>
+  }
 
   return (
     <form onSubmit={handleSubmit} className="mb-4 px-8 pb-8 pt-6">

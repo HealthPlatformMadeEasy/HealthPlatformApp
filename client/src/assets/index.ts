@@ -1,0 +1,1 @@
+export {food as default} from './fancy_food.jpeg';

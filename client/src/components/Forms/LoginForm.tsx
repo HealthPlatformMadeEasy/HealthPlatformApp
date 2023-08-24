@@ -1,14 +1,16 @@
-﻿import React, { useState } from "react";
-import { GetUserId } from "../../context/Axios";
-import { useUserId } from "../../hooks";
-import { Link, useNavigate } from "react-router-dom";
-import { CancelBackPreviousRouteButton } from "../Buttons";
+﻿import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {GetUserId} from "../../context/Axios";
+import {useUserId} from "../../hooks";
+import {CancelBackPreviousRouteButton} from "../Buttons";
+import {Loading} from "../Loading";
 
 export function LoginForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
+  const [loading, setLoading] = useState(false);
   const { setUserId } = useUserId();
   const navigate = useNavigate();
 
@@ -17,16 +19,23 @@ export function LoginForm() {
 
     GetUserId({ name: username, email: email, password: password })
       .then((data) => {
+        setLoading(true);
         setUserId(data);
-
+        setLoading(false);
         navigate("/food");
       })
-      .catch(() => alert("Fail to Log"));
+        .catch(() => alert("Name, Email or Password incorrect"));
   };
 
   const togglePasswordVisibility = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
+
+  if (loading) {
+    setTimeout(() => {
+    }, 300)
+    return <Loading/>
+  }
 
   return (
     <form onSubmit={handleSubmit} className="w-full px-8 pb-8 pt-6">
