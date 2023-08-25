@@ -21,7 +21,6 @@ export function LoginForm() {
       .then((data) => {
         setLoading(true);
         setUserId(data);
-        setLoading(false);
         navigate("/food");
       })
         .catch(() => alert("Name, Email or Password incorrect"));
