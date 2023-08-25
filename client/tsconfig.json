@@ -21,7 +21,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "composite": true,
     "types": [
       "node",
       "vite/client"
