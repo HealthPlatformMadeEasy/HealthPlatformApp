@@ -5,5 +5,5 @@
 }
 
 export type UserIdResponse = {
-  userId: string;
+  userId: string | undefined;
 };

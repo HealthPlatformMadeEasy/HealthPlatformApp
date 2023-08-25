@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 /**
  * / <reference Model="vite/client" />
  */

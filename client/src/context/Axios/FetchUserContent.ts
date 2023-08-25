@@ -2,7 +2,7 @@
 
 export async function GetMacrosAndEnergy(id: string | undefined) {
   const { data } = await axios.get(
-      `https://meal-diary.azurewebsites.net/api/nutrients/energy-macros/${id}`,
+    `${import.meta.env.VITE_BASE_URL}/api/nutrients/energy-macros/${id}`,
     {
       headers: {
         Accept: "application/json",
@@ -14,14 +14,11 @@ export async function GetMacrosAndEnergy(id: string | undefined) {
 
 export async function GetMacrosAndEnergy1(id: string | undefined) {
   const { data } = await axios
-      .get(
-          `https://meal-diary.azurewebsites.net/api/nutrients/energy-macros/${id}`,
-          {
-              headers: {
-                  Accept: "application/json",
-              },
-          },
-      )
+    .get(`${import.meta.env.VITE_BASE_URL}/api/nutrients/energy-macros/${id}`, {
+      headers: {
+        Accept: "application/json",
+      },
+    })
     .then((response) => response.data);
   return data;
 }

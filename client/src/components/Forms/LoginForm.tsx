@@ -1,39 +1,82 @@
-﻿import React, {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {GetUserId} from "../../context/Axios";
-import {useUserId} from "../../hooks";
-import {CancelBackPreviousRouteButton} from "../Buttons";
-import {Loading} from "../Loading";
+﻿import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CancelBackPreviousRouteButton } from "../Buttons";
+import { Loading } from "../Loading";
+import axios from "axios";
+import { UserIdResponse } from "../../Model";
+import { useUserId } from "../../hooks";
+import { useQuery } from "@tanstack/react-query";
 
 export function LoginForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const { setUserId } = useUserId();
   const navigate = useNavigate();
+  const {
+    data,
+    isRefetching,
+    isSuccess,
+    isError,
+    refetch: getUserIdReactQuery,
+  } = useQuery(
+    ["user-id"],
+    () =>
+      axios
+        .get<UserIdResponse>(
+          `${import.meta.env.VITE_BASE_URL}/v1/api/users/get-user-id`,
+          {
+            params: {
+              name: username,
+              password: password,
+              email: email,
+            },
+          },
+        )
+        .then((response) => response.data),
+    {
+      enabled: false,
+    },
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    GetUserId({ name: username, email: email, password: password })
-      .then((data) => {
-        setLoading(true);
-        setUserId(data);
-        navigate("/food");
-      })
-        .catch(() => alert("Name, Email or Password incorrect"));
+    getUserIdReactQuery();
+    setUserId({ userId: data?.userId });
+
+    // GetUserId({
+    //   name: username,
+    //   email: email,
+    //   password: password,
+    // })
+    //   .then((data) => {
+    //     setLoading(true);
+    //     setUserId(data);
+    //     navigate("/food");
+    //   })
+    //   .catch(() => alert("Name, Email or Password incorrect"));
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/food");
+    }
+  }, [isSuccess]);
 
   const togglePasswordVisibility = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
-  if (loading) {
-    setTimeout(() => {
-    }, 300)
-    return <Loading/>
+  if (isError) {
+    alert("Name, Email or Password incorrect");
+  }
+
+  if (isRefetching) {
+    setTimeout(() => {}, 300);
+    return <Loading />;
   }
 
   return (

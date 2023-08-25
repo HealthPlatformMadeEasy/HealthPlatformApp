@@ -1,9 +1,14 @@
 ﻿import { useEffect, useState } from "react";
 import { GetMacrosAndEnergy } from "../../context/Axios";
 import { useUserId } from "../../hooks";
-import { IEnergyAndMacros, IGenericMacroDataChart } from "../../Model";
+import {
+  IEnergyAndMacros,
+  IGenericMacroDataChart,
+  UserIdResponse,
+} from "../../Model";
 import { SingleMacroChart } from "./SingleMacroChart.tsx";
 import { Loading } from "../Loading";
+import { queryClient } from "../../main.tsx";
 
 export function MacroChartsLayout(props: { trigger: boolean }) {
   const [data, setData] = useState<IEnergyAndMacros>({
@@ -16,6 +21,12 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
   const { userId } = useUserId();
   const [loading, setLoading] = useState(true);
 
+  const user: UserIdResponse | undefined = queryClient.getQueryData([
+    "user-id",
+  ]);
+
+  console.log(JSON.stringify(user));
+
   useEffect(() => {
     if (
       data.carbDtos.length !== 0 &&
@@ -27,11 +38,11 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
   }, [data]);
 
   useEffect(() => {
-    if (typeof userId === undefined) {
+    if (typeof userId === "undefined") {
       return;
     }
     const getData = () => {
-      GetMacrosAndEnergy(userId?.userId).then((data) => {
+      GetMacrosAndEnergy(user?.userId).then((data) => {
         setData(data);
         setLoading(false);
       });
