@@ -1,7 +1,7 @@
 ﻿import axios from "axios";
 import { UserIdResponse, UserRequest } from "../../Model";
 
-export async function CreateUser(user: UserRequest) {
+export async function CreateUser(user: UserRequest): Promise<UserIdResponse> {
   const { data } = await axios.post(
     `${import.meta.env.VITE_BASE_URL}/v1/api/users`,
     user,
