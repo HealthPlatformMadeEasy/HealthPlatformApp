@@ -12,7 +12,7 @@ public class EnergyAndMacroResponse
 
     public List<ProteinDto> ProteinDtos { get; set; } = null!;
 
-    public void SetEnergyAndMacrosResponseFromList(List<EnergyAndMacros> input)
+    public void SetEnergyAndMacrosResponseFromList(List<EnergyAndMacros>? input)
     {
         EnergyDtos = new List<EnergyDto>();
         CarbDtos = new List<CarbDto>();

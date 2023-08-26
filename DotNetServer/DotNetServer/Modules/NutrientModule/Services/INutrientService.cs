@@ -15,4 +15,6 @@ public interface INutrientService
     Task DeleteNutrientAsync(Guid id);
 
     Task<Response<EnergyAndMacroResponse>> GetEnergyAndMacros(Guid userId);
+
+    Task<EnergyAndMacroResponse> GetMacros(Guid userId);
 }

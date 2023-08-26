@@ -1,10 +1,10 @@
-﻿import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { CancelBackPreviousRouteButton } from "../Buttons";
-import { Loading } from "../Loading";
-import { useUserId } from "../../hooks";
-import { useQuery } from "@tanstack/react-query";
-import { GetUserId } from "../../context/Axios";
+﻿import {useQuery} from "@tanstack/react-query";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {GetUserId} from "../../FetchFunctions/Axios";
+import {useUserId} from "../../hooks";
+import {CancelBackPreviousRouteButton} from "../Buttons";
+import {Loading} from "../Loading";
 
 export function LoginForm() {
   const [username, setUsername] = useState("");

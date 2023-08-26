@@ -1,16 +1,9 @@
-import { IGenericMacroDataChart } from "../../Model";
-import {
-  ColorScalePropType,
-  VictoryArea,
-  VictoryAxis,
-  VictoryChart,
-  VictoryStack,
-  VictoryTheme,
-} from "victory";
+import {ColorScalePropType, VictoryArea, VictoryAxis, VictoryChart, VictoryStack, VictoryTheme,} from "victory";
+import {IGenericMacroDataChart} from "../../Model";
 
 export function SingleMacroChart(props: {
   name: string;
-  data: IGenericMacroDataChart[];
+    data: IGenericMacroDataChart[] | undefined;
   color: ColorScalePropType | undefined;
 }) {
   return (
@@ -23,14 +16,14 @@ export function SingleMacroChart(props: {
           <VictoryArea
             name="carbs"
             colorScale={props.color}
-            data={props.data.map((row) => {
+            data={props.data?.map((row) => {
               return { x: row.createdAt, y: row.value };
             })}
             interpolation="linear"
           />
           <VictoryAxis
-            tickValues={props.data.map((row) => row.createdAt)}
-            tickFormat={props.data.map((row) => {
+              tickValues={props.data?.map((row) => row.createdAt)}
+              tickFormat={props.data?.map((row) => {
               const date = new Date(row.createdAt);
               const day = date.getDate();
               const month = date.getMonth() + 1;
