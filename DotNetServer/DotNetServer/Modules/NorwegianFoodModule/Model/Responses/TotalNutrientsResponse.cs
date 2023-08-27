@@ -1,10 +1,9 @@
-﻿using DotNetServer.Modules.NorwegianFoodModule.Entities;
+﻿using DotNetServer.Modules.NorwegianFoodModule.Model.DTO;
 
 namespace DotNetServer.Modules.NorwegianFoodModule.Model.Responses;
 
 public class TotalNutrientsResponse
 {
-    public DateTime CreatedAt { get; set; }
     public double? SpiseligDel { get; set; }
     public double? Vann { get; set; }
     public double? KilojouleKJ { get; set; }
@@ -63,9 +62,8 @@ public class TotalNutrientsResponse
     public double? FosforMg { get; set; }
     public double? JodMug { get; set; }
 
-    public void GetTotalNutrientsResponse(List<NorwegianFood> requests)
+    public void GetTotalNutrientsResponse(List<NorwegianFoodDto> requests)
     {
-        CreatedAt = DateTime.Now;
         SpiseligDel = requests.Sum(row => row.SpiseligDel);
         Vann = requests.Sum(row => row.Vann);
         KilojouleKJ = requests.Sum(row => row.KilojouleKJ);

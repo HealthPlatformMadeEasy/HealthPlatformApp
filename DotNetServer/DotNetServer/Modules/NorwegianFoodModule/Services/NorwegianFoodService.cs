@@ -36,7 +36,9 @@ public class NorwegianFoodService : INorwegianFoodService
 
             if (dbResponse is null) return new Response<NorwegianFoodResponse> { Succeeded = false };
 
-            dbResponse.SetPerQuantityValues(dbResponse, request);
+            var dbResponseDto = NorwegianFoodMapper.NorwegianFoodToNorwegianFoodDto(dbResponse);
+
+            dbResponseDto.SetPerQuantityValues(dbResponseDto, request);
 
             var response = NorwegianFoodMapper.NorwegianFoodToNorwegianFoodResponse(dbResponse);
 
@@ -99,7 +101,6 @@ public class NorwegianFoodService : INorwegianFoodService
         }
     }
 
-    // TODO make extra function to open endpoint for test
     private async Task<TotalNutrientsResponse?> GetNorwegianFoodsByNameList(
         List<NorwegianFoodRequest> requests)
     {
@@ -109,15 +110,17 @@ public class NorwegianFoodService : INorwegianFoodService
 
         if (dbResponses is null || !dbResponses.Any()) return null;
 
-        var sortedDbResponse = dbResponses!.OrderBy(row => row.FoodName).ToList();
+        var dbResponseDto = NorwegianFoodMapper.ListNorwegianFoodToNorwegianFoodDto(dbResponses);
+
+        var sortedDbResponseDto = dbResponseDto!.OrderBy(row => row.FoodName).ToList();
         var sortedRequests = requests.OrderBy(row => row.FoodName).ToList();
 
-        for (var i = 0; i < sortedDbResponse.Count; i++)
-            sortedDbResponse[i].SetPerQuantityValues(sortedDbResponse[i], sortedRequests[i]);
+        for (var i = 0; i < sortedDbResponseDto.Count; i++)
+            sortedDbResponseDto[i].SetPerQuantityValues(sortedDbResponseDto[i], sortedRequests[i]);
 
         var response = new TotalNutrientsResponse();
 
-        response.GetTotalNutrientsResponse(sortedDbResponse);
+        response.GetTotalNutrientsResponse(sortedDbResponseDto);
 
         return response;
     }
