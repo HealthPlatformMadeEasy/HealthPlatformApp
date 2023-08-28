@@ -1,29 +1,13 @@
-﻿import {PencilIcon, PlusIcon, TrashIcon} from "@heroicons/react/24/outline";
-import {useMutation, useQuery} from "@tanstack/react-query";
+﻿import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
 import Fuse from "fuse.js";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import {pushFoodData} from "../../FetchFunctions/Axios";
-import {useUserId} from "../../hooks";
-import {queryClient} from "../../main.tsx";
-import {Food, FoodItem, INorwegianFoodResponse, UserIdResponse,} from "../../Model";
-import {listOfDbFoods} from "../../utils/ListOfDbFoods.ts";
-import {Loading} from "../Loading";
-
-interface IError {
-  response?: { data: { message: string } };
-}
-
-const useSaveFoodData = () => {
-  return useMutation(pushFoodData, {
-    onError: (error: IError) => {
-      console.log("Error: ", error.response?.data.message ?? error);
-    },
-    onSuccess: (data) => {
-      return data;
-    },
-  });
-};
+import { pushFoodData } from "../../FetchFunctions/Axios";
+import { queryClient } from "../../main.tsx";
+import { Food, FoodItem, UserIdResponse } from "../../Model";
+import { listOfDbFoods } from "../../utils/ListOfDbFoods.ts";
+import { Loading } from "../Loading";
 
 const fuseOptions: Fuse.IFuseOptions<{ title: string }> = {
   keys: ["title"],
@@ -42,12 +26,9 @@ export function Meal(props: { loadChart: () => void }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentItem, setCurrentItem] = useState<FoodItem | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [data, setData] = useState<INorwegianFoodResponse | null>(null);
-  const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
-  const mutation = useSaveFoodData();
-  const { userId } = useUserId();
   const [login, setLogin] = useState(false);
+
   const [showSearchItem, setShowSearchItem] = useState(false);
   const [results, setResults] = useState<Fuse.FuseResult<{ title: string }>[]>(
     [],
@@ -64,9 +45,9 @@ export function Meal(props: { loadChart: () => void }) {
     isSuccess,
     isError,
   } = useQuery(
-      ["meal"],
-      () => pushFoodData({userId: user?.userId, requests: list}),
-      {enabled: false},
+    ["meal"],
+    () => pushFoodData({ userId: user?.userId, requests: list }),
+    { enabled: false },
   );
 
   useEffect(() => {
@@ -79,10 +60,10 @@ export function Meal(props: { loadChart: () => void }) {
   }, [form.FoodName]);
 
   useEffect(() => {
-    if (userId !== null) {
+    if (user?.userId !== undefined) {
       setLogin(true);
     }
-  }, [userId]);
+  }, [user?.userId]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -122,29 +103,14 @@ export function Meal(props: { loadChart: () => void }) {
       request.fill({ FoodName: row.FoodName, Quantity: row.Quantity }),
     );
 
-    getMeal().then((r) => {
-      if (r.data === "") {
-        alert("Food Not Found");
-      }
-    });
-
-    if (isSuccess) {
+    getMeal().then(() => {
+      props.loadChart();
       setShowData(true);
-    }
+    });
 
     if (isError) {
       alert("Error, try again");
     }
-
-    // mutation
-    //   .mutateAsync({ userId: userId?.userId, requests: list })
-    //   .then((response) => {
-    //     setData(response);
-    //     setLoading(false);
-    //     setShowData(true);
-    //     props.loadChart();
-    //   })
-    //   .catch((error) => console.error(error));
   };
 
   return (
@@ -388,7 +354,7 @@ export function Meal(props: { loadChart: () => void }) {
                           </tr>
                         </thead>
                         <tbody>
-                        {Object.entries<any>(meal).map(([key, value]) => (
+                          {Object.entries<any>(meal).map(([key, value]) => (
                             <tr
                               key={key}
                               className="border-t border-pine_green-600 text-center text-gray-400"

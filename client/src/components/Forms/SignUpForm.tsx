@@ -1,21 +1,18 @@
-﻿import {useQuery} from "@tanstack/react-query";
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {CreateUser} from "../../FetchFunctions/Axios";
-import {useUserId} from "../../hooks";
-import {CancelBackPreviousRouteButton} from "../Buttons";
-import {Loading} from "../Loading";
+﻿import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { CreateUser } from "../../FetchFunctions/Axios";
+import { CancelBackPreviousRouteButton } from "../Buttons";
+import { Loading } from "../Loading";
 
 export function SignUpForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const { setUserId } = useUserId();
   const navigate = useNavigate();
 
   const {
-    data,
     isSuccess,
     isRefetching,
     isError,
@@ -46,9 +43,6 @@ export function SignUpForm() {
     }
 
     createUser();
-
-    //TODO remove when finish with react-query
-    setUserId({ userId: data?.userId });
   };
 
   if (isError) {

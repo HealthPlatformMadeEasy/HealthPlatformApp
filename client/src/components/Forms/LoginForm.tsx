@@ -1,21 +1,18 @@
-﻿import {useQuery} from "@tanstack/react-query";
-import React, {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {GetUserId} from "../../FetchFunctions/Axios";
-import {useUserId} from "../../hooks";
-import {CancelBackPreviousRouteButton} from "../Buttons";
-import {Loading} from "../Loading";
+﻿import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { GetUserId } from "../../FetchFunctions/Axios";
+import { CancelBackPreviousRouteButton } from "../Buttons";
+import { Loading } from "../Loading";
 
 export function LoginForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
-  const { setUserId } = useUserId();
   const navigate = useNavigate();
   const {
-    data,
-    isRefetching,
+    isFetching,
     isSuccess,
     isError,
     refetch: getUserIdReactQuery,
@@ -37,9 +34,6 @@ export function LoginForm() {
     e.preventDefault();
 
     getUserIdReactQuery();
-
-    //TODO remove when finish with react-query
-    setUserId({ userId: data?.userId });
   };
 
   useEffect(() => {
@@ -54,14 +48,13 @@ export function LoginForm() {
     alert("Name, Email or Password incorrect");
   }
 
-  if (isRefetching) {
-    setTimeout(() => {}, 300);
+  if (isFetching) {
     return <Loading />;
   }
 
   return (
     <>
-      {!isRefetching && (
+      {!isFetching && (
         <form onSubmit={handleSubmit} className="w-full px-8 pb-8 pt-6">
           <div className="w-1/3 rounded-xl border-2 border-pine_green-600 bg-pine_green-900 p-10">
             <p className="font-playfair text-3xl leading-6 text-gray-200 focus:outline-none">

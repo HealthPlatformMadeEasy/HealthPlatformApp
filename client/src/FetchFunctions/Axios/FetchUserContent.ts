@@ -1,8 +1,12 @@
 ﻿import axios from "axios";
-import {FoodRequest, IEnergyAndMacros, INorwegianFoodResponse,} from "../../Model";
+import {
+  FoodRequest,
+  IEnergyAndMacros,
+  INorwegianFoodResponse,
+} from "../../Model";
 
 export async function GetMacrosAndEnergy(
-    id: string | undefined,
+  id: string | undefined,
 ): Promise<IEnergyAndMacros> {
   const { data } = await axios.get(
     `${import.meta.env.VITE_BASE_URL}/api/nutrients/energy-macros/${id}`,
@@ -15,26 +19,16 @@ export async function GetMacrosAndEnergy(
   return data;
 }
 
-// export async function GetMacrosAndEnergy1(id: string | undefined) {
-//   const { data } = await axios
-//     .get(`${import.meta.env.VITE_BASE_URL}/api/nutrients/energy-macros/${id}`, {
-//       headers: {
-//         Accept: "application/json",
-//       },
-//     })
-//     .then((response: { data: string }) => response.data);
-//   return data;
-// }
-
-export const pushFoodData = async (
-    request: FoodRequest | undefined,
-): Promise<INorwegianFoodResponse | undefined | string> => {
-  const response = await axios.post<INorwegianFoodResponse>(
+export const pushFoodData = (
+  request: FoodRequest | undefined,
+): Promise<INorwegianFoodResponse> => {
+  return axios
+    .post<INorwegianFoodResponse>(
       `${
-          import.meta.env.VITE_BASE_URL
+        import.meta.env.VITE_BASE_URL
       }/api/norwegianfoods/getnutrientcalculationforuser`,
       request,
-      {headers: {"Content-Type": "application/json"}},
-  );
-  return response.data;
+      { headers: { "Content-Type": "application/json" } },
+    )
+    .then((r) => r.data);
 };

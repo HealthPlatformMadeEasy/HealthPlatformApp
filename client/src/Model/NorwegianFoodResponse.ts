@@ -1,5 +1,4 @@
 export interface INorwegianFoodResponse {
-  createdAt: string;
   spiseligDel: number;
   vann: number;
   kilojouleKJ: number;
