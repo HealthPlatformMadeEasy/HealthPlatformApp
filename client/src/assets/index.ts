@@ -1,1 +1,1 @@
-export {food as default} from './fancy_food.jpeg';
+export * from "fancy_food.jpeg";
