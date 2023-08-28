@@ -1,74 +1,61 @@
-﻿import { useEffect, useState } from "react";
-import { GetMacrosAndEnergy } from "../../context/Axios";
-import { useUserId } from "../../hooks";
-import { IEnergyAndMacros, IGenericMacroDataChart } from "../../Model";
-import { SingleMacroChart } from "./SingleMacroChart.tsx";
+﻿import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { GetMacrosAndEnergy } from "../../FetchFunctions/Axios";
+import { queryClient } from "../../main.tsx";
+import { IGenericMacroDataChart, UserIdResponse } from "../../Model";
 import { Loading } from "../Loading";
+import { SingleMacroChart } from "./SingleMacroChart.tsx";
 
 export function MacroChartsLayout(props: { trigger: boolean }) {
-  const [data, setData] = useState<IEnergyAndMacros>({
-    energyDtos: [],
-    carbDtos: [],
-    fatDtos: [],
-    proteinDtos: [],
-  });
   const [isDataNotUndefined, setIsDataNotUndefined] = useState(false);
-  const { userId } = useUserId();
-  const [loading, setLoading] = useState(true);
+  const {
+    data: mealData,
+    isError,
+    isFetching,
+    refetch: refreshFoodChartData,
+  } = useQuery(["meal-macros-data"], () => GetMacrosAndEnergy(user?.userId));
+
+  const user: UserIdResponse | undefined = queryClient.getQueryData([
+    "user-id",
+  ]);
 
   useEffect(() => {
-    if (
-      data.carbDtos.length !== 0 &&
-      data.energyDtos.length !== 0 &&
-      data.fatDtos.length !== 0 &&
-      data.proteinDtos.length !== 0
-    )
-      setIsDataNotUndefined(true);
-  }, [data]);
+    if (mealData === undefined) setIsDataNotUndefined(true);
+  }, [mealData]);
 
   useEffect(() => {
-    if (typeof userId === undefined) {
-      return;
-    }
-    const getData = () => {
-      GetMacrosAndEnergy(userId?.userId).then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-    };
+    refreshFoodChartData();
+  }, [props.trigger]);
 
-    getData();
-  }, [props.trigger, userId]);
-
-  const genericEnergyData: IGenericMacroDataChart[] = data?.energyDtos.map(
-    (item) => ({
+  const genericEnergyData: IGenericMacroDataChart[] | undefined =
+    mealData?.energyDtos.map((item) => ({
       createdAt: item.createdAt,
       value: item.kilokalorierKcal,
-    }),
-  );
+    }));
 
-  const genericCarbData: IGenericMacroDataChart[] = data?.carbDtos.map(
-    (item) => ({
+  const genericCarbData: IGenericMacroDataChart[] | undefined =
+    mealData?.carbDtos.map((item) => ({
       createdAt: item.createdAt,
       value: item.karbohydrat,
-    }),
-  );
+    }));
 
-  const genericFatData: IGenericMacroDataChart[] = data?.fatDtos.map(
-    (item) => ({
+  const genericFatData: IGenericMacroDataChart[] | undefined =
+    mealData?.fatDtos.map((item) => ({
       createdAt: item.createdAt,
       value: item.fett,
-    }),
-  );
+    }));
 
-  const genericProteinData: IGenericMacroDataChart[] = data?.proteinDtos.map(
-    (item) => ({
+  const genericProteinData: IGenericMacroDataChart[] | undefined =
+    mealData?.proteinDtos.map((item) => ({
       createdAt: item.createdAt,
       value: item.protein,
-    }),
-  );
+    }));
 
-  if (loading) return <Loading />;
+  if (isFetching) return <Loading />;
+
+  if (isError) {
+    alert("Error to get data, try again.");
+  }
 
   return (
     <div>
@@ -82,21 +69,21 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
         )}
         {isDataNotUndefined && (
           <SingleMacroChart
-            name="Carbs in gr"
+            name="Carbs in grams"
             color="heatmap"
             data={genericCarbData}
           />
         )}
         {isDataNotUndefined && (
           <SingleMacroChart
-            name="Fats in gr"
+            name="Fats in grams"
             color="qualitative"
             data={genericFatData}
           />
         )}
         {isDataNotUndefined && (
           <SingleMacroChart
-            name="Protein in gr"
+            name="Protein in grams"
             color="red"
             data={genericProteinData}
           />

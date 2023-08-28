@@ -33,10 +33,17 @@
 
     <ItemGroup>
         <Folder Include="Migrations\"/>
-        <Folder Include="Modules\NorwegianFoodModule\Model\DTO\"/>
         <Folder Include="Modules\NorwegianFoodModule\Validations\"/>
         <Folder Include="Modules\NutrientModule\Validations\"/>
         <Folder Include="Modules\UserModule\Model\DTO\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\BirdLogo10Percent-6b80d623.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\fancy_food-43f78144.jpeg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\index-3a14e7c0.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\index-8710b70b.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\Lionel_Richie-4aa65749.jpg"/>
     </ItemGroup>
 
 </Project>

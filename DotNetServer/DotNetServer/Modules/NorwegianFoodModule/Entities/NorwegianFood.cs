@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DotNetServer.Modules.NorwegianFoodModule.Model.Requests;
 
 namespace DotNetServer.Modules.NorwegianFoodModule.Entities;
 
@@ -69,66 +68,4 @@ public class NorwegianFood
     public double? KopperMg { get; set; }
     public double? FosforMg { get; set; }
     public double? JodMug { get; set; }
-
-    // TODO Check if Vitamin A RAE conversion is right
-    public void SetPerQuantityValues(NorwegianFood food, NorwegianFoodRequest request)
-    {
-        SpiseligDel = food.SpiseligDel * request.Quantity / 100;
-        Vann = food.Vann * request.Quantity / 100;
-        KilojouleKJ = food.KilojouleKJ * request.Quantity / 100;
-        KilokalorierKcal = food.KilokalorierKcal * request.Quantity / 100;
-        Fett = food.Fett * request.Quantity / 100;
-        Mettet = food.Mettet * request.Quantity / 100;
-        C12_0g = food.C12_0g * request.Quantity / 100;
-        C14_0 = food.C14_0 * request.Quantity / 100;
-        C16_0 = food.C16_0 * request.Quantity / 100;
-        C18_0 = food.C18_0 * request.Quantity / 100;
-        Trans = food.Trans * request.Quantity / 100;
-        Enumettet = food.Enumettet * request.Quantity / 100;
-        C16_1Sum = food.C16_1Sum * request.Quantity / 100;
-        C18_1Sum = food.C18_1Sum * request.Quantity / 100;
-        Flerumettet = food.Flerumettet * request.Quantity / 100;
-        C18_2n_6 = food.C18_2n_6 * request.Quantity / 100;
-        C18_3n_3 = food.C18_3n_3 * request.Quantity / 100;
-        C20_3n_3 = food.C20_3n_3 * request.Quantity / 100;
-        C20_3n_6 = food.C20_3n_6 * request.Quantity / 100;
-        C20_4n_3 = food.C20_4n_3 * request.Quantity / 100;
-        C20_4n_6 = food.C20_4n_6 * request.Quantity / 100;
-        C20_5n_3_EPA = food.C20_5n_3_EPA * request.Quantity / 100;
-        C22_5n_3_DPA = food.C22_5n_3_DPA * request.Quantity / 100;
-        C22_6n_3_DHA = food.C22_6n_3_DHA * request.Quantity / 100;
-        Omega_3 = food.Omega_3 * request.Quantity / 100;
-        Omega_6 = food.Omega_6 * request.Quantity / 100;
-        KolesterolMg = food.KolesterolMg * request.Quantity * 10;
-        Karbohydrat = food.Karbohydrat * request.Quantity / 100;
-        Stivelse = food.Stivelse * request.Quantity / 100;
-        MonoPlusDisakk = food.MonoPlusDisakk * request.Quantity / 100;
-        SukkerTilsatt = food.SukkerTilsatt * request.Quantity / 100;
-        Kostfiber = food.Kostfiber * request.Quantity / 100;
-        Protein = food.Protein * request.Quantity / 100;
-        Salt = food.Salt * request.Quantity / 100;
-        Alkohol = food.Alkohol * request.Quantity / 100;
-        VitaminARAE = food.VitaminARAE * request.Quantity / 30000000;
-        RetinolMug = food.RetinolMug * request.Quantity / 100000000;
-        BetaKarotenMug = food.BetaKarotenMug * request.Quantity / 100000000;
-        VitaminDMug = food.VitaminDMug * request.Quantity / 100000000;
-        VitaminEAlfaTE = food.VitaminEAlfaTE * request.Quantity;
-        TiaminMg = food.TiaminMg * request.Quantity / 100000;
-        RiboflavinMg = food.RiboflavinMg * request.Quantity / 100000;
-        NiacinMg = food.NiacinMg * request.Quantity / 100000;
-        VitaminB6Mg = food.VitaminB6Mg * request.Quantity / 100000;
-        FolatMug = food.FolatMug * request.Quantity / 100000000;
-        VitaminB12Mug = food.VitaminB12Mug * request.Quantity / 100000000;
-        VitaminCMg = food.VitaminCMg * request.Quantity / 100000;
-        KalsiumMg = food.KalsiumMg * request.Quantity / 100000;
-        JernMg = food.JernMg * request.Quantity / 100000;
-        NatriumMg = food.NatriumMg * request.Quantity / 100000;
-        KaliumMg = food.KaliumMg * request.Quantity / 100000;
-        MagnesiumMg = food.MagnesiumMg * request.Quantity / 100000;
-        SinkMg = food.SinkMg * request.Quantity / 100000;
-        SelenMug = food.SelenMug * request.Quantity / 100000000;
-        KopperMg = food.KopperMg * request.Quantity / 100000;
-        FosforMg = food.FosforMg * request.Quantity / 100000;
-        JodMug = food.JodMug * request.Quantity / 100000000;
-    }
 }

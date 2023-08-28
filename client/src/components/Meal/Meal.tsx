@@ -1,37 +1,13 @@
-﻿import {PencilIcon, PlusIcon, TrashIcon} from "@heroicons/react/24/outline";
-import axios from "axios";
+﻿import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
 import Fuse from "fuse.js";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import {useMutation} from "react-query";
-import {useUserId} from "../../hooks";
-import {Food, FoodItem, FoodRequest, INorwegianFoodResponse,} from "../../Model";
-import {listOfDbFoods} from "../../utils/ListOfDbFoods.ts";
-import {Loading} from "../Loading";
-
-interface IError {
-  response?: { data: { message: string } };
-}
-
-const pushFoodData = async (request: FoodRequest | undefined) => {
-  const response = await axios.post(
-      "https://meal-diary.azurewebsites.net/api/norwegianfoods/getnutrientcalculationforuser",
-    request,
-    { headers: { "Content-Type": "application/json" } },
-  );
-  return response.data;
-};
-
-const useSaveFoodData = () => {
-  return useMutation(pushFoodData, {
-    onError: (error: IError) => {
-      console.log("Error: ", error.response?.data.message ?? error);
-    },
-    onSuccess: (data) => {
-      return data;
-    },
-  });
-};
+import { pushFoodData } from "../../FetchFunctions/Axios";
+import { queryClient } from "../../main.tsx";
+import { Food, FoodItem, UserIdResponse } from "../../Model";
+import { listOfDbFoods } from "../../utils/ListOfDbFoods.ts";
+import { Loading } from "../Loading";
 
 const fuseOptions: Fuse.IFuseOptions<{ title: string }> = {
   keys: ["title"],
@@ -50,15 +26,28 @@ export function Meal(props: { loadChart: () => void }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentItem, setCurrentItem] = useState<FoodItem | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [data, setData] = useState<INorwegianFoodResponse[] | null>(null);
-  const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
-  const mutation = useSaveFoodData();
-  const { userId } = useUserId();
   const [login, setLogin] = useState(false);
+
   const [showSearchItem, setShowSearchItem] = useState(false);
   const [results, setResults] = useState<Fuse.FuseResult<{ title: string }>[]>(
     [],
+  );
+
+  const user: UserIdResponse | undefined = queryClient.getQueryData([
+    "user-id",
+  ]);
+
+  const {
+    data: meal,
+    refetch: getMeal,
+    isFetching,
+    isSuccess,
+    isError,
+  } = useQuery(
+    ["meal"],
+    () => pushFoodData({ userId: user?.userId, requests: list }),
+    { enabled: false },
   );
 
   useEffect(() => {
@@ -71,10 +60,10 @@ export function Meal(props: { loadChart: () => void }) {
   }, [form.FoodName]);
 
   useEffect(() => {
-    if (userId !== null) {
+    if (user?.userId !== undefined) {
       setLogin(true);
     }
-  }, [userId]);
+  }, [user?.userId]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,22 +98,19 @@ export function Meal(props: { loadChart: () => void }) {
   };
 
   const callData = () => {
-    setLoading(true);
-
     const request: Food[] = [];
     list.forEach((row) =>
       request.fill({ FoodName: row.FoodName, Quantity: row.Quantity }),
     );
 
-    mutation
-      .mutateAsync({ userId: userId?.userId, requests: list })
-      .then((response) => {
-        setData(response);
-        setLoading(false);
-        setShowData(true);
-        props.loadChart();
-      })
-      .catch((error) => console.error(error));
+    getMeal().then(() => {
+      props.loadChart();
+      setShowData(true);
+    });
+
+    if (isError) {
+      alert("Error, try again");
+    }
   };
 
   return (
@@ -133,7 +119,7 @@ export function Meal(props: { loadChart: () => void }) {
         <div>
           <div className="grid rounded-xl border-2 border-pine_green-600">
             <div className="p-10">
-                <h1 className="mb-4 font-playfair text-3xl font-light">Meal</h1>
+              <h1 className="mb-4 font-playfair text-3xl font-light">Meal</h1>
               {!showData && (
                 <form
                   onSubmit={handleSubmit}
@@ -227,7 +213,7 @@ export function Meal(props: { loadChart: () => void }) {
                   >
                     <div className="flex w-full items-center justify-between py-1 text-xl font-light leading-none text-gray-400">
                       <div>{item.FoodName}:</div>
-                        <div>{item.Quantity} g.</div>
+                      <div>{item.Quantity} g.</div>
                     </div>
                     <div className="flex items-center justify-between">
                       {!showData && (
@@ -329,7 +315,7 @@ export function Meal(props: { loadChart: () => void }) {
                       type="submit"
                       className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
                     >
-                        <span className="font-semibold text-white ">Update</span>
+                      <span className="font-semibold text-white ">Update</span>
                     </button>
                   </div>
                 </form>
@@ -339,7 +325,7 @@ export function Meal(props: { loadChart: () => void }) {
                   onClick={callData}
                   className="group mx-auto mt-10 flex h-12 transform items-center overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
                 >
-                    <span className="font-semibold text-white">Register</span>
+                  <span className="font-semibold text-white">Register</span>
                 </button>
               )}
               {showData && (
@@ -358,7 +344,7 @@ export function Meal(props: { loadChart: () => void }) {
             {showData && (
               <div className=" border-t border-pine_green-600">
                 <div className="h-96 overflow-auto">
-                  {data && (
+                  {isSuccess && (
                     <div>
                       <table className="w-full">
                         <thead className="sticky top-0 h-10 bg-pine_green-900">
@@ -368,7 +354,7 @@ export function Meal(props: { loadChart: () => void }) {
                           </tr>
                         </thead>
                         <tbody>
-                          {Object.entries<any>(data).map(([key, value]) => (
+                          {Object.entries<any>(meal).map(([key, value]) => (
                             <tr
                               key={key}
                               className="border-t border-pine_green-600 text-center text-gray-400"
@@ -385,7 +371,7 @@ export function Meal(props: { loadChart: () => void }) {
               </div>
             )}
           </div>
-          {loading && (
+          {isFetching && (
             <div className="m-auto w-full space-x-5 p-10">
               <Loading />
             </div>

@@ -1,6 +1,5 @@
-﻿// TODO make Landing Page design
-import { Link } from "react-router-dom";
-import { Parallax } from "../components/Tables/Parallax.tsx";
+﻿import { Link } from "react-router-dom";
+import { FoodBackgroundParallax } from "../components/Banner";
 
 export function LandingPage() {
   return (
@@ -10,7 +9,7 @@ export function LandingPage() {
       </h1>
       <hr className="my-6 border-gray-400 dark:border-gray-700 sm:mx-auto lg:my-8" />
 
-      <Parallax />
+      <FoodBackgroundParallax />
       <hr className="my-6 border-gray-400 dark:border-gray-700 sm:mx-auto lg:my-8" />
       <div className="mr-12 mt-8 flex items-center justify-end gap-10">
         <Link

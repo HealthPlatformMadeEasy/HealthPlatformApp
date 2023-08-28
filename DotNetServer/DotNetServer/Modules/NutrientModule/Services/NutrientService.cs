@@ -81,4 +81,14 @@ public class NutrientService : INutrientService
             };
         }
     }
+
+    public async Task<EnergyAndMacroResponse> GetMacros(Guid userId)
+    {
+        var dbResponse = await _nutrientRepository.GetEnergyAndMacros(userId, _cancellationTokenSource.Token);
+
+        var response = new EnergyAndMacroResponse();
+        response.SetEnergyAndMacrosResponseFromList(dbResponse);
+
+        return response;
+    }
 }
