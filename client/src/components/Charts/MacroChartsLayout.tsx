@@ -1,30 +1,28 @@
-﻿import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { GetMacrosAndEnergy } from "../../FetchFunctions/Axios";
+﻿import { useEffect, useState } from "react";
 import { queryClient } from "../../main.tsx";
 import { IGenericMacroDataChart, UserIdResponse } from "../../Model";
 import { Loading } from "../Loading";
 import { SingleMacroChart } from "./SingleMacroChart.tsx";
+import { useGetMacros } from "../../hooks";
 
 export function MacroChartsLayout(props: { trigger: boolean }) {
   const [isDataNotUndefined, setIsDataNotUndefined] = useState(false);
+  const user: UserIdResponse | undefined = queryClient.getQueryData([
+    "user-id",
+  ]);
   const {
     data: mealData,
     isError,
     isFetching,
     refetch: refreshFoodChartData,
-  } = useQuery(["meal-macros-data"], () => GetMacrosAndEnergy(user?.userId));
-
-  const user: UserIdResponse | undefined = queryClient.getQueryData([
-    "user-id",
-  ]);
+  } = useGetMacros(user?.userId);
 
   useEffect(() => {
     if (mealData === undefined) setIsDataNotUndefined(true);
   }, [mealData]);
 
   useEffect(() => {
-    refreshFoodChartData();
+    refreshFoodChartData().then();
   }, [props.trigger]);
 
   const genericEnergyData: IGenericMacroDataChart[] | undefined =

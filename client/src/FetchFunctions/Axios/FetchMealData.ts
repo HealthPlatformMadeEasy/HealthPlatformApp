@@ -5,7 +5,7 @@ import {
   INorwegianFoodResponse,
 } from "../../Model";
 
-export async function GetMacrosAndEnergy(
+export async function GetMacros(
   id: string | undefined,
 ): Promise<IEnergyAndMacros> {
   const { data } = await axios.get(
@@ -19,16 +19,15 @@ export async function GetMacrosAndEnergy(
   return data;
 }
 
-export const pushFoodData = (
+export const registerMeal = async (
   request: FoodRequest | undefined,
 ): Promise<INorwegianFoodResponse> => {
-  return axios
-    .post<INorwegianFoodResponse>(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/api/norwegianfoods/getnutrientcalculationforuser`,
-      request,
-      { headers: { "Content-Type": "application/json" } },
-    )
-    .then((r) => r.data);
+  const r = await axios.post<INorwegianFoodResponse>(
+    `${
+      import.meta.env.VITE_BASE_URL
+    }/api/norwegianfoods/getnutrientcalculationforuser`,
+    request,
+    { headers: { "Content-Type": "application/json" } },
+  );
+  return r.data;
 };
