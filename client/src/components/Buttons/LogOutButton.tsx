@@ -5,7 +5,11 @@ export function LogOutButton() {
   return (
     <Link
       to="/"
-      onClick={() => queryClient.removeQueries(["user-id"])}
+      onClick={() => {
+        queryClient.removeQueries(["user-id"]);
+        queryClient.removeQueries(["meal"]);
+        queryClient.removeQueries(["meal-macros-data"]);
+      }}
       className="group relative ml-4 mr-4 flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-madder px-6 font-semibold text-pine_green-900 transition duration-300 ease-in-out hover:scale-125"
     >
       <span className="relative font-semibold text-white">Log Out</span>

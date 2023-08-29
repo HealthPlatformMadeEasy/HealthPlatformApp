@@ -1,24 +1,13 @@
-﻿import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { useQuery } from "@tanstack/react-query";
-import Fuse from "fuse.js";
+﻿import Fuse from "fuse.js";
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
-import { pushFoodData } from "../../FetchFunctions/Axios";
 import { queryClient } from "../../main.tsx";
 import { Food, FoodItem, UserIdResponse } from "../../Model";
-import { listOfDbFoods } from "../../utils/ListOfDbFoods.ts";
+import { fuse } from "../../utils";
 import { Loading } from "../Loading";
-
-const fuseOptions: Fuse.IFuseOptions<{ title: string }> = {
-  keys: ["title"],
-  includeMatches: true,
-  threshold: 0.3,
-};
-
-const fuse = new Fuse(
-  listOfDbFoods.map((food) => ({ title: food })),
-  fuseOptions,
-);
+import { useRegisterMeal } from "../../hooks";
+import { NutrientTable } from "./NutrientTable";
+import { MealList } from "./MealList.tsx";
+import { MealFrom } from "./MealForm.tsx";
 
 export function Meal(props: { loadChart: () => void }) {
   const [form, setForm] = useState({ FoodName: "", Quantity: 0 });
@@ -44,11 +33,7 @@ export function Meal(props: { loadChart: () => void }) {
     isFetching,
     isSuccess,
     isError,
-  } = useQuery(
-    ["meal"],
-    () => pushFoodData({ userId: user?.userId, requests: list }),
-    { enabled: false },
-  );
+  } = useRegisterMeal({ userId: user?.userId, requests: list });
 
   useEffect(() => {
     if (form.FoodName) {
@@ -64,6 +49,10 @@ export function Meal(props: { loadChart: () => void }) {
       setLogin(true);
     }
   }, [user?.userId]);
+
+  function SetFormProps(meal: { FoodName: string; Quantity: number }) {
+    setForm({ ...form, FoodName: meal.FoodName });
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,11 +72,13 @@ export function Meal(props: { loadChart: () => void }) {
       setIsEditing(false);
       setCurrentItem(null);
       setModalIsOpen(false);
+      setForm({ FoodName: "", Quantity: 0 });
     }
   };
 
   const handleDelete = (id: number) => {
     setList(list.filter((item) => item.id !== id));
+    setForm({ FoodName: "", Quantity: 0 });
   };
 
   const handleEdit = (item: FoodItem) => {
@@ -114,212 +105,56 @@ export function Meal(props: { loadChart: () => void }) {
   };
 
   return (
-    <div className="rounded-xl bg-pine_green-900">
+    <div className="rounded-xl border-2 border-pine_green-600 bg-pine_green-900">
       {login && (
         <div>
-          <div className="grid rounded-xl border-2 border-pine_green-600">
+          <div className="grid">
             <div className="p-10">
               <h1 className="mb-4 font-playfair text-3xl font-light">Meal</h1>
               {!showData && (
-                <form
+                <MealFrom
                   onSubmit={handleSubmit}
-                  className="flex items-center justify-center space-x-2"
-                >
-                  <div className="flex items-center justify-evenly gap-6">
-                    <div className="relative">
-                      <div>
-                        <label
-                          id="UserName"
-                          className="text-sm font-medium leading-none text-gray-400"
-                        >
-                          Search
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          disabled={showData}
-                          aria-labelledby="userName"
-                          value={form.FoodName}
-                          onChange={(e) => {
-                            setForm({ ...form, FoodName: e.target.value });
-                            if (e.target.value !== "") {
-                              setShowSearchItem(true);
-                            } else {
-                              setShowSearchItem(false);
-                            }
-                          }}
-                          className="mt-2 w-full appearance-none border-b border-pine_green-100 bg-transparent px-2 py-1 leading-tight text-gray-100 focus:outline-none"
-                        />
-                      </div>
-                      {showSearchItem && (
-                        <ul className="absolute z-50 my-2 max-h-60 w-full overflow-auto rounded border-2 border-pine_green-600 bg-pine_green-800 p-2 text-gray-300">
-                          {results.map((result) => (
-                            <button
-                              type="button"
-                              key={result.item.title}
-                              onClick={() => {
-                                setForm({
-                                  ...form,
-                                  FoodName: result.item.title,
-                                });
-                                setShowSearchItem(false);
-                              }}
-                              className="m-1 w-full text-left hover:cursor-pointer"
-                            >
-                              {result.item.title}
-                            </button>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                    <div className="w-60">
-                      <label
-                        id="UserName"
-                        className="text-sm font-medium leading-none text-gray-400"
-                      >
-                        Quantity in grams
-                      </label>
-                      <input
-                        type="number"
-                        required
-                        disabled={showData}
-                        value={form.Quantity}
-                        aria-labelledby="userName"
-                        onChange={(e) =>
-                          setForm({
-                            ...form,
-                            Quantity: parseFloat(e.target.value),
-                          })
-                        }
-                        className="mt-2 w-full appearance-none border-b border-pine_green-100 bg-transparent px-2 py-1 leading-tight text-gray-100 focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <button
-                        type="submit"
-                        className="group mt-3 flex h-9 w-9 transform items-center justify-center rounded-full bg-marian_blue transition duration-300 ease-in-out hover:scale-125"
-                      >
-                        <PlusIcon className="h-6 w-6 text-white" />
-                      </button>
-                    </div>
-                  </div>
-                </form>
+                  disabled={showData}
+                  form={form}
+                  onChangeFoodName={(e) => {
+                    setForm({ ...form, FoodName: e.target.value });
+                    if (e.target.value !== "") {
+                      setShowSearchItem(true);
+                    } else {
+                      setShowSearchItem(false);
+                    }
+                  }}
+                  onChangeQuantity={(e) =>
+                    setForm({
+                      ...form,
+                      Quantity: parseFloat(e.target.value),
+                    })
+                  }
+                  SetFormProps={SetFormProps}
+                  Results={results}
+                  SetShowSearchItems={() => setShowSearchItem(false)}
+                  showSearchItems={showSearchItem}
+                />
               )}
-              <ul className="mt-8 space-y-4">
-                {list.map((item) => (
-                  <li
-                    key={item.FoodName}
-                    className="flex justify-between gap-4 border-b border-pine_green-100 p-1"
-                  >
-                    <div className="flex w-full items-center justify-between py-1 text-xl font-light leading-none text-gray-400">
-                      <div>{item.FoodName}:</div>
-                      <div>{item.Quantity} g.</div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      {!showData && (
-                        <div className="grid grid-cols-2 gap-4">
-                          <button
-                            onClick={() => handleEdit(item)}
-                            className="group mx-1 flex h-9 w-9 transform items-center justify-center rounded-full bg-hunyadi_yellow transition duration-300 ease-in-out hover:scale-125"
-                          >
-                            <PencilIcon className="h-5 w-5 text-pine_green-900" />
-                          </button>
-                          <button
-                            onClick={() => handleDelete(item.id)}
-                            className="group mx-1 flex h-9  w-9 transform items-center justify-center rounded-full bg-madder transition duration-300 ease-in-out hover:scale-125"
-                          >
-                            <TrashIcon className="h-5 w-5 text-white" />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <Modal
-                isOpen={modalIsOpen}
+              <MealList
+                FoodItems={list}
+                ShowData={showData}
+                HandleEdit={handleEdit}
+                HandleDelete={handleDelete}
+                open={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
-                style={{
-                  overlay: {
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                  },
-                  content: {
-                    color: "white",
-                    top: "50%",
-                    left: "50%",
-                    right: "auto",
-                    bottom: "auto",
-                    marginRight: "-50%",
-                    transform: "translate(-50%, -50%)",
-                    backgroundColor: "#041613",
-                    borderRadius: "0.75rem", // 6px
-                    padding: "2rem", // 32px
-                  },
+                onSubmit={handleUpdate}
+                form={form}
+                onChangeFoodName={(e) => {
+                  setForm({ ...form, FoodName: e.target.value });
                 }}
-              >
-                <h2 className="mb-4 font-playfair text-3xl font-bold">
-                  Update Food Item
-                </h2>
-                <form
-                  onSubmit={handleUpdate}
-                  className="grid grid-cols-2 gap-2"
-                >
-                  <div>
-                    <label
-                      id="UserName"
-                      className="text-sm font-medium leading-none text-gray-400"
-                    >
-                      Food
-                    </label>
-                    <input
-                      disabled={true}
-                      type="text"
-                      required
-                      aria-labelledby="userName"
-                      value={form.FoodName}
-                      onChange={(e) => {
-                        setForm({ ...form, FoodName: e.target.value });
-                      }}
-                      className="mt-2 w-full appearance-none border-b border-pine_green-100 bg-transparent px-2 py-1 leading-tight text-gray-100 focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      id="UserName"
-                      className="text-sm font-medium leading-none text-gray-400"
-                    >
-                      Quantity in grams
-                    </label>
-                    <input
-                      type="number"
-                      required
-                      value={form.Quantity}
-                      aria-labelledby="userName"
-                      onChange={(e) =>
-                        setForm({
-                          ...form,
-                          Quantity: parseFloat(e.target.value),
-                        })
-                      }
-                      className="mt-2 w-full appearance-none border-b border-pine_green-100 bg-transparent px-2 py-1 leading-tight text-gray-100 focus:outline-none"
-                    />
-                  </div>
-                  <div className="col-span-2 mt-6 flex justify-end gap-8">
-                    <button
-                      onClick={() => setModalIsOpen(false)}
-                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-madder px-6 transition duration-300 ease-in-out hover:scale-125"
-                    >
-                      <span className="font-semibold text-white">Cancel</span>
-                    </button>
-                    <button
-                      type="submit"
-                      className="group flex h-12 transform items-center space-x-2 overflow-hidden rounded-full bg-marian_blue px-6 transition duration-300 ease-in-out hover:scale-125"
-                    >
-                      <span className="font-semibold text-white ">Update</span>
-                    </button>
-                  </div>
-                </form>
-              </Modal>
+                onChangeQuantity={(e) =>
+                  setForm({
+                    ...form,
+                    Quantity: parseFloat(e.target.value),
+                  })
+                }
+              />
               {!showData && (
                 <button
                   onClick={callData}
@@ -344,35 +179,13 @@ export function Meal(props: { loadChart: () => void }) {
             {showData && (
               <div className=" border-t border-pine_green-600">
                 <div className="h-96 overflow-auto">
-                  {isSuccess && (
-                    <div>
-                      <table className="w-full">
-                        <thead className="sticky top-0 h-10 bg-pine_green-900">
-                          <tr className="font-semibold uppercase tracking-wide text-marian_blue-100">
-                            <th>Property</th>
-                            <th>Value</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {Object.entries<any>(meal).map(([key, value]) => (
-                            <tr
-                              key={key}
-                              className="border-t border-pine_green-600 text-center text-gray-400"
-                            >
-                              <td>{key}</td>
-                              <td>{value}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
+                  {isSuccess && <NutrientTable meals={meal} />}
                 </div>
               </div>
             )}
           </div>
           {isFetching && (
-            <div className="m-auto w-full space-x-5 p-10">
+            <div className="m-auto flex w-full items-center justify-center space-x-5 p-10">
               <Loading />
             </div>
           )}
