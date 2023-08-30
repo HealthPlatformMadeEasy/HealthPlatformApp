@@ -7,6 +7,7 @@ import {
   LoginPage,
   SignUpPage,
 } from "./pages";
+import { TestPage } from "./pages/TestPage.tsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
       <Footer />
     </div>
