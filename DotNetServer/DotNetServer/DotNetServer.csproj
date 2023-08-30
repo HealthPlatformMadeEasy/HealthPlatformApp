@@ -46,6 +46,7 @@
         <_ContentIncludedByDefault Remove="wwwroot\assets\Lionel_Richie-4aa65749.jpg"/>
         <_ContentIncludedByDefault Remove="wwwroot\assets\index-554ae3a0.css"/>
         <_ContentIncludedByDefault Remove="wwwroot\assets\index-82e39e66.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\index-633cee4b.js"/>
     </ItemGroup>
 
 </Project>
