@@ -2,3 +2,4 @@
 export * from "./FoodRequest.ts";
 export * from "./NorwegianFoodResponse.ts";
 export * from "./ChartData.ts";
+export * from "./Calendar.ts";
