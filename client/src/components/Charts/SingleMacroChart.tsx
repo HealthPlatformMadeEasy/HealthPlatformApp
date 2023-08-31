@@ -1,7 +1,7 @@
 import {
   ColorScalePropType,
-  VictoryArea,
   VictoryAxis,
+  VictoryBar,
   VictoryChart,
   VictoryStack,
   VictoryTheme,
@@ -20,13 +20,13 @@ export function SingleMacroChart(props: {
       </h1>
       <VictoryChart name="Energy" theme={VictoryTheme.material}>
         <VictoryStack>
-          <VictoryArea
+          <VictoryBar
             name="carbs"
             colorScale={props.color}
+            barWidth={12}
             data={props.data?.map((row) => {
               return { x: row.createdAt, y: row.value };
             })}
-            interpolation="linear"
           />
           <VictoryAxis
             tickValues={props.data?.map((row) => row.createdAt)}

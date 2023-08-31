@@ -11,6 +11,7 @@ import {
   groupAndCalculateTotalCalories,
 } from "../../utils";
 import { SingleMacroChart } from "./SingleMacroChart.tsx";
+import Calendar from "./Calendar.tsx";
 
 function MacroDataCharts(props: {
   energy: IGenericMacroDataChart[] | undefined;
@@ -88,7 +89,25 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
 
   const tabs = [
     {
-      label: "Daily",
+      label: "Energy",
+      content: (
+        <Calendar priceData={dailyEnergyData} goal={2000} unit={"Kcal"} />
+      ),
+    },
+    {
+      label: "Carbs",
+      content: <Calendar priceData={dailyCarbsData} goal={2000} unit={"g"} />,
+    },
+    {
+      label: "Fats",
+      content: <Calendar priceData={dailyFatsData} goal={2000} unit={"g"} />,
+    },
+    {
+      label: "Proteins",
+      content: <Calendar priceData={dailyProteinData} goal={2000} unit={"g"} />,
+    },
+    {
+      label: "Daily Graph",
       content: (
         <MacroDataCharts
           energy={dailyEnergyData}
@@ -120,8 +139,10 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
             onClick={() => handleTabClick(index)}
             className={`tab ${
               index === activeTab
-                ? "active rounded-xl border-2 border-pine_green-600 bg-pine_green-800 px-6 py-2"
-                : "px-6 py-2"
+                ? "active rounded-xl border-2 border-pine_green-600 bg-pine_green-800 px-6 py-2 transition" +
+                  " duration-300 ease-in-out hover:scale-110 hover:cursor-pointer"
+                : "rounded-xl border-2 border-pine_green-600 px-6 py-2 transition duration-300 ease-in-out" +
+                  " hover:scale-110 hover:cursor-pointer"
             }`}
           >
             {tab.label}
