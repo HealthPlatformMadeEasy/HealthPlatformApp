@@ -3,7 +3,9 @@
 ## Meal Diary
 
 This is a product that helps you visualize your nutrition journey.
- "We Are What We Eat."
+
+_"We Are What We Eat."_
+ 
 This App will provide you with comprehensive tools to keep track of
 energy, macros, vitamins, minerals, and nutrients of each meal.
 
