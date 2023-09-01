@@ -22,6 +22,10 @@ Just for Desktops and laptops.
 
 [Meal Diary](https://meal-diary.azurewebsites.net/)
 
+## Demo
+
+[Video](https://www.youtube.com/watch?v=V4l0NQ7TmsA)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
