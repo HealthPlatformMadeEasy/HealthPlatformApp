@@ -1,13 +1,38 @@
 # HealthPlatformApp.
 
-An easy platform that patients and doctors can use for interaction. Initially, Our main focus will be weight-loss
-treatment, various calculators such as calories, BMI, etc. Later we will implement features in that direction, for
-example, implementing tools to keep track of your weight, contacting doctors, and accessing healthy recipes.
+## Meal Diary
 
-# Figma
+This is a product that helps you visualize your nutrition journey.
 
-[Click Me](https://www.figma.com/proto/1w1iYVHI3pOfH3n7X6Avcd/Health-Platform?page-id=0%3A1&type=design&node-id=19-2&viewport=1362%2C752%2C0.65&scaling=min-zoom&mode=design)
+_"We Are What We Eat."_
+ 
+This App will provide you with comprehensive tools to keep track of
+energy, macros, vitamins, minerals, and nutrients of each meal.
 
-# Youtube Channel to our team End Of Line
+## Installation
 
-[Click Me](https://www.youtube.com/channel/UCxurnAtQjTZyvrsaSY5g9Cg)
+Use:
+* .NET 7
+* React Vite
+* Tailwind CSS
+
+## Usage
+
+Just for Desktops and laptops.
+
+[Meal Diary](https://meal-diary.azurewebsites.net/)
+
+## Demo
+
+[Video](https://www.youtube.com/watch?v=V4l0NQ7TmsA)
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[Crative Commons](https://github.com/HealthPlatformMadeEasy/HealthPlatformApp/blob/main/LICENSE)
