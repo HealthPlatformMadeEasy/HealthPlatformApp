@@ -1,3 +1,9 @@
+import { TestComponent } from "./TestComponent.tsx";
+
 export function TestPage() {
-    return <div></div>;
+  return (
+    <>
+      <TestComponent />
+    </>
+  );
 }

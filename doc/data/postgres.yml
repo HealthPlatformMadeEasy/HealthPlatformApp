@@ -1,0 +1,16 @@
+﻿version: '3.3'
+services:
+  db:
+    image: postgres:15.1-alpine
+    container_name: meal-diary
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/meal-diary
+volumes:
+  db:
+    driver: local
