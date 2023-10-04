@@ -50,7 +50,7 @@ export function SignUpForm() {
   return (
     <>
       <form onSubmit={handleSubmit} className="mb-4 px-8 pb-8 pt-6">
-        <div className="w-1/3 rounded-xl border-2 border-pine_green-600 bg-pine_green-900 p-10">
+        <div className="rounded-xl border-2 border-pine_green-600 bg-pine_green-900 p-10 md:w-1/2 lg:w-1/3">
           <p className="mb-4 font-playfair text-3xl leading-6 text-gray-200 focus:outline-none">
             Created Account
           </p>
