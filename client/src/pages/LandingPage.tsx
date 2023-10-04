@@ -3,7 +3,7 @@ import { FoodBackgroundParallax } from "../components/Banner";
 
 export function LandingPage() {
   return (
-    <div className="p-10">
+    <div className="h-screen p-10">
       <h1 className="mb-8 font-playfair text-2xl text-white md:text-7xl">
         Welcome to Meal Diary
       </h1>
