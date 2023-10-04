@@ -105,11 +105,11 @@ export function Meal(props: { loadChart: () => void }) {
   };
 
   return (
-    <div className="rounded-xl border-2 border-pine_green-600 bg-pine_green-900">
+    <div className="flex rounded-xl border-2 border-pine_green-600 bg-pine_green-900 text-xs lg:text-lg">
       {login && (
         <div>
           <div className="grid">
-            <div className="p-10">
+            <div className="mx-20 p-2 lg:mx-0 lg:p-10">
               <h1 className="mb-4 font-playfair text-3xl font-light">Meal</h1>
               {!showData && (
                 <MealFrom
@@ -178,7 +178,7 @@ export function Meal(props: { loadChart: () => void }) {
             </div>
             {showData && (
               <div className=" border-t border-pine_green-600">
-                <div className="h-96 overflow-auto">
+                <div className="h-36 overflow-auto lg:h-96">
                   {isSuccess && <NutrientTable meals={meal} />}
                 </div>
               </div>

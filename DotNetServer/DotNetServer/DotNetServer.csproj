@@ -49,6 +49,8 @@
         <_ContentIncludedByDefault Remove="wwwroot\assets\index-633cee4b.js"/>
         <_ContentIncludedByDefault Remove="wwwroot\assets\index-3a382489.js"/>
         <_ContentIncludedByDefault Remove="wwwroot\assets\index-a56bca6a.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\index-22682b59.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\index-d806ff9d.js"/>
     </ItemGroup>
 
 </Project>

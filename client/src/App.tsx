@@ -11,16 +11,15 @@ import { TestPage } from "./pages/TestPage.tsx";
 
 function App() {
   return (
-    <div className="bg-pine_green-900 font-montserrat text-white">
+    <div className="min-h-screen bg-pine_green-900 font-montserrat text-white">
       <Routes>
         <Route path="/" element={<NavBarLayout />}>
-          <Route index path="food" element={<FoodPage />} />
+          <Route path="food" element={<FoodPage />} />
         </Route>
-
-        <Route index element={<LandingPage />} />
+        <Route index path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="/*" element={<ErrorPage />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
       <Footer />

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 
 export function Footer() {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
@@ -14,21 +14,20 @@ export function Footer() {
   };
   return (
     <div className="border-t-2 border-pine_green-600 bg-pine_green-900 text-white">
-      <div className=" p-4 py-6 lg:py-8">
-        <div className="md:flex md:justify-between">
+      <div className="p-4 lg:py-8">
+        <div className="hidden sm:flex sm:justify-between">
           <div className="mb-6 md:mb-0">
-            <a className="flex items-center gap-4">
-              <div
-                  className="mr-3 flex h-14 w-14 items-center justify-center rounded-full bg-white outline outline-4 outline-offset-2 outline-pine_green-600">
-                <div className=" h-11 w-11 rounded-full bg-bird-logo bg-cover "/>
+            <a className="flex items-center md:gap-4">
+              <div className="mr-3 flex h-14 w-14 items-center justify-center rounded-full bg-white outline outline-4 outline-offset-2 outline-pine_green-600">
+                <div className=" h-11 w-11 rounded-full bg-bird-logo bg-cover " />
               </div>
 
-              <span className="self-center whitespace-nowrap font-playfair text-4xl">
+              <span className="hidden self-center whitespace-nowrap font-playfair text-4xl lg:flex">
                 Maximiliano Barrientos
               </span>
             </a>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+          <div className="sm:grid sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8">
             <div>
               <h2 className="mb-6 text-sm font-semibold uppercase text-gray-400 dark:text-white">
                 Resources
@@ -67,13 +66,13 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-200 dark:border-gray-700 sm:mx-auto lg:my-8" />
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+        <hr className="my-6 hidden border-gray-200 dark:border-gray-700 sm:mx-auto sm:flex lg:my-8" />
+        <div className="flex justify-end sm:items-center sm:justify-between">
+          <span className="hidden text-sm text-gray-500 dark:text-gray-400 sm:flex sm:text-center">
             © 2023 <a className="hover:underline">Maximiliano Barrientos</a>.
             Creative Commons.
           </span>
-          <div className="relative mt-4 flex space-x-5 sm:mt-0 sm:justify-center">
+          <div className="relative mt-4 flex items-end justify-center space-x-5 sm:ml-0 sm:mt-0">
             {isPopoverOpen && (
               <div className="absolute bottom-10 right-8 flex w-60 animate-[fade-in_0.15s_ease-in-out] flex-col items-center justify-center rounded-xl border bg-pine_green-900 p-4 shadow-lg">
                 <h6 className="font-semibold">Maximiliano Barrientos</h6>

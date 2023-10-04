@@ -9,11 +9,11 @@ export function FoodPage() {
   }
 
   return (
-    <div className="grid min-h-[420px] grid-cols-3 gap-2 bg-pine_green-800 p-2">
-      <div className="flex flex-col gap-2">
+    <div className="grid gap-2 bg-pine_green-800 p-2 lg:grid-cols-3">
+      <div className="lg:grid-cols-1">
         <Meal loadChart={reLoadChart} />
       </div>
-      <div className="col-span-2">
+      <div className="lg:col-span-2">
         <MacroChartsLayout trigger={triggerLoad} />
       </div>
     </div>
