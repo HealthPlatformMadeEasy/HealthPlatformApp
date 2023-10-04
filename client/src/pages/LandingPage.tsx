@@ -4,14 +4,14 @@ import { FoodBackgroundParallax } from "../components/Banner";
 export function LandingPage() {
   return (
     <div className="p-10">
-      <h1 className="mb-8 font-playfair text-7xl text-white">
+      <h1 className="mb-8 font-playfair text-2xl text-white md:text-7xl">
         Welcome to Meal Diary
       </h1>
       <hr className="my-6 border-gray-400 dark:border-gray-700 sm:mx-auto lg:my-8" />
 
       <FoodBackgroundParallax />
       <hr className="my-6 border-gray-400 dark:border-gray-700 sm:mx-auto lg:my-8" />
-      <div className="mr-12 mt-8 flex items-center justify-end gap-10">
+      <div className="flex items-center justify-end gap-4 md:mr-12 md:mt-8 md:gap-10">
         <Link
           to="/login"
           type="button"
