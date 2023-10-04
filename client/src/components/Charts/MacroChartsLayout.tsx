@@ -107,7 +107,7 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
       content: <Calendar priceData={dailyProteinData} goal={2000} unit={"g"} />,
     },
     {
-      label: "Daily Graph",
+      label: "Daily",
       content: (
         <MacroDataCharts
           energy={dailyEnergyData}
@@ -131,7 +131,7 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
   ];
 
   return (
-    <div className="tabs grid rounded-xl border-2 border-pine_green-600 bg-pine_green-900 p-2">
+    <div className="tabs grid rounded-xl border-2 border-pine_green-600 bg-pine_green-900 p-2 text-xs lg:text-lg">
       <div className="tab-list flex gap-4 pb-2">
         {tabs.map((tab, index) => (
           <div
@@ -139,9 +139,9 @@ export function MacroChartsLayout(props: { trigger: boolean }) {
             onClick={() => handleTabClick(index)}
             className={`tab ${
               index === activeTab
-                ? "active rounded-xl border-2 border-pine_green-600 bg-pine_green-800 px-6 py-2 transition" +
+                ? "active rounded-xl border-2 border-pine_green-600 bg-pine_green-800 p-1 transition lg:px-6 lg:py-2" +
                   " duration-300 ease-in-out hover:scale-110 hover:cursor-pointer"
-                : "rounded-xl border-2 border-pine_green-600 px-6 py-2 transition duration-300 ease-in-out" +
+                : "rounded-xl border-2 border-pine_green-600 p-1 transition duration-300 ease-in-out lg:px-6 lg:py-2" +
                   " hover:scale-110 hover:cursor-pointer"
             }`}
           >

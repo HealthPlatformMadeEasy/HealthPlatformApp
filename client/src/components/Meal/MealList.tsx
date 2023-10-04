@@ -19,15 +19,15 @@ export function MealList(props: {
 
   return (
     <>
-      <ul className="mt-8 space-y-4">
+      <ul className="mt-8 w-full space-y-4">
         {props.FoodItems.map((item) => (
           <li
             key={item.FoodName}
             className="flex justify-between gap-4 border-b border-pine_green-100 p-1"
           >
-            <div className="flex w-full items-center justify-between py-1 text-xl font-light leading-none text-gray-400">
+            <div className="flex w-full items-center justify-between px-2 text-xl font-light leading-none text-gray-400">
               <div>{item.FoodName}:</div>
-              <div>{item.Quantity} g.</div>
+              <div>{item.Quantity}g.</div>
             </div>
             <div className="flex items-center justify-between">
               {!props.ShowData && (

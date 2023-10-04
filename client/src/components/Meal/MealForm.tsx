@@ -16,10 +16,10 @@ export function MealFrom(props: {
   return (
     <form
       onSubmit={props.onSubmit}
-      className="flex items-center justify-center space-x-2"
+      className="flex w-full items-center justify-center sm:space-x-2"
     >
-      <div className="flex items-center justify-evenly gap-6">
-        <div className="relative">
+      <div className="flex flex-col items-center justify-evenly gap-6 lg:flex-row">
+        <div className="relative w-full">
           <div>
             <label
               id="UserName"
@@ -58,7 +58,7 @@ export function MealFrom(props: {
             </ul>
           )}
         </div>
-        <div className="w-60">
+        <div className="w-full">
           <label
             id="UserName"
             className="text-sm font-medium leading-none text-gray-400"

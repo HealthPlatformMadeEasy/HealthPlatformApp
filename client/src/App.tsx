@@ -11,7 +11,7 @@ import { TestPage } from "./pages/TestPage.tsx";
 
 function App() {
   return (
-    <div className="h-screen bg-pine_green-900 font-montserrat text-white">
+    <div className="min-h-screen bg-pine_green-900 font-montserrat text-white">
       <Routes>
         <Route path="/" element={<NavBarLayout />}>
           <Route index path="food" element={<FoodPage />} />
